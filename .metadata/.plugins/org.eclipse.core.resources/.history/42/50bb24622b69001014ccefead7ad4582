@@ -1,0 +1,5 @@
+package training.iqgateway.admin.dto;
+
+public class UserRequestDTO {
+
+}

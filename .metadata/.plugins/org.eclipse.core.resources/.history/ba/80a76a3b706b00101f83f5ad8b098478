@@ -1,0 +1,178 @@
+package training.iqgateway.hospital.service;
+
+import java.time.Instant;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Service;
+
+import com.mongodb.client.result.UpdateResult;
+
+import training.iqgateway.hospital.dto.NurseResponseDTO;
+import training.iqgateway.hospital.dto.NurseResponseDTO.WorkSchedule;
+import training.iqgateway.hospital.entity.CancelRequestDetails;
+import training.iqgateway.hospital.entity.Hospital;
+import training.iqgateway.hospital.entity.NurseRequest;
+import training.iqgateway.hospital.entity.RequestDetails;
+import training.iqgateway.hospital.repository.HospitalRepository;
+import training.iqgateway.hospital.repository.NurseResponseRepository;
+
+@Service
+public class HospitalServiceImpl implements HospitalService {
+
+	@Autowired
+	HospitalRepository hospitalRepository;
+
+	@Autowired
+	MongoTemplate mongoTemplate;
+	
+	@Autowired
+	NurseResponseRepository nurseResponseRepository;
+	
+	
+
+	@Override
+	public Hospital getHospitalById(String id) {
+		// Placeholder for actual hospital retrieval logic
+		return hospitalRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Hospital not found with id: " + id));
+	}
+
+	public List<NurseResponseDTO> getNurseByRequestDetails(RequestDetails requestDetails) {
+
+
+		
+		String requestDate = requestDetails.getDate();
+        String requestFrom = requestDetails.getFrom();
+        String requestTo = requestDetails.getTo();
+
+        // 2. Build the query criteria
+        Criteria criteria = new Criteria().andOperator(
+            // Must be approved
+            Criteria.where("registrationStatus").is("approved"),
+            
+            // Not on leave on the requested date
+            Criteria.where("leaveDetails").not().elemMatch(
+                Criteria.where("fromDate").lte(requestDate)
+                       .and("toDate").gte(requestDate)
+            ),
+            
+            // Either has no schedules OR has non-conflicting schedules
+            new Criteria().orOperator(
+                // Case 1: No schedules at all
+                Criteria.where("workSchedule").size(0),
+                
+                // Case 2: Has schedules but none match our criteria
+                new Criteria().andOperator(
+                    Criteria.where("workSchedule").exists(true),
+                    Criteria.where("workSchedule").not().elemMatch(
+                        new Criteria().orOperator(
+                            // Sub-case 2a: Matching date but not confirmed
+                            new Criteria().andOperator(
+                                Criteria.where("date").is(requestDate),
+                                new Criteria().orOperator(
+                                    Criteria.where("status").ne("confirmed"),
+                                    Criteria.where("status").exists(false)
+                                )
+                            ),
+                            
+                            // Sub-case 2b: Confirmed but overlapping time
+                            new Criteria().andOperator(
+                                Criteria.where("date").is(requestDate),
+                                Criteria.where("status").is("confirmed"),
+                                new Criteria().orOperator(
+                                    // Existing schedule starts during requested period
+                                    new Criteria().andOperator(
+                                        Criteria.where("from").gte(requestFrom),
+                                        Criteria.where("from").lt(requestTo)
+                                    ),
+                                    // Existing schedule ends during requested period
+                                    new Criteria().andOperator(
+                                        Criteria.where("to").gt(requestFrom),
+                                        Criteria.where("to").lte(requestTo)
+                                    ),
+                                    // Existing schedule completely contains requested period
+                                    new Criteria().andOperator(
+                                        Criteria.where("from").lte(requestFrom),
+                                        Criteria.where("to").gte(requestTo)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        );
+
+        // 3. Execute the query
+        Query query = new Query(criteria);
+       
+    
+		
+		return mongoTemplate.find(query, NurseResponseDTO.class);
+	}
+
+	@Override
+	public NurseResponseDTO requestSingleNurse(NurseRequest singleNurseRequestDetails) {
+		// TODO Auto-generated method stub
+		
+	    
+	    NurseResponseDTO nurseDetails = nurseResponseRepository.findById(singleNurseRequestDetails.getStaffId()).get();
+	    
+	    System.out.println(nurseDetails);
+	    
+	    List<WorkSchedule> workSchedule2 = nurseDetails.getWorkSchedule();
+	    
+	    workSchedule2.add(new WorkSchedule(
+	            singleNurseRequestDetails.getDate(),  // "yyyy-MM-dd"
+	            Instant.parse(singleNurseRequestDetails.getFrom()),  // "2023-06-20T08:00:00Z"
+	            		Instant.parse(singleNurseRequestDetails.getTo()),    // "2023-06-20T16:00:00Z"
+	            singleNurseRequestDetails.getHospitalId(),
+	            "requested"
+	    ));
+	    
+	    System.out.println("after criteria creation");
+	    
+	    NurseResponseDTO updatedNurseDetails = nurseResponseRepository.save(nurseDetails);
+	    
+	    
+	    
+	    
+	    System.out.println(updatedNurseDetails);
+	    
+	    
+	    
+	    
+	    
+	    if (updatedNurseDetails == null) {
+	        throw new RuntimeException("Nurse not found or update failed for staff ID: " + singleNurseRequestDetails.getStaffId());
+	    }
+	    
+		return updatedNurseDetails;
+	}
+
+	@Override
+	public void cancelSingleNurseRequest(CancelRequestDetails cancelSingleRequestDetails) {
+		// TODO Auto-generated method stub
+		
+		NurseResponseDTO nurseDetails = nurseResponseRepository.findById(cancelSingleRequestDetails.getStaffId()).get();
+		
+		List<WorkSchedule> updateNurseWorkSchedule = nurseDetails.getWorkSchedule().stream()
+		.map(workSchedule -> {
+			if (workSchedule.getDate().equals(cancelSingleRequestDetails.getDate()) &&
+					workSchedule.getFrom().equals(Instant.parse(cancelSingleRequestDetails.getFrom())) &&
+					workSchedule.getTo().equals(Instant.parse(cancelSingleRequestDetails.getTo())) &&
+					workSchedule.getHospitalId().equals(cancelSingleRequestDetails.getHospitalId())) {
+				workSchedule.setStatus("cancelled");
+			}
+			return workSchedule;
+		}).toList();
+		
+		return nurseResponseRepository.save(nurseDetails);
+	}
+
+}

@@ -1,0 +1,72 @@
+package training.iqgateway.admin.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import training.iqgateway.admin.dto.HospitalResponseDTO;
+import training.iqgateway.admin.entity.Hospital;
+import training.iqgateway.admin.service.HospitalService;
+import training.iqgateway.admin.utils.HospitalUtils;
+@RestController
+@CrossOrigin(origins = "*")
+@RequestMapping("/api/admin/hospital")
+public class HospitalController {
+	
+	HospitalService hospitalService;
+	
+	@GetMapping("/hospitalDetails")
+	public List<HospitalResponseDTO> getAllHospitals() {
+		// Logic to fetch all hospitals
+		List<HospitalResponseDTO> allHospitalResponseDTO = new ArrayList<>();
+
+	    List<Hospital> listOfHospitalEntity = hospitalService.getAllHospitals();
+
+	    for (Hospital hospital : listOfHospitalEntity) {
+	        
+
+	        allHospitalResponseDTO.add(HospitalUtils.convertToHospitalResponseDTO(hospital));
+	    }
+
+	    return allHospitalResponseDTO;
+	}
+	
+	
+	@PutMapping("/updateRegistrationStatus")
+	public HospitalResponseDTO getHospital(@RequestParam String registrationStatus, @RequestParam String hospitalId) {
+		return HospitalUtils.convertToHospitalResponseDTO(hospitalService.updateHospitalRegistrationStatus(hospitalId, registrationStatus)); // Replace "someId" with actual logic to get hospital ID
+	}
+	
+	
+	@DeleteMapping("/deleteHospital")
+	public ResponseEntity<?> deleteHospital(@RequestParam String hospitalId) {
+		// Logic to delete a hospital
+		if(hospitalService.deleteHospital(hospitalId)) {
+			return new ResponseEntity<>("Hospital with ID: " + hospitalId + " has been deleted successfully.", HttpStatus.OK);
+			
+		}
+		return new ResponseEntity<>("Hospital with ID: " + hospitalId + " could not be deleted.", HttpStatus.NOT_FOUND);
+	}
+	
+	
+	@PutMapping("/updateHospital")
+	public ResponseEntity<?> updateHospital(@RequestBody HospitalRequestDTO hospitalResponseDTO) {
+		HospitalResponseDTO updatedHospital = HospitalUtils.convertToHospitalResponseDTO(hospitalService.updateHospitalRegistrationStatus(registrationStatus, hospitalId));
+		if (updatedHospital != null) {
+			return new ResponseEntity<>(updatedHospital, HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Hospital with ID: " + hospitalId + " could not be updated.", HttpStatus.NOT_FOUND);
+	}
+	
+
+}

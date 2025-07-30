@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+    <typeInfo handle="=registration-service/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;training.iqgateway.service{HospitalRegistrationService.java[HospitalRegistrationService" modifiers="513" timestamp="1753355544993"/>
+    <typeInfo handle="=registration-service/C:\/Users\/madanmohan.g\/.m2\/repository\/org\/springframework\/data\/spring-data-mongodb\/4.5.1\/spring-data-mongodb-4.5.1.jar=/maven.pomderived=/true=/=/maven.groupId=/org.springframework.data=/=/maven.artifactId=/spring-data-mongodb=/=/maven.version=/4.5.1=/=/maven.scope=/compile=/=/maven.pomderived=/true=/&lt;org.springframework.data.mongodb.repository(MongoRepository.class[MongoRepository" modifiers="1537" timestamp="1752644244352"/>
+    <typeInfo handle="=registration-service/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;training.iqgateway.service{NurseRegistrationService.java[NurseRegistrationService" modifiers="513" timestamp="1753346789940"/>
+    <typeInfo handle="=admin-service/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;training.iqgateway.admin.service{UserService.java[UserService" modifiers="513" timestamp="1753466783630"/>
+    <typeInfo handle="=admin-service/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;training.iqgateway.admin.service{NurseService.java[NurseService" modifiers="513" timestamp="1753463148196"/>
+    <typeInfo handle="=hospital-service/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;training.iqgateway.hospital.service{HospitalNurseService.java[HospitalNurseService" modifiers="513" timestamp="1753692735994"/>
+</typeInfoHistroy>

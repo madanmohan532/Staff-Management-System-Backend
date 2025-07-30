@@ -1,0 +1,5 @@
+package training.iqgateway.staff.service;
+
+public class PatientServiceImpl {
+
+}

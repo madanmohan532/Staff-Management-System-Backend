@@ -1,0 +1,116 @@
+package training.iqgateway.hospital.controller;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import training.iqgateway.hospital.dto.NurseResponseDTO;
+import training.iqgateway.hospital.entity.Hospital;
+import training.iqgateway.hospital.entity.NurseRequest;
+import training.iqgateway.hospital.entity.RequestDetails;
+import training.iqgateway.hospital.service.HospitalService;
+
+@RestController
+@CrossOrigin(origins = "*")
+@RequestMapping("/api/hospital")
+public class HospitalController {
+	
+	@Autowired
+	HospitalService hospitalService;
+	
+	@Autowired
+	RestTemplate restTemplate;
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<?> getHospitalById(@PathVariable String id) {
+		// Logic to fetch hospital by ID
+		// Placeholder for actual hospital retrieval logic
+		Hospital hospitalById = hospitalService.getHospitalById(id);
+		
+		if (hospitalById != null) {
+			return new ResponseEntity<>(hospitalById, HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>("Hospital details for ID: " + id, HttpStatus.OK);
+	}
+	
+	
+	@PutMapping()
+	public void updateHospitalDetails(@RequestBody Hospital hospital) {
+		// Logic to update hospital details
+		// Placeholder for actual hospital update logic
+		
+		String updateHospitalURI = "http://localhost:9192/api/admin/hospital/updateHospital";
+		
+		restTemplate.put(updateHospitalURI, hospital);
+		
+		}
+	
+	
+	@GetMapping("/getAllNurseDetails")
+	public ResponseEntity<?> getNurseDetails() {
+		// Logic to fetch nurse details
+		
+		// Placeholder for actual nurse retrieval logic
+		NurseResponseDTO[] allNurseDetails = restTemplate.getForObject("http://localhost:9192/api/admin/nurse/nurseDetails", NurseResponseDTO[].class);
+		if(allNurseDetails!= null && allNurseDetails.length > 0) {
+			return new ResponseEntity<>(Arrays.asList(allNurseDetails), HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Cannot retrieve Nurse Details", HttpStatus.NOT_FOUND);
+	}
+	
+	
+	@GetMapping("/getNurseDetails")
+	public ResponseEntity<?> getNurseDetails(@RequestBody RequestDetails requestDetails) {
+		// Logic to fetch nurse details
+		
+		List<NurseResponseDTO> nurseByRequestDetails = hospitalService.getNurseByRequestDetails(requestDetails);
+		
+		if(nurseByRequestDetails != null && !nurseByRequestDetails.isEmpty()) {
+			return new ResponseEntity<>(nurseByRequestDetails, HttpStatus.OK);
+		}
+		
+		
+		if(nurseByRequestDetails == null || nurseByRequestDetails.isEmpty()) {
+			return new ResponseEntity<>("No Nurses available for the given request details", HttpStatus.NOT_FOUND);
+		}
+		
+		
+		return new ResponseEntity<>("Cannot retrieve Nurse Details", HttpStatus.NOT_FOUND);
+	}
+	
+	
+	
+	@PutMapping("/requestMultiNurse")
+	public ResponseEntity<?> requestMultiNurse(@RequestBody List<NurseRequest> multiNurseRequestDetails) {
+		// Logic to request multiple nurses
+		
+		
+		
+		return new ResponseEntity<>("No Nurses available for the given request details", HttpStatus.NOT_FOUND);
+	}
+	
+	
+	@PutMapping("/requestSingleNurse")
+	public ResponseEntity<?> requestSingleNurse(@RequestBody NurseRequest singleNurseRequestDetails) {
+		// Logic to request a single nurse
+		
+		
+		
+		return new ResponseEntity<>("Cannot retrieve Nurse Details", HttpStatus.NOT_FOUND);
+	}
+	
+	
+
+}

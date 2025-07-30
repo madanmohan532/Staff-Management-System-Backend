@@ -1,0 +1,13 @@
+package training.iqgateway.staff.service;
+
+import training.iqgateway.staff.entity.Nurse;
+
+public class NurseServiceImpl implements NurseService {
+
+	@Override
+	public Nurse getNurseById(String nurseId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

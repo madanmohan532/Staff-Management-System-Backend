@@ -1,0 +1,9 @@
+package training.iqgateway.repository;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import training.iqgateway.entity.Users;
+
+public class UserRepository implements MongoRepository<Users, String>{
+ 
+}

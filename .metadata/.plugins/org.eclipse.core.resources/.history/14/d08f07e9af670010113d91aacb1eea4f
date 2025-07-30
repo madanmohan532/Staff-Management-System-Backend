@@ -1,0 +1,51 @@
+package training.iqgateway.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import lombok.Data;
+
+@Data
+@Document(collection = "hospital_details")
+public class HospitalRegistrationEntity {
+	@Id
+    private String _id;
+    private String userId; 
+    
+    
+    private String name;
+    private String ceoName;
+    private String certificate; 
+    private String password; 
+    
+    private Address address;
+    
+   
+    private ContactDetails contactDetails;
+    
+   
+    private List<String> staffDetails = new ArrayList<>();
+    private String registrationStatus = "pending"; 
+    
+    @Data
+    public static class Address {
+        private String street;
+        private String city;
+        private String state;
+        private String pincode;
+        
+       
+    }
+    
+    @Data
+    public static class ContactDetails {
+        private String phone;
+        private String email;
+        
+    }
+    
+   
+}

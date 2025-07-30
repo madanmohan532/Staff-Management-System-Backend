@@ -1,0 +1,5 @@
+package training.iqgateway.admin.repository;
+
+public class UserRepository {
+
+}

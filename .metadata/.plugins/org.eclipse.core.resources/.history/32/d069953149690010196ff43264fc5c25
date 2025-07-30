@@ -1,0 +1,39 @@
+package training.iqgateway.admin.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import training.iqgateway.admin.dto.NurseResponseDTO;
+import training.iqgateway.admin.entity.Nurse;
+import training.iqgateway.admin.service.NurseService;
+
+@RestController
+@CrossOrigin(origins = "*")
+@RequestMapping("/api/admin/nurse")
+public class NurseController {
+	
+	@Autowired
+	NurseService nurseService;
+
+	@GetMapping("/nurseDetails")
+	public List<NurseResponseDTO> getAllNurses() {
+		// Logic to fetch all nurses
+		List<NurseResponseDTO> allNurseResponseDTO = new ArrayList<>();
+
+		List<Nurse> listOfNurseEntity = nurseService.getAllNurses();
+
+		for (Nurse nurse : listOfNurseEntity) {
+			System.out.println(nurse);
+			allNurseResponseDTO.add(NurseUtils.convertToNurseResponseDTO(nurse));
+		}
+
+		return allNurseResponseDTO;
+	}
+	
+}

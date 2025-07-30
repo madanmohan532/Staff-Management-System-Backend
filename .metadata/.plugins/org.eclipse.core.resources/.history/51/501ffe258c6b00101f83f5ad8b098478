@@ -1,0 +1,86 @@
+package training.iqgateway.staff.entity;
+
+import java.time.Instant;
+import java.util.List;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import lombok.Data;
+
+@Document(collection = "patients")
+@Data
+public class Patient {
+    @Id
+    private String id;
+    private String patientId;
+    private String first_name;
+    private String last_name;
+    private Instant admit_date;
+    private Instant expected_discharge_date;
+    private Instant actual_discharge_date;
+    private String associated_doctor;
+    private String staff_id;
+    private String hospital_id;
+    private String floor_number;
+    private Address address;
+    private MedicalInformation medicalInformation;
+
+
+    
+
+    // Inner class for Address
+    @Data
+    public static class Address {
+        private String street;
+        private String city;
+        private String state;
+        private String pincode;
+
+        
+    }
+
+    // Inner class for MedicalInformation
+    public static class MedicalInformation {
+        private String primary_reason;
+        private String secondary_reason;
+        private String treatment;
+        private Instant last_consulted_at;
+        private Medicines medicines;
+
+
+        
+    }
+
+    // Inner class for Medicines
+    @Data
+    public static class Medicines {
+        private List<String> tablets;
+        private List<String> injections;
+        private List<String> tests;
+
+        // Constructors, getters and setters
+        public Medicines() {
+        }
+
+        public Medicines(List<String> tablets, List<String> injections, List<String> tests) {
+            this.tablets = tablets;
+            this.injections = injections;
+            this.tests = tests;
+        }
+
+        // Getters and Setters
+        // ... (omitted for brevity)
+    }
+
+    // Getters and Setters for Patient class
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    // ... (other getters and setters omitted for brevity)
+}

@@ -1,0 +1,5 @@
+package training.iqgateway.hospital.controller;
+
+public class HospitalStaffController {
+
+}

@@ -1,0 +1,10 @@
+package training.iqgateway.hospital.entity;
+
+public class RequestDetails {
+	
+	private String date;
+	private String from;
+	private String to;
+	
+	
+}

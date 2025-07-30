@@ -1,0 +1,47 @@
+package training.iqgateway.admin.dto;
+
+import java.util.List;
+
+import lombok.Data;
+import training.iqgateway.admin.entity.Nurse.Address;
+import training.iqgateway.admin.entity.Nurse.ContactDetails;
+import training.iqgateway.admin.entity.Nurse.LeaveDetail;
+import training.iqgateway.admin.entity.Nurse.WorkSchedule;
+import training.iqgateway.admin.entity.Nurse.WorkingHour;
+
+
+@Data
+public class NurseResponseDTO {
+	private String _id;
+    private String userId;
+    private String firstName;
+    private String lastName;
+    private boolean availableStatus;
+    private List<LeaveDetail> leaveDetails;
+    private ContactDetails contactDetails;
+    private String certificate;
+    private Integer yearOfExperience;
+    private String password;
+    private String certificateNumber;
+    private Address address;
+    private boolean currentWorkingStatus;
+    private List<WorkingHour> workingHours;
+    private List<WorkSchedule> workSchedule;
+    private List<String> skills;
+    private String selfDescription;
+    private String registrationStatus;
+    
+    @Data
+    public static class ContactDetails {
+        private String phone;
+        private String email;
+    }
+    
+    @Data
+    public static class Address {
+        private String street;
+        private String city;
+        private String state;
+        private String pincode;
+    }
+}

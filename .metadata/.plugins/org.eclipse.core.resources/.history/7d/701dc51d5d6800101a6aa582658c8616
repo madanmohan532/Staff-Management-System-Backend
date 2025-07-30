@@ -1,0 +1,20 @@
+package training.iqgateway.entity;
+
+public class WorkingHour {
+    private String date;
+    private String from;
+    private String to;
+    private String hospitalId;
+
+    // Constructors, Getters and Setters
+    public WorkingHour() {}
+
+    public WorkingHour(String date, String from, String to, String hospitalId) {
+        this.date = date;
+        this.from = from;
+        this.to = to;
+        this.hospitalId = hospitalId;
+    }
+
+    // Getters and Setters...
+}

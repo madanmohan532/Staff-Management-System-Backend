@@ -1,0 +1,5 @@
+package training.iqgateway.zuul;
+
+public class ZuulConfiguration {
+
+}

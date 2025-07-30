@@ -1,0 +1,503 @@
+package training.iqgateway.entity;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import lombok.Data;
+
+@Document(collection = "nurse_details")
+@Data
+public class NurseRegistrationEntity {
+    
+    @Id
+    @Field("_id")
+    private String _id;
+    
+    
+    private String userId;
+    
+    @Field("first_name")
+    private String firstName;
+    
+    @Field("last_name")
+    private String lastName;
+    
+    @Field("password")
+    private String password;
+    
+    @Field("available_status")
+    private boolean availableStatus = false;
+    
+    @Field("leave_details")
+    private List<LeaveDetail> leaveDetails = new ArrayList<>();
+    
+    @Field("contactDetails")
+    private ContactDetails contactDetails;
+    
+    @Field("certificate")
+    private String certificate;
+    
+    @Field("year_of_experience")
+    private Integer yearOfExperience;
+    
+    public Integer getYearOfExperience() {
+		return yearOfExperience;
+	}
+
+	public void setYearOfExperience(Integer yearOfExperience) {
+		this.yearOfExperience = yearOfExperience;
+	}
+
+	@Indexed(unique = true)
+    @Field("certificateNumber")
+    private String certificateNumber;
+    
+    @Field("address")
+    private Address address;
+    
+    @Field("current_working_status")
+    private boolean currentWorkingStatus = false;
+    
+    @Field("working_hours")
+    private List<WorkingHour> workingHours = new ArrayList<>();
+    
+    @Field("work_schedule")
+    private List<WorkSchedule> workSchedule = new ArrayList<>();
+    
+    @Field("skills")
+    private List<String> skills;
+    
+    @Field("self_description")
+    private String selfDescription;
+    
+    @Field("registration_status")
+    private String registrationStatus = "pending";
+    
+    
+    @Data
+    public static class LeaveDetail{
+    	@Field(name = "from_date")
+    	private Instant fromDate;
+    	@Field(name = "to_date")
+        private Instant toDate;
+
+        // Constructors, Getters and Setters
+//        public LeaveDetail() {}
+//
+//        public LeaveDetail(String fromDate, String toDate) {
+//            this.fromDate = fromDate;
+//            this.toDate = toDate;
+//        }
+//
+//        public String getFromDate() { return fromDate; }
+//        public void setFromDate(String fromDate) { this.fromDate = fromDate; }
+//        public String getToDate() { return toDate; }
+//        public void setToDate(String toDate) { this.toDate = toDate; }
+//
+//		@Override
+//		public String toString() {
+//			return "LeaveDetail [fromDate=" + fromDate + ", toDate=" + toDate + "]";
+//		}
+        
+        
+    }
+
+    
+    @Data
+    public static class Address{
+    	
+    	
+    	private String street;
+        private String city;
+        private String state;
+        private String pincode;
+
+         Constructors
+        public Address() {}
+
+        public Address(String street, String city, String state, String pincode) {
+            this.street = street;
+            this.city = city;
+            this.state = state;
+            this.pincode = pincode;
+        }
+
+        // Getters and Setters
+        public String getStreet() { return street; }
+        public void setStreet(String street) { this.street = street; }
+        public String getCity() { return city; }
+        public void setCity(String city) { this.city = city; }
+        public String getState() { return state; }
+        public void setState(String state) { this.state = state; }
+        public String getPincode() { return pincode; }
+        public void setPincode(String pincode) { this.pincode = pincode; }
+    }
+    
+    @Data
+    public static class ContactDetails{
+    	
+    	@Field(name = "phone")
+    	private String phone;
+    	
+    	@Field(name = "email")
+        private String email;
+
+        // Constructors
+//        public ContactDetails() {}
+//
+//        public ContactDetails(String phone, String email) {
+//            this.phone = phone;
+//            this.email = email;
+//        }
+//
+//        // Getters and Setters
+//        public String getPhone() { return phone; }
+//        public void setPhone(String phone) { this.phone = phone; }
+//        public String getEmail() { return email; }
+//        public void setEmail(String email) { this.email = email; }
+        
+        
+    }
+    
+    @Data
+    public static class WorkingHour{
+    	
+    	@Field(name = "date")
+    	private String date;
+    	@Field(name = "from")
+        private Instant from;
+    	@Field(name = "to")
+        private Instant to;
+    	@Field(name = "hospital_id")
+        private String hospitalId;
+
+        // Constructors, Getters and Setters
+//        public WorkingHour() {}
+//
+//        public WorkingHour(String date, String from, String to, String hospitalId) {
+//            this.date = date;
+//            this.from = from;
+//            this.to = to;
+//            this.hospitalId = hospitalId;
+//        }
+//
+//		public String getDate() {
+//			return date;
+//		}
+//
+//		public void setDate(String date) {
+//			this.date = date;
+//		}
+//
+//		public String getFrom() {
+//			return from;
+//		}
+//
+//		public void setFrom(String from) {
+//			this.from = from;
+//		}
+//
+//		public String getTo() {
+//			return to;
+//		}
+//
+//		public void setTo(String to) {
+//			this.to = to;
+//		}
+//
+//		public String getHospitalId() {
+//			return hospitalId;
+//		}
+//
+//		public void setHospitalId(String hospitalId) {
+//			this.hospitalId = hospitalId;
+//		}
+//        
+        
+
+    }
+    
+    @Data
+    public static class WorkSchedule{
+    	@Field(name = "date")
+    	private String date;
+    	@Field(name = "from")
+        private Instant from;
+    	@Field(name = "to")
+        private Instant to;
+    	@Field(name = "hospital_id")
+        private String hospitalId;
+    	@Field(name = "status")
+        private String status; // "confirmed", "pending", "cancelled"
+
+        // Constructors, Getters and Setters
+//        public WorkSchedule() {}
+//
+//        public WorkSchedule(String date, String from, String to, String hospitalId, String status) {
+//            this.date = date;
+//            this.from = from;
+//            this.to = to;
+//            this.hospitalId = hospitalId;
+//            this.status = status;
+//        }
+//
+//		public String getDate() {
+//			return date;
+//		}
+//
+//		public void setDate(String date) {
+//			this.date = date;
+//		}
+//
+//		public String getFrom() {
+//			return from;
+//		}
+//
+//		public void setFrom(String from) {
+//			this.from = from;
+//		}
+//
+//		public String getTo() {
+//			return to;
+//		}
+//
+//		public void setTo(String to) {
+//			this.to = to;
+//		}
+//
+//		public String getHospitalId() {
+//			return hospitalId;
+//		}
+//
+//		public void setHospitalId(String hospitalId) {
+//			this.hospitalId = hospitalId;
+//		}
+//
+//		public String getStatus() {
+//			return status;
+//		}
+//
+//		public void setStatus(String status) {
+//			this.status = status;
+//		}
+        
+        
+    }
+    
+    // Constructors
+//    public NurseRegistrationEntity() {
+//    }
+//
+//	public String get_id() {
+//		return _id;
+//	}
+//
+//	public void set_id(String _id) {
+//		this._id = _id;
+//	}
+//
+//	public String getUserId() {
+//		return userId;
+//	}
+//
+//	public void setUserId(String userId) {
+//		this.userId = userId;
+//	}
+//
+//	public String getFirstName() {
+//		return firstName;
+//	}
+//
+//	public void setFirstName(String firstName) {
+//		this.firstName = firstName;
+//	}
+//
+//	public String getLastName() {
+//		return lastName;
+//	}
+//
+//	public void setLastName(String lastName) {
+//		this.lastName = lastName;
+//	}
+//
+//	public String getPassword() {
+//		return password;
+//	}
+//
+//	public void setPassword(String password) {
+//		this.password = password;
+//	}
+//
+//	public boolean getAvailableStatus() {
+//		return availableStatus;
+//	}
+//
+//	public void setAvailableStatus(boolean availableStatus) {
+//		this.availableStatus = availableStatus;
+//	}
+//
+//	public List<LeaveDetail> getLeaveDetails() {
+//		return leaveDetails;
+//	}
+//
+//	public void setLeaveDetails(List<LeaveDetail> leaveDetails) {
+//		this.leaveDetails = leaveDetails;
+//	}
+//
+//	public ContactDetails getContactDetails() {
+//		return contactDetails;
+//	}
+//
+//	public void setContactDetails(ContactDetails contactDetails) {
+//		this.contactDetails = contactDetails;
+//	}
+//
+//	public String getCertificate() {
+//		return certificate;
+//	}
+//
+//	public void setCertificate(String certificate) {
+//		this.certificate = certificate;
+//	}
+//
+//	public String getCertificateNumber() {
+//		return certificateNumber;
+//	}
+//
+//	public void setCertificateNumber(String certificateNumber) {
+//		this.certificateNumber = certificateNumber;
+//	}
+//
+//	public Address getAddress() {
+//		return address;
+//	}
+//
+//	public void setAddress(Address address) {
+//		this.address = address;
+//	}
+//
+//	public boolean isCurrentWorkingStatus() {
+//		return currentWorkingStatus;
+//	}
+//
+//	public void setCurrentWorkingStatus(boolean currentWorkingStatus) {
+//		this.currentWorkingStatus = currentWorkingStatus;
+//	}
+//
+//	public List<WorkingHour> getWorkingHours() {
+//		return workingHours;
+//	}
+//
+//	public void setWorkingHours(List<WorkingHour> workingHours) {
+//		this.workingHours = workingHours;
+//	}
+//
+//	public List<WorkSchedule> getWorkSchedule() {
+//		return workSchedule;
+//	}
+//
+//	public void setWorkSchedule(List<WorkSchedule> workSchedule) {
+//		this.workSchedule = workSchedule;
+//	}
+//
+//	public List<String> getSkills() {
+//		return skills;
+//	}
+//
+//	public void setSkills(List<String> skills) {
+//		this.skills = skills;
+//	}
+//
+//	public String getSelfDescription() {
+//		return selfDescription;
+//	}
+//
+//	public void setSelfDescription(String selfDescription) {
+//		this.selfDescription = selfDescription;
+//	}
+//
+//	public String getRegistrationStatus() {
+//		return registrationStatus;
+//	}
+//
+//	public void setRegistrationStatus(String registrationStatus) {
+//		this.registrationStatus = registrationStatus;
+//	}
+//	
+//	
+//
+//	public NurseRegistrationEntity(String _id, String userId, String firstName, String lastName, String password,
+//			boolean availableStatus, List<LeaveDetail> leaveDetails, ContactDetails contactDetails, String certificate,
+//			Integer yearOfExperience, String certificateNumber, Address address, boolean currentWorkingStatus,
+//			List<WorkingHour> workingHours, List<WorkSchedule> workSchedule, List<String> skills,
+//			String selfDescription, String registrationStatus) {
+//		super();
+//		this._id = _id;
+//		this.userId = userId;
+//		this.firstName = firstName;
+//		this.lastName = lastName;
+//		this.password = password;
+//		this.availableStatus = availableStatus;
+//		this.leaveDetails = leaveDetails;
+//		this.contactDetails = contactDetails;
+//		this.certificate = certificate;
+//		this.yearOfExperience = yearOfExperience;
+//		this.certificateNumber = certificateNumber;
+//		this.address = address;
+//		this.currentWorkingStatus = currentWorkingStatus;
+//		this.workingHours = workingHours;
+//		this.workSchedule = workSchedule;
+//		this.skills = skills;
+//		this.selfDescription = selfDescription;
+//		this.registrationStatus = registrationStatus;
+//	}
+//
+//	public NurseRegistrationEntity(String _id, String userId, String firstName, String lastName, String password,
+//			boolean availableStatus, List<LeaveDetail> leaveDetails, ContactDetails contactDetails, String certificate,
+//			String certificateNumber, Address address, boolean currentWorkingStatus, List<WorkingHour> workingHours,
+//			List<WorkSchedule> workSchedule, List<String> skills, String selfDescription, String registrationStatus) {
+//		super();
+//		this._id = _id;
+//		this.userId = userId;
+//		this.firstName = firstName;
+//		this.lastName = lastName;
+//		this.password = password;
+//		this.availableStatus = availableStatus;
+//		this.leaveDetails = leaveDetails;
+//		this.contactDetails = contactDetails;
+//		this.certificate = certificate;
+//		this.certificateNumber = certificateNumber;
+//		this.address = address;
+//		this.currentWorkingStatus = currentWorkingStatus;
+//		this.workingHours = workingHours;
+//		this.workSchedule = workSchedule;
+//		this.skills = skills;
+//		this.selfDescription = selfDescription;
+//		this.registrationStatus = registrationStatus;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "NurseRegistrationEntity [_id=" + _id + ", userId=" + userId + ", firstName=" + firstName + ", lastName="
+//				+ lastName + ", password=" + password + ", availableStatus=" + availableStatus + ", leaveDetails="
+//				+ leaveDetails + ", contactDetails=" + contactDetails + ", certificate=" + certificate
+//				+ ", yearOfExperience=" + yearOfExperience + ", certificateNumber=" + certificateNumber + ", address="
+//				+ address + ", currentWorkingStatus=" + currentWorkingStatus + ", workingHours=" + workingHours
+//				+ ", workSchedule=" + workSchedule + ", skills=" + skills + ", selfDescription=" + selfDescription
+//				+ ", registrationStatus=" + registrationStatus + "]";
+//	}
+
+	
+
+}
+
+
+
+
+

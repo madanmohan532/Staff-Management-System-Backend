@@ -1,0 +1,12 @@
+package training.iqgateway.staff.service;
+
+import training.iqgateway.staff.entity.Nurse;
+
+public interface NurseService {
+	
+	
+	Nurse getNurseById(String nurseId);
+
+	Nurse updateNurse(Nurse nurse);
+
+}

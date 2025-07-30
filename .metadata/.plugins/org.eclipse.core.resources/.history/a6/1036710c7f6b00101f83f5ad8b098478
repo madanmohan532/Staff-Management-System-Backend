@@ -1,0 +1,5 @@
+package training.iqgateway.staff.repository;
+
+public class NurseRepository {
+
+}

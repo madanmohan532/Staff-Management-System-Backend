@@ -1,0 +1,28 @@
+package training.iqgateway.admin.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import training.iqgateway.admin.entity.Admin;
+
+@Service
+public class AdminServiceImpl implements AdminService {
+
+	@Autowired
+	private AdminRepository adminRepository;
+
+	@Override
+	public Admin getAdminById(String id) {
+		// Logic to fetch admin by ID
+		return adminRepository.findById(id).orElse(null);
+	}
+
+	@Override
+	public Admin updateAdmin(Admin admin) {
+		// TODO Auto-generated method stub
+		return adminRepository.save(admin);
+	}
+
+	// Additional methods can be implemented here as needed
+
+}

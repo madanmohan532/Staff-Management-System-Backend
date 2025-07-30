@@ -1,0 +1,6 @@
+package training.iqgateway.zuul;
+
+@org.springframework.context.annotation.Configuration
+public class ZuulConfiguration {
+
+}

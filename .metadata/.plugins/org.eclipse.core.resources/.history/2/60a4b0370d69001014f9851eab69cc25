@@ -1,0 +1,152 @@
+package training.iqgateway.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import training.iqgateway.entity.HospitalRegistrationEntity;
+import training.iqgateway.entity.NurseRegistrationEntity;
+import training.iqgateway.entity.Users;
+import training.iqgateway.service.HospitalRegistrationService;
+import training.iqgateway.service.NurseRegistrationService;
+import training.iqgateway.service.UserService;
+import training.iqgateway.util.JwtTokenUtil;
+
+@RestController
+@RequestMapping("api/login")
+public class LoginController {
+
+	@Autowired
+	HospitalRegistrationService hospitalRegistrationService;
+
+	@Autowired
+	NurseRegistrationService nurseRegistrationService;
+
+	@Autowired
+	UserService userService;
+
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
+
+	
+
+	@GetMapping("/users")
+	public List<Users> getUsers() {
+		return userService.findAll();
+	}
+
+	@PostMapping("/login")
+	public ResponseEntity<?> handleLogin(@RequestParam String email, @RequestParam String password,
+			@RequestParam String role) {
+
+		Users logUser;
+	
+
+		if ("hospital staff".equalsIgnoreCase(role)) {
+			Optional<HospitalRegistrationEntity> hospitalEntityOpt = hospitalRegistrationService.findAllHospitals()
+					.stream().filter(hos -> hos.getContactDetails().getEmail().equals(email)).findFirst();
+
+			if (!hospitalEntityOpt.isPresent()) {
+				return new ResponseEntity<>("Email Does not Exist, Try Again", HttpStatus.BAD_REQUEST);
+			}
+
+			String status = hospitalEntityOpt.get().getRegistrationStatus();
+			System.out.println(hospitalEntityOpt.get());
+			System.out.println(status);
+
+			if ("cancelled".equalsIgnoreCase(status)) {
+				return new ResponseEntity<>("Registration is Cancelled by Admin", HttpStatus.FORBIDDEN);
+			} else if ("pending".equalsIgnoreCase(status)) {
+				return new ResponseEntity<>("User is Not Validated, Come back Later", HttpStatus.FORBIDDEN);
+			}
+			// If approved -> continue
+			logUser = userService.findByEmail(email);
+			if (logUser == null) {
+				return new ResponseEntity<>("User does not exist", HttpStatus.NOT_FOUND);
+			}
+
+			// TODO: Use password encoder if passwords are hashed
+			if (logUser.getPassword().equals(password)) {
+				String token = jwtTokenUtil.generateToken(email, role.toUpperCase());
+		        
+		        // Return token and user details
+		        Map<String, Object> response = new HashMap<>();
+		        response.put("token", token);
+		        response.put("user", logUser);
+				return new ResponseEntity<>(response, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>("Incorrect Password, Try Again", HttpStatus.UNAUTHORIZED);
+			}
+		} else if ("nurse".equalsIgnoreCase(role)) {
+			Optional<NurseRegistrationEntity> nurseEntityOpt = nurseRegistrationService.findAllNurses().stream()
+					.filter(nur -> nur.getContactDetails().getEmail().equals(email)).findFirst();
+
+			if (!nurseEntityOpt.isPresent()) {
+				return new ResponseEntity<>("Email Does not Exist, Try Again", HttpStatus.BAD_REQUEST);
+			}
+
+			String status = nurseEntityOpt.get().getRegistrationStatus();
+
+			if ("cancelled".equalsIgnoreCase(status)) {
+				return new ResponseEntity<>("Registration is Cancelled by Admin", HttpStatus.FORBIDDEN);
+			} else if ("pending".equalsIgnoreCase(status)) {
+				return new ResponseEntity<>("User is Not Validated, Come back Later", HttpStatus.FORBIDDEN);
+			}
+			// If approved -> continue
+			logUser = userService.findByEmail(email);
+			if (logUser == null) {
+				return new ResponseEntity<>("User does not exist", HttpStatus.NOT_FOUND);
+			}
+
+			// TODO: Use password encoder if passwords are hashed
+			if (logUser.getPassword().equals(password)) {
+				String token = jwtTokenUtil.generateToken(email, role.toUpperCase());
+		        
+		        // Return token and user details
+		        Map<String, Object> response = new HashMap<>();
+		        response.put("token", token);
+		        response.put("user", logUser);
+				return new ResponseEntity<>(response, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>("Incorrect Password, Try Again", HttpStatus.UNAUTHORIZED);
+			}
+		} else if ("admin".equalsIgnoreCase(role)) {
+
+			// If approved -> continue
+			logUser = userService.findByEmail(email);
+			if (logUser == null) {
+				return new ResponseEntity<>("User does not exist", HttpStatus.NOT_FOUND);
+			}
+
+			// TODO: Use password encoder if passwords are hashed
+			if (logUser.getPassword().equals(password)) {
+				String token = jwtTokenUtil.generateToken(email, role.toUpperCase());
+		        
+		        // Return token and user details
+		        Map<String, Object> response = new HashMap<>();
+		        response.put("token", token);
+		        response.put("user", logUser);
+				return new ResponseEntity<>(response, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>("Incorrect Password, Try Again", HttpStatus.UNAUTHORIZED);
+			}
+		}
+
+		else {
+			return new ResponseEntity<>("Invalid role provided", HttpStatus.BAD_REQUEST);
+		}
+
+	}
+
+}

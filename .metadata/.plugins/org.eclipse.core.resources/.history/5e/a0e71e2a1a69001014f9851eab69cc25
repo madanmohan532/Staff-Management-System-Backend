@@ -1,0 +1,54 @@
+package training.iqgateway.admin.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import lombok.Data;
+import training.iqgateway.entity.HospitalRegistrationEntity.Address;
+import training.iqgateway.entity.HospitalRegistrationEntity.ContactDetails;
+
+public class Hospital {
+	@Id
+    private String _id;
+    private String userId; 
+    
+    
+    private String name;
+    private String ceoName;
+    private String certificate;
+    private String kmcNumber;
+    
+private String password; 
+    
+    private Address address;
+    
+    private ContactDetails contactDetails;
+    
+    @Field(name = "staff_details")
+     private List<String> staffDetails = new ArrayList<>();
+    @Field(name = "registration_status")
+     private String registrationStatus;
+    
+    
+    @Data
+    public static class Address {
+        private String street;
+        private String city;
+        private String state;
+        private String pincode;
+        
+    }
+    
+    @Data
+    public static class ContactDetails {
+        private String phone;
+        
+        @Indexed(unique = true)
+        private String email;
+        
+    }
+}

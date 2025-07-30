@@ -1,0 +1,92 @@
+package training.iqgateway.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+@Document(collection = "nurses_details")
+public class NurseRegistrationEntity {
+    
+    @Id
+    @Field("_id")
+    private String id;
+    
+    @Field("user_id")
+    private String userId;
+    
+    @Field("first_name")
+    private String firstName;
+    
+    @Field("last_name")
+    private String lastName;
+    
+    @Field("password")
+    private String password;
+    
+    @Field("available_status")
+    private boolean availableStatus = false;
+    
+    @Field("leave_details")
+    private List<LeaveDetail> leaveDetails = new ArrayList<>();
+    
+    @Field("contactDetails")
+    private ContactDetails contactDetails;
+    
+    @Field("certificate")
+    private String certificate;
+    
+    @Field("certificateNumber")
+    private String certificateNumber;
+    
+    @Field("address")
+    private Address address;
+    
+    @Field("current_working_status")
+    private boolean currentWorkingStatus = false;
+    
+    @Field("working_hours")
+    private List<WorkingHour> workingHours = new ArrayList<>();
+    
+    @Field("work_schedule")
+    private List<WorkSchedule> workSchedule = new ArrayList<>();
+    
+    @Field("skills")
+    private List<String> skills;
+    
+    @Field("self_description")
+    private String selfDescription;
+    
+    @Field("registration_status")
+    private String registrationStatus = "pending";
+
+    // Constructors
+    public NurseRegistrationEntity() {
+    }
+
+    // Getters and Setters for all fields
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    // ... continue with getters and setters for all other fields
+}

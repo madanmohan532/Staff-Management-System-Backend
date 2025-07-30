@@ -1,0 +1,23 @@
+package training.iqgateway.hospital.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+	 @Bean
+	    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	        http
+	            .authorizeHttpRequests(auth -> auth.requestMatchers("/api/hospital/**").permitAll()
+	            		.requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/v3/api-docs.yaml").permitAll()// Match all admin API endpoints
+	                .anyRequest().authenticated() // Allow all requests without auth
+	            )
+	            .csrf(csrf -> csrf.disable()); // Disable CSRF for APIs
+	        
+	        return http.build();
+	    }
+}

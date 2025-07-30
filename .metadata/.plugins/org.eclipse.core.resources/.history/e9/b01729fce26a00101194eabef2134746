@@ -1,0 +1,9 @@
+package training.iqgateway.hospital.service;
+
+import training.iqgateway.hospital.entity.HospitalNurse;
+
+public interface HospitalNurseService {
+	
+	public HospitalNurse createHospitalNurse(HospitalNurse hospitalNurse);
+
+}

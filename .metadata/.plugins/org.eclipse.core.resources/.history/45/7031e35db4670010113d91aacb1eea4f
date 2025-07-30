@@ -1,0 +1,77 @@
+package training.iqgateway.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import training.iqgateway.dto.HospitalRegistrationResponseDTO;
+import training.iqgateway.entity.HospitalRegistrationEntity;
+import training.iqgateway.service.HospitalRegistrationService;
+
+@RestController
+@CrossOrigin
+@RequestMapping("api/registration")
+public class RegistrationController {
+
+//	@GetMapping("/hi")
+//	public String sayHello() {
+//		return "HEllo Bhai";
+//	}
+
+	@Autowired
+	HospitalRegistrationService hospitalRegistrationService;
+
+	
+	List<HospitalRegistrationResponseDTO> allHospitalResponseDTO = new ArrayList<>();
+
+
+	HospitalRegistrationResponseDTO hospitalResponseDTO = new HospitalRegistrationResponseDTO();
+
+	HospitalRegistrationResponseDTO.Address address = new HospitalRegistrationResponseDTO.Address();
+	
+	HospitalRegistrationResponseDTO.ContactDetails contactDetails = new HospitalRegistrationResponseDTO.ContactDetails();
+	
+	@GetMapping("/hospitals")
+	public List<HospitalRegistrationResponseDTO> getAllHospitals() {
+
+		List<HospitalRegistrationEntity> listOfHospitalEntity = hospitalRegistrationService.findAllHospitals();
+
+		for (HospitalRegistrationEntity hospital : listOfHospitalEntity) {
+
+			hospitalResponseDTO.set_id(hospital.get_id());
+			hospitalResponseDTO.setName(hospital.getName());
+			hospitalResponseDTO.setCeoName(hospital.getCeoName());
+			String city = hospital.getAddress().getCity();
+			String state = hospital.getAddress().getState();
+			String pincode = hospital.getAddress().getPincode();
+			String street = hospital.getAddress().getStreet();
+			address.setCity(city);
+			address.setPincode(pincode);
+			address.setState(state);
+			address.setStreet(street);
+			hospitalResponseDTO.setAddress(address);
+			
+			String email = hospital.getContactDetails().getEmail();
+			String phone = hospital.getContactDetails().getPhone();
+			
+			contactDetails.setEmail(email);
+			contactDetails.setPhone(phone);
+
+			hospitalResponseDTO.getContactDetails().setEmail(hospital.getContactDetails().getEmail());
+			hospitalResponseDTO.getContactDetails().setPhone(hospital.getContactDetails().getPhone());
+			hospitalResponseDTO.setStaffDetails(hospital.getStaffDetails());
+			hospitalResponseDTO.setRegistrationStatus(hospital.getRegistrationStatus());
+
+			allHospitalResponseDTO.add(hospitalResponseDTO);
+		}
+
+		return allHospitalResponseDTO;
+
+	}
+
+}

@@ -1,0 +1,5 @@
+package training.iqgateway.hospital.entity;
+
+public class HospitalStaff {
+
+}

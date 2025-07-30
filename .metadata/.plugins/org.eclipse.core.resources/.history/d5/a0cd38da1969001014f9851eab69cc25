@@ -1,0 +1,5 @@
+package training.iqgateway.admin.enitty;
+
+public class Hospital {
+
+}

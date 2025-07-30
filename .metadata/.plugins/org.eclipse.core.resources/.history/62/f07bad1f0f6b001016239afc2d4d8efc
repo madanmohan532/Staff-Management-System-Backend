@@ -1,0 +1,397 @@
+package training.iqgateway.hospital.service;
+
+import java.util.List;
+
+import org.bson.Document;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Service;
+
+import com.mongodb.client.result.UpdateResult;
+
+import training.iqgateway.hospital.dto.NurseResponseDTO;
+import training.iqgateway.hospital.entity.Hospital;
+import training.iqgateway.hospital.entity.NurseRequest;
+import training.iqgateway.hospital.entity.RequestDetails;
+import training.iqgateway.hospital.repository.HospitalRepository;
+
+@Service
+public class HospitalServiceImpl implements HospitalService {
+
+	@Autowired
+	HospitalRepository hospitalRepository;
+
+	@Autowired
+	MongoTemplate mongoTemplate;
+	
+	
+	
+	
+
+	@Override
+	public Hospital getHospitalById(String id) {
+		// Placeholder for actual hospital retrieval logic
+		return hospitalRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Hospital not found with id: " + id));
+	}
+
+	public List<NurseResponseDTO> getNurseByRequestDetails(RequestDetails requestDetails) {
+
+
+//		Criteria notOnLeave = Criteria.where("leave_details").not().elemMatch(
+//			    Criteria.where("from_date").lte(requestDetails.getDate())
+//			           .and("to_date").gte(requestDetails.getDate())
+//			);
+//
+//			Criteria overlapSchedule = new Criteria().orOperator(
+//			    Criteria.where("work_schedule.from").gte(Instant.parse(requestDetails.getFrom()))
+//			           .and("work_schedule.from").lt(Instant.parse(requestDetails.getTo())),
+//			    Criteria.where("work_schedule.to").gt(Instant.parse(requestDetails.getFrom()))
+//			           .and("work_schedule.to").lte(Instant.parse(requestDetails.getTo())),
+//			    Criteria.where("work_schedule.from").lte(Instant.parse(requestDetails.getFrom()))
+//			           .and("work_schedule.to").gte(Instant.parse(requestDetails.getTo()))
+//			).and("work_schedule.date").is(requestDetails.getDate());
+//			
+//			Criteria notConfirmedSchedule = new Criteria().orOperator(
+//				    Criteria.where("work_schedule.status").ne("confirmed"),
+//				    Criteria.where("work_schedule.status").exists(false)
+//				);
+//
+//			Criteria noOverlapCondition = new Criteria().not().elemMatch(
+//				    new Criteria().andOperator(overlapSchedule, notConfirmedSchedule)
+//				);
+//
+//			Query query = new Query(new Criteria().andOperator(
+//			    Criteria.where("registration_status").is("approved"),
+//			    notOnLeave,
+//			    noOverlapCondition
+//			));
+		
+		
+//		Criteria notOnLeave = Criteria.where("leave_details").not().elemMatch(
+//			    Criteria.where("from_date").lte(requestDetails.getDate())
+//			           .and("to_date").gte(requestDetails.getDate())
+//			);
+//
+//			// Restructured overlap criteria to avoid field conflicts
+//			Criteria overlapSchedule = new Criteria().orOperator(
+//			    // Case 1: New schedule starts during existing schedule
+//			    new Criteria().andOperator(
+//			        Criteria.where("work_schedule.from").gte(Instant.parse(requestDetails.getFrom())),
+//			        Criteria.where("work_schedule.from").lt(Instant.parse(requestDetails.getTo()))
+//			    ),
+//			    // Case 2: New schedule ends during existing schedule
+//			    new Criteria().andOperator(
+//			        Criteria.where("work_schedule.to").gt(Instant.parse(requestDetails.getFrom())),
+//			        Criteria.where("work_schedule.to").lte(Instant.parse(requestDetails.getTo()))
+//			    ),
+//			    // Case 3: New schedule completely contains existing schedule
+//			    new Criteria().andOperator(
+//			        Criteria.where("work_schedule.from").lte(Instant.parse(requestDetails.getFrom())),
+//			        Criteria.where("work_schedule.to").gte(Instant.parse(requestDetails.getTo()))
+//			    )
+//			).and("work_schedule.date").is(requestDetails.getDate());
+//
+//			Criteria notConfirmedSchedule = new Criteria().orOperator(
+//			    Criteria.where("work_schedule.status").ne("confirmed"),
+//			    Criteria.where("work_schedule.status").exists(false)
+//			);
+//
+//			Criteria noOverlapCondition = new Criteria().not().elemMatch(
+//			    new Criteria().andOperator(overlapSchedule, notConfirmedSchedule)
+//			);
+//
+//			// Final query combining all criteria
+//			Query query = new Query(new Criteria().andOperator(
+//			    Criteria.where("registration_status").is("approved"),
+//			    notOnLeave,
+//			    noOverlapCondition
+//			));
+		
+//		Criteria notOnLeave = Criteria.where("leave_details").not().elemMatch(
+//			    Criteria.where("from_date").lte(requestDetails.getDate())
+//			           .and("to_date").gte(requestDetails.getDate())
+//			);
+//
+//			// Restructured overlap criteria
+//			Criteria overlapSchedule = new Criteria().orOperator(
+//			    // Case 1: New schedule starts during existing schedule
+//			    new Criteria().andOperator(
+//			        Criteria.where("work_schedule.from").gte(Instant.parse(requestDetails.getFrom())),
+//			        Criteria.where("work_schedule.from").lt(Instant.parse(requestDetails.getTo()))
+//			    ),
+//			    // Case 2: New schedule ends during existing schedule
+//			    new Criteria().andOperator(
+//			        Criteria.where("work_schedule.to").gt(Instant.parse(requestDetails.getFrom())),
+//			        Criteria.where("work_schedule.to").lte(Instant.parse(requestDetails.getTo()))
+//			    ),
+//			    // Case 3: New schedule completely contains existing schedule
+//			    new Criteria().andOperator(
+//			        Criteria.where("work_schedule.from").lte(Instant.parse(requestDetails.getFrom())),
+//			        Criteria.where("work_schedule.to").gte(Instant.parse(requestDetails.getTo()))
+//			    )
+//			).and("work_schedule.date").is(requestDetails.getDate());
+//
+//			Criteria notConfirmedSchedule = new Criteria().orOperator(
+//			    Criteria.where("work_schedule.status").ne("confirmed"),
+//			    Criteria.where("work_schedule.status").exists(false)
+//			);
+//
+//			// Fixed noOverlapCondition - using $nor instead of $not
+//			Criteria noOverlapCondition = new Criteria().norOperator(
+//			    new Criteria().andOperator(overlapSchedule, notConfirmedSchedule)
+//			);
+//
+//			// Final query
+//			Query query = new Query(new Criteria().andOperator(
+//			    Criteria.where("registration_status").is("approved"),
+//			    notOnLeave,
+//			    noOverlapCondition
+//			));
+
+		
+		// 1. Criteria for nurses not on leave on the requested date
+//		Criteria notOnLeave = new Criteria().norOperator(
+//		    Criteria.where("leave_details").elemMatch(
+//		        Criteria.where("from_date").lte(requestDetails.getDate())
+//		               .and("to_date").gte(requestDetails.getDate())
+//		    )
+//		);
+//
+//		// 2. Convert request dates to proper format
+//		String requestDate = requestDetails.getDate(); // yyyy-MM-dd
+//		Instant requestFrom = Instant.parse(requestDetails.getFrom());
+//		Instant requestTo = Instant.parse(requestDetails.getTo());
+//
+//		// 3. Criteria for schedule overlap detection
+//		Criteria overlapSchedule = new Criteria().orOperator(
+//		    // Case 1: New schedule starts during existing schedule
+//		    new Criteria().andOperator(
+//		        Criteria.where("work_schedule.from").lte(requestTo.toString()),
+//		        Criteria.where("work_schedule.to").gte(requestFrom.toString())
+//		    )
+//		).and("work_schedule.date").is(requestDate);
+//
+//		// 4. Criteria for unconfirmed schedules
+//		Criteria notConfirmedSchedule = new Criteria().orOperator(
+//		    Criteria.where("work_schedule.status").ne("confirmed"),
+//		    Criteria.where("work_schedule.status").exists(false)
+//		);
+//
+//		// 5. Criteria to find nurses without conflicting schedules
+//		Criteria noOverlapCondition = new Criteria().norOperator(
+//		    Criteria.where("work_schedule").elemMatch(
+//		        new Criteria().andOperator(overlapSchedule, notConfirmedSchedule)
+//		    )
+//		);
+
+		
+		
+
+//		// 7. Final query combining all criteria
+//		Query query = new Query(new Criteria().andOperator(
+//		    Criteria.where("registration_status").is("approved"),
+//		    notOnLeave,
+//		    noOverlapCondition
+//		));
+//		
+//		
+//		Criteria notOnLeave = new Criteria().norOperator(
+//			    Criteria.where("leaveDetails").elemMatch(
+//			        Criteria.where("fromDate").lte(requestDetails.getDate())
+//			               .and("toDate").gte(requestDetails.getDate())
+//			    )
+//			);
+//		
+////		 2. Convert request dates to proper format
+//		String requestDate = requestDetails.getDate(); // yyyy-MM-dd
+//		Instant requestFrom = Instant.parse(requestDetails.getFrom());
+//		Instant requestTo = Instant.parse(requestDetails.getTo());
+//
+//			// 2. Criteria for nurses with no work schedules
+//			Criteria noSchedules = Criteria.where("workSchedule").size(0);
+//
+//			// 3. Criteria for nurses with unconfirmed matching schedules
+//			Criteria matchingUnconfirmedSchedule = new Criteria().andOperator(
+//			    Criteria.where("workSchedule.date").is(requestDate),
+//			    Criteria.where("workSchedule.from").lte(requestTo.toString()),
+//			    Criteria.where("workSchedule.to").gte(requestFrom.toString()),
+//			    new Criteria().orOperator(
+//			        Criteria.where("workSchedule.status").ne("confirmed"),
+//			        Criteria.where("workSchedule.status").exists(false)
+//			    )
+//			);
+//
+//			// 4. Combine criteria
+//			Criteria finalCriteria = new Criteria().andOperator(
+//			    Criteria.where("registrationStatus").is("approved"),
+//			    notOnLeave,
+//			    new Criteria().orOperator(
+//			        noSchedules,
+//			        Criteria.where("workSchedule").elemMatch(matchingUnconfirmedSchedule)
+//			    )
+//			);
+
+		// 8. Execute the query
+//		List<Nurse> availableNurses = mongoTemplate.find(query, Nurse.class);
+		
+			// Execute the query
+//			List<Nurse> availableNurses = mongoTemplate.find(query, Nurse.class);
+		
+//			Query query = new Query(finalCriteria);
+		
+		
+		// 1. Not on leave criteria (correct)
+//		Criteria notOnLeave = new Criteria().norOperator(
+//		    Criteria.where("leaveDetails").elemMatch(
+//		        Criteria.where("fromDate").lte(requestDetails.getDate())
+//		               .and("toDate").gte(requestDetails.getDate())
+//		    )
+//		);
+//
+//		// 2. Date handling - ensure consistent formats
+//		String requestDate = requestDetails.getDate(); // yyyy-MM-dd
+//		String requestFromStr = requestDetails.getFrom(); // Already in correct Instant string format
+//		String requestToStr = requestDetails.getTo();     // Already in correct Instant string format
+//
+//		// 3. Criteria for nurses with no work schedules (correct)
+//		Criteria noSchedules = Criteria.where("workSchedule").size(0);
+//
+//		// 4. Criteria for unconfirmed matching schedules - FIXED
+//		Criteria matchingUnconfirmedSchedule = new Criteria().andOperator(
+//		    Criteria.where("date").is(requestDate),
+//		    Criteria.where("from").lte(requestToStr),
+//		    Criteria.where("to").gte(requestFromStr),
+//		    new Criteria().orOperator(
+//		        Criteria.where("status").ne("confirmed"),
+//		        Criteria.where("status").exists(false)
+//		    )
+//		);
+//
+//		// 5. Combine criteria - FIXED structure
+//		Criteria finalCriteria = new Criteria().andOperator(
+//		    Criteria.where("registrationStatus").is("approved"),
+//		    notOnLeave,
+//		    new Criteria().orOperator(
+//		        noSchedules,
+//		        new Criteria().andOperator(  // Added explicit andOperator
+//		            Criteria.where("workSchedule").exists(true),
+//		            Criteria.where("workSchedule").not().size(0),
+//		            Criteria.where("workSchedule").elemMatch(matchingUnconfirmedSchedule)
+//		        )
+//		    )
+//		);
+//
+//		Query query = new Query(finalCriteria);
+		
+		String requestDate = requestDetails.getDate();
+        String requestFrom = requestDetails.getFrom();
+        String requestTo = requestDetails.getTo();
+
+        // 2. Build the query criteria
+        Criteria criteria = new Criteria().andOperator(
+            // Must be approved
+            Criteria.where("registrationStatus").is("approved"),
+            
+            // Not on leave on the requested date
+            Criteria.where("leaveDetails").not().elemMatch(
+                Criteria.where("fromDate").lte(requestDate)
+                       .and("toDate").gte(requestDate)
+            ),
+            
+            // Either has no schedules OR has non-conflicting schedules
+            new Criteria().orOperator(
+                // Case 1: No schedules at all
+                Criteria.where("workSchedule").size(0),
+                
+                // Case 2: Has schedules but none match our criteria
+                new Criteria().andOperator(
+                    Criteria.where("workSchedule").exists(true),
+                    Criteria.where("workSchedule").not().elemMatch(
+                        new Criteria().orOperator(
+                            // Sub-case 2a: Matching date but not confirmed
+                            new Criteria().andOperator(
+                                Criteria.where("date").is(requestDate),
+                                new Criteria().orOperator(
+                                    Criteria.where("status").ne("confirmed"),
+                                    Criteria.where("status").exists(false)
+                                )
+                            ),
+                            
+                            // Sub-case 2b: Confirmed but overlapping time
+                            new Criteria().andOperator(
+                                Criteria.where("date").is(requestDate),
+                                Criteria.where("status").is("confirmed"),
+                                new Criteria().orOperator(
+                                    // Existing schedule starts during requested period
+                                    new Criteria().andOperator(
+                                        Criteria.where("from").gte(requestFrom),
+                                        Criteria.where("from").lt(requestTo)
+                                    ),
+                                    // Existing schedule ends during requested period
+                                    new Criteria().andOperator(
+                                        Criteria.where("to").gt(requestFrom),
+                                        Criteria.where("to").lte(requestTo)
+                                    ),
+                                    // Existing schedule completely contains requested period
+                                    new Criteria().andOperator(
+                                        Criteria.where("from").lte(requestFrom),
+                                        Criteria.where("to").gte(requestTo)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        );
+
+        // 3. Execute the query
+        Query query = new Query(criteria);
+       
+    
+		
+		return mongoTemplate.find(query, NurseResponseDTO.class);
+	}
+
+	@Override
+	public NurseResponseDTO requestSingleNurse(NurseRequest singleNurseRequestDetails) {
+		// TODO Auto-generated method stub
+		
+		Query query = new Query();
+		
+		System.out.println("before criteria creation");
+		
+	    Criteria findStaffId = Criteria.where("staff_id").is(singleNurseRequestDetails.getStaffId());
+	    
+	    System.out.println("after criteria creation");
+	    
+	    Document workSchedule = new Document()
+	            .append("date", singleNurseRequestDetails.getDate())  // "yyyy-MM-dd"
+	            .append("from", singleNurseRequestDetails.getFrom())  // "2023-06-20T08:00:00Z"
+	            .append("to", singleNurseRequestDetails.getTo())      // "2023-06-20T16:00:00Z"
+	            .append("hospital_id", singleNurseRequestDetails.getHospitalId())
+	            .append("status", "requested");
+	    
+	    Update update = new Update();
+	    
+	    
+	    update.addToSet("work_schedule", workSchedule);
+	    
+	    System.out.println("before update");
+	    
+	    UpdateResult updateNurseDetail = mongoTemplate.updateFirst(query.addCriteria(findStaffId), update, NurseResponseDTO.class);
+		
+	    System.out.println("after update");
+	    
+	    if (updateNurseDetail.getModifiedCount() == 0) {
+	        throw new RuntimeException("Nurse not found or update failed for staff ID: " + singleNurseRequestDetails.getStaffId());
+	    }
+	    
+		return mongoTemplate.findOne(query.addCriteria(findStaffId), NurseResponseDTO.class);
+	}
+
+}

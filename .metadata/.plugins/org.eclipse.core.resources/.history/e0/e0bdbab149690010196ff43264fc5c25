@@ -1,0 +1,13 @@
+package training.iqgateway.admin.utils;
+
+import training.iqgateway.admin.dto.NurseResponseDTO;
+import training.iqgateway.admin.entity.Nurse;
+
+public class NurseUtils {
+
+	public static NurseResponseDTO convertToNurseResponseDTO(Nurse nurse) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

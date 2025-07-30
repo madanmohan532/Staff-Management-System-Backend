@@ -1,0 +1,106 @@
+package training.iqgateway.admin.dto;
+
+import java.util.List;
+
+import lombok.Data;
+
+
+@Data
+public class NurseResponseDTO {
+	private String _id;
+    private String userId;
+    private String firstName;
+    private String lastName;
+    private boolean availableStatus;
+    private List<LeaveDetail> leaveDetails;
+    private ContactDetails contactDetails;
+    private String certificate;
+    private Integer yearOfExperience;
+    private String password;
+    private String certificateNumber;
+    private Address address;
+    private boolean currentWorkingStatus;
+    private List<WorkingHour> workingHours;
+    private List<WorkSchedule> workSchedule;
+    private List<String> skills;
+    private String selfDescription;
+    private String registrationStatus;
+    
+    @Data
+    public static class ContactDetails {
+        private String phone;
+        private String email;
+		public ContactDetails(String phone, String email) {
+			super();
+			this.phone = phone;
+			this.email = email;
+		}
+        
+        
+    }
+    
+    @Data
+    public static class LeaveDetail {
+    	private String fromDate;
+        private String toDate;
+        
+		public LeaveDetail(String fromDate, String toDate) {
+			super();
+			this.fromDate = fromDate;
+			this.toDate = toDate;
+		}
+        
+    }
+    
+    @Data
+    public static class Address {
+        private String street;
+        private String city;
+        private String state;
+        private String pincode;
+		public Address(String street, String city, String state, String pincode) {
+			super();
+			this.street = street;
+			this.city = city;
+			this.state = state;
+			this.pincode = pincode;
+		}
+        
+    }
+    
+    @Data
+    public static class WorkingHour {
+        private String date;
+        private String from;
+        private String to;
+        private String hospitalId;
+		public WorkingHour(String date, String from, String to, String hospitalId) {
+			super();
+			this.date = date;
+			this.from = from;
+			this.to = to;
+			this.hospitalId = hospitalId;
+		}
+        
+        
+    }
+    
+    @Data
+    public class WorkSchedule {
+        private String date;
+        private String from;
+        private String to;
+        private String hospitalId;
+        private String status;
+		public WorkSchedule(String date, String from, String to, String hospitalId, String status) {
+			super();
+			this.date = date;
+			this.from = from;
+			this.to = to;
+			this.hospitalId = hospitalId;
+			this.status = status;
+		} 
+        
+        
+    }
+}

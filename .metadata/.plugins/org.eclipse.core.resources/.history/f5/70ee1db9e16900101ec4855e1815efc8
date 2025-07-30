@@ -1,0 +1,5 @@
+package training.iqgateway.hospital.config;
+
+public class SecurityConfig {
+
+}

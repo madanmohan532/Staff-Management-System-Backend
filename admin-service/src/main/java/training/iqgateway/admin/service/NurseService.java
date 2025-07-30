@@ -1,0 +1,20 @@
+package training.iqgateway.admin.service;
+
+import java.util.List;
+
+import training.iqgateway.admin.entity.Nurse;
+
+public interface NurseService {
+	
+	public List<Nurse> getAllNurses();
+
+
+	public Nurse updateNurseRegistrationStatus(String registrationStatus, String get_id, String userId);
+
+
+	public Nurse updateNurse(Nurse nurse);
+
+
+	public boolean deleteNurse(String nurseId);
+
+}

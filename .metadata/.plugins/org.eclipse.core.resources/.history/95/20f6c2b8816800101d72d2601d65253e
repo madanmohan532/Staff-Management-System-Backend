@@ -1,0 +1,66 @@
+package training.iqgateway.controller;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import training.iqgateway.entity.HospitalRegistrationEntity;
+import training.iqgateway.entity.Users;
+import training.iqgateway.service.HospitalRegistrationService;
+import training.iqgateway.service.NurseRegistrationService;
+import training.iqgateway.service.UserService;
+
+@RestController
+@RequestMapping("api/login")
+public class LoginController {
+	
+	@Autowired
+	HospitalRegistrationService hospitalRegistrationService;
+	
+	@Autowired
+	NurseRegistrationService nurseRegistrationService;
+	
+	@Autowired
+	UserService userService;
+	
+	@PostMapping
+	public ResponseEntity<?> handleLogin(@RequestParam String email, @RequestParam String password, @RequestParam String role){
+		
+		if(role.equalsIgnoreCase("hospital staff")) {
+			Optional<HospitalRegistrationEntity> hospitalEntity = hospitalRegistrationService.findAllHospitals()
+			.stream().filter(hos -> hos.getContactDetails().getEmail().equals(email)).findFirst();
+
+//			.findFirst().filter(h-> h.getRegistrationStatus().equals("approved"));
+			if(hospitalEntity.get()!=null) {
+				Users logUser = null;
+				try {
+					logUser = userService.findByEmail(email);
+				}
+				catch (NullPointerException e) {
+					// TODO: handle exception
+					return new ResponseEntity<>("User is Not Validated, Come back Later")
+				}
+				if(logUser.getPassword().equals(password)) {
+					return new ResponseEntity<>(logUser,HttpStatus.FOUND);
+				}
+				else {
+					return new ResponseEntity<>("Incorrect Password, Try Again",HttpStatus.UNAUTHORIZED);
+				}
+			}
+			
+		}
+		else {
+			
+		}
+		
+		return null;
+		
+	}
+	
+}

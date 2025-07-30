@@ -1,0 +1,47 @@
+package training.iqgateway.hospital.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import training.iqgateway.hospital.entity.HospitalNurse;
+import training.iqgateway.hospital.repository.HospitalNurseRepository;
+
+@Service
+public class HospitalNurseServiceImpl implements HospitalNurseService {
+	
+	@Autowired
+	HospitalNurseRepository hospitalNurseRepository;
+
+	@Override
+	public HospitalNurse createHospitalNurse(HospitalNurse hospitalNurse) {
+		// TODO Auto-generated method stub
+		return hospitalNurseRepository.save(hospitalNurse);
+	}
+
+	@Override
+	public List<HospitalNurse> getAllHospitalNurses() {
+		// TODO Auto-generated method stub
+		return hospitalNurseRepository.findAll();
+	}
+
+	@Override
+	public HospitalNurse deleteHospitalNurseByStaffId(String staffId) {
+		// TODO Auto-generated method stub
+
+		
+		return hospitalNurseRepository.deleteByStaffId(staffId);
+	}
+
+	@Override
+	public boolean assignNurseToFloor(String floor) {
+		
+		// TODO Auto-generated method stub
+		
+		
+		
+		return false;
+	}
+
+}

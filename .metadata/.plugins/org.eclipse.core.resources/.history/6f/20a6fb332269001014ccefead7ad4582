@@ -1,0 +1,40 @@
+package training.iqgateway.admin.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Service;
+
+import training.iqgateway.admin.entity.Hospital;
+import training.iqgateway.admin.repository.HospitalRepository;
+
+@Service
+public class HospitalServiceImpl implements HospitalService {
+	
+	@Autowired
+	HospitalRepository hospitalRepository;
+	
+	@Autowired
+	ReactiveMongoTemplate reactiveMongoTemplate;
+	
+
+	// This method should contain the logic to fetch all hospitals
+	@Override
+	public List<Hospital> getAllHospitals() {
+		return hospitalRepository.findAll();
+	}
+
+	@Override
+	public Hospital updateHospitalRegistrationStatus(String registrationStatus, String hospitalId) {
+		// TODO Auto-generated method stub
+		
+		Query query = Query.query(Criteria.where("_id").is(hospitalId));
+		
+		reactiveMongoTemplate.update(Hospital.class);
+		return null;
+	}
+
+}

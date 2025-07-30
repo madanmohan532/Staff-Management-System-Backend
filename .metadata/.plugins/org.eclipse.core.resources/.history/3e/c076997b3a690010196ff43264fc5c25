@@ -1,0 +1,5 @@
+package training.iqgateway.admin.config;
+
+public class SecurityConfig {
+
+}

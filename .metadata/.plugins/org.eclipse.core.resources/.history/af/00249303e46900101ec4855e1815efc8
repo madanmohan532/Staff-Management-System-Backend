@@ -1,0 +1,23 @@
+package training.iqgateway.hospital.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import training.iqgateway.hospital.entity.Hospital;
+import training.iqgateway.hospital.repository.HospitalRepository;
+
+public class HospitalServiceImpl implements HospitalService {
+
+	
+	@Autowired
+	HospitalRepository hospitalRepository;
+	
+	@Override
+	public Hospital getHospitalById(String id) {
+		// Placeholder for actual hospital retrieval logic
+		return hospitalRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Hospital not found with id: " + id));
+	}
+	
+	
+
+}

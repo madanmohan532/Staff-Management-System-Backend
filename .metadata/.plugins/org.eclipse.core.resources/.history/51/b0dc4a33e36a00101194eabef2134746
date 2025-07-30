@@ -1,0 +1,41 @@
+package training.iqgateway.hospital.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import training.iqgateway.hospital.entity.HospitalNurse;
+import training.iqgateway.hospital.service.HospitalNurseService;
+
+@RestController
+@CrossOrigin(origins = "*")
+@RequestMapping("/api/hospital/nurse")
+public class HospitalStaffController {
+	
+	@Autowired
+	HospitalNurseService hospitalNurseService;
+	
+	@GetMapping("/getHospitalNurseDetails")
+	public ResponseEntity<?> getHospitalNurseDetails() {
+		// Logic to fetch staff details
+		// Placeholder for actual staff retrieval logic
+		return new ResponseEntity<>("Hospital Nurse details retrieved successfully", HttpStatus.OK);
+	}
+	
+	
+	@PostMapping("/createHospitalNurse")
+	public ResponseEntity<?> createHospitalNurse(@RequestBody HospitalNurse hospitalNurse) {
+		// Logic to create a new hospital nurse
+		
+		hospitalNurseService.createHospitalNurse(hospitalNurse);
+		
+		return new ResponseEntity<>("Hospital Nurse created successfully", HttpStatus.CREATED);
+	}
+
+}

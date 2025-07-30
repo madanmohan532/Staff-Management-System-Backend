@@ -1,0 +1,75 @@
+package training.iqgateway.hospital.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Service;
+
+import training.iqgateway.hospital.dto.NurseResponseDTO;
+import training.iqgateway.hospital.entity.Hospital;
+import training.iqgateway.hospital.entity.RequestDetails;
+import training.iqgateway.hospital.repository.HospitalRepository;
+
+@Service
+public class HospitalServiceImpl implements HospitalService {
+
+	@Autowired
+	HospitalRepository hospitalRepository;
+
+	@Autowired
+	MongoTemplate mongoTemplate;
+
+	@Override
+	public Hospital getHospitalById(String id) {
+		// Placeholder for actual hospital retrieval logic
+		return hospitalRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Hospital not found with id: " + id));
+	}
+
+	public List<NurseResponseDTO> getNurseByRequestDetails(RequestDetails requestDetails) {
+
+//		Criteria notOnLeave = new Criteria()
+//				.norOperator(Criteria.where("leave_details.from_date").lte(requestDetails.getDate())
+//						.andOperator(Criteria.where("leave_details.to_date").gte(requestDetails.getDate())));
+//
+//		Criteria overlapSchedule = new Criteria().andOperator(
+//				Criteria.where("work_schedule.to").gt(requestDetails.getFrom()),
+//				Criteria.where("work_schedule.from").lt(requestDetails.getTo()),
+//				Criteria.where("work_schedule.date").is(requestDetails.getDate()));
+//
+//		Criteria noOverlapCondition = new Criteria().not().elemMatch(overlapSchedule);
+//
+//		Query query = new Query(new Criteria().andOperator(notOnLeave, noOverlapCondition));
+
+		Criteria notOnLeave = Criteria.where("leave_details").not().elemMatch(
+			    Criteria.where("from_date").lte(requestDetails.getDate())
+			           .and("to_date").gte(requestDetails.getDate())
+			);
+
+			Criteria overlapSchedule = new Criteria().orOperator(
+			    Criteria.where("work_schedule.from").gte(requestDetails.getFrom())
+			           .and("work_schedule.from").lt(requestDetails.getTo()),
+			    Criteria.where("work_schedule.to").gt(requestDetails.getFrom())
+			           .and("work_schedule.to").lte(requestDetails.getTo()),
+			    Criteria.where("work_schedule.from").lte(requestDetails.getFrom())
+			           .and("work_schedule.to").gte(requestDetails.getTo())
+			).and("work_schedule.date").is(requestDetails.getDate());
+
+			Criteria noOverlapCondition = new Criteria().not().elemMatch(overlapSchedule);
+
+			Query query = new Query(new Criteria().andOperator(
+			    Criteria.where("available_status").is(true),
+			    Criteria.where("current_working_status").is(true),
+			    Criteria.where("registration_status").is("approved"),
+			    notOnLeave,
+			    noOverlapCondition
+			));
+		
+		
+		return mongoTemplate.find(query, NurseResponseDTO.class);
+	}
+
+}

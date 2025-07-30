@@ -1,0 +1,17 @@
+spring.application.name=zuul-for-sms-services
+# Server port for Zuul gateway
+server.port=9999
+
+
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
+eureka.instance.prefer-ip-address=true
+
+# Zuul Routes Config
+zuul.routes.registration-service.url=http://localhost:9191/
+zuul.routes.admin-service.url=http://localhost:9192/
+zuul.routes.hospital-service.url=http://localhost:9193/
+zuul.routes.staff-service.url=http://localhost:9194/
+
+# Optional: Zuul strip prefix (removes /service-name from forwarded request)
+zuul.strip-prefix=true
+

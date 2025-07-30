@@ -1,0 +1,16 @@
+package training.iqgateway.admin.service;
+
+import java.util.List;
+
+import training.iqgateway.admin.dto.NurseResponseDTO;
+import training.iqgateway.admin.entity.Hospital;
+import training.iqgateway.admin.entity.Nurse;
+
+public interface NurseService {
+	
+	public List<Nurse> getAllNurses();
+
+
+	public Hospital updateHospitalRegistrationStatus(String registrationStatus, String get_id, String userId);
+
+}

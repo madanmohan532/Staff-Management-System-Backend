@@ -1,0 +1,13 @@
+package training.iqgateway.hospital.service;
+
+import training.iqgateway.hospital.entity.HospitalStaff;
+
+public class HospitalNurseServiceImpl implements HospitalNurseService {
+
+	@Override
+	public HospitalStaff createHospitalNurse(HospitalStaff hospitalNurse) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

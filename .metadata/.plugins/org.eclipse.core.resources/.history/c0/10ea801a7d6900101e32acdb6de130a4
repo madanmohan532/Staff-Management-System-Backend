@@ -1,0 +1,5 @@
+package training.iqgateway.admin.controller;
+
+public class AdminController {
+
+}

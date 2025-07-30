@@ -1,0 +1,33 @@
+package training.iqgateway.util;
+
+import training.iqgateway.dto.NurseRegistrationResponseDTO;
+import training.iqgateway.entity.NurseRegistrationEntity;
+
+public class NurseUtils {
+	
+	public static NurseRegistrationResponseDTO convertToNurseRegistrationResponseDTO(NurseRegistrationEntity nurse) {
+		
+		NurseRegistrationResponseDTO nurseResponseDTO = new NurseRegistrationResponseDTO();
+		
+		nurseResponseDTO.set_id(nurse.get_id());
+		nurseResponseDTO.setAddress(nurse.getAddress());
+		nurseResponseDTO.setAvailableStatus(nurse.getAvailableStatus());
+		nurseResponseDTO.setCertificate(nurse.getCertificate());
+		nurseResponseDTO.setCertificateNumber(nurse.getCertificateNumber());
+		nurseResponseDTO.setContactDetails(nurse.getContactDetails());
+		nurseResponseDTO.setCurrentWorkingStatus(nurse.isCurrentWorkingStatus());
+		nurseResponseDTO.setFirstName(nurse.getFirstName());
+		nurseResponseDTO.setLastName(nurse.getLastName());
+		nurseResponseDTO.setLeaveDetails(nurse.getLeaveDetails());
+		nurseResponseDTO.setRegistrationStatus(nurse.getRegistrationStatus());
+		nurseResponseDTO.setSelfDescription(nurse.getSelfDescription());
+		nurseResponseDTO.setSkills(nurse.getSkills());
+		nurseResponseDTO.setUserId(nurse.getUserId());
+		nurseResponseDTO.setWorkingHours(nurse.getWorkingHours());
+		nurseResponseDTO.setWorkSchedule(nurse.getWorkSchedule());
+		
+		return nurseResponseDTO;
+		
+	}
+
+}

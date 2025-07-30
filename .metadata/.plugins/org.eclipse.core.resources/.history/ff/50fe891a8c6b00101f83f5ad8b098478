@@ -1,0 +1,128 @@
+package training.iqgateway.staff.entity;
+
+import java.util.List;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import lombok.Data;
+
+@Document(collection = "patients")
+@Data
+public class Patient {
+    @Id
+    private String id;
+    private String patientId;
+    private String first_name;
+    private String last_name;
+    private String admit_date;
+    private String expected_discharge_date;
+    private String actual_discharge_date;
+    private String associated_doctor;
+    private String staff_id;
+    private String hospital_id;
+    private String floor_number;
+    private Address address;
+    private MedicalInformation medicalInformation;
+
+    // Constructors
+    public Patient() {
+    }
+
+    public Patient(String id, String patientId, String first_name, String last_name, 
+                 String admit_date, String expected_discharge_date, String actual_discharge_date,
+                 String associated_doctor, String staff_id, String hospital_id, String floor_number,
+                 Address address, MedicalInformation medicalInformation) {
+        this.id = id;
+        this.patientId = patientId;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.admit_date = admit_date;
+        this.expected_discharge_date = expected_discharge_date;
+        this.actual_discharge_date = actual_discharge_date;
+        this.associated_doctor = associated_doctor;
+        this.staff_id = staff_id;
+        this.hospital_id = hospital_id;
+        this.floor_number = floor_number;
+        this.address = address;
+        this.medicalInformation = medicalInformation;
+    }
+
+    // Inner class for Address
+    public static class Address {
+        private String street;
+        private String city;
+        private String state;
+        private String pincode;
+
+        // Constructors, getters and setters
+        public Address() {
+        }
+
+        public Address(String street, String city, String state, String pincode) {
+            this.street = street;
+            this.city = city;
+            this.state = state;
+            this.pincode = pincode;
+        }
+
+        // Getters and Setters
+        // ... (omitted for brevity)
+    }
+
+    // Inner class for MedicalInformation
+    public static class MedicalInformation {
+        private String primary_reason;
+        private String secondary_reason;
+        private String treatment;
+        private String last_consulted_at;
+        private Medicines medicines;
+
+        // Constructors, getters and setters
+        public MedicalInformation() {
+        }
+
+        public MedicalInformation(String primary_reason, String secondary_reason, 
+                                String treatment, String last_consulted_at, Medicines medicines) {
+            this.primary_reason = primary_reason;
+            this.secondary_reason = secondary_reason;
+            this.treatment = treatment;
+            this.last_consulted_at = last_consulted_at;
+            this.medicines = medicines;
+        }
+
+        // Getters and Setters
+        // ... (omitted for brevity)
+    }
+
+    // Inner class for Medicines
+    public static class Medicines {
+        private List<String> tablets;
+        private List<String> injections;
+        private List<String> tests;
+
+        // Constructors, getters and setters
+        public Medicines() {
+        }
+
+        public Medicines(List<String> tablets, List<String> injections, List<String> tests) {
+            this.tablets = tablets;
+            this.injections = injections;
+            this.tests = tests;
+        }
+
+        // Getters and Setters
+        // ... (omitted for brevity)
+    }
+
+    // Getters and Setters for Patient class
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    // ... (other getters and setters omitted for brevity)
+}

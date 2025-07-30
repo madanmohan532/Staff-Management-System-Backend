@@ -1,0 +1,36 @@
+package training.iqgateway.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.mongodb.MongoWriteException;
+
+import training.iqgateway.dto.HospitalRegistrationResponseDTO;
+import training.iqgateway.entity.HospitalRegistrationEntity;
+import training.iqgateway.repository.HospitalRegistrationRepository;
+
+@Service
+public class HospitalRegistrationServiceImpl implements HospitalRegistrationService {
+	
+	
+	@Autowired
+	HospitalRegistrationRepository hospitalRegistrationRepo;
+	
+	
+	public List<HospitalRegistrationEntity> findAllHospitals(){
+		List<HospitalRegistrationEntity> listOfHospitals =   hospitalRegistrationRepo.findAll();
+		return listOfHospitals;
+	}
+
+
+	@Override
+	public HospitalRegistrationEntity registerHospital(HospitalRegistrationEntity hospitalEntity) throws MongoWriteException {
+		// TODO Auto-generated method stub
+		return hospitalRegistrationRepo.save(hospitalEntity);
+	}
+	
+}

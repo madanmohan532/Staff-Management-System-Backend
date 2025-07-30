@@ -1,0 +1,14 @@
+package training.iqgateway.hospital.utils;
+
+import java.security.SecureRandom;
+
+public class HospitalNurseUtils {
+	
+	public static String generateHospitalStaffId() {
+		long timestamp = System.currentTimeMillis();
+	    int random = new SecureRandom().nextInt(900); // 0-899
+	    return "HOS_NURSE"+String.format("%07d", (timestamp % 9_000_000) + random);
+		
+	}
+
+}

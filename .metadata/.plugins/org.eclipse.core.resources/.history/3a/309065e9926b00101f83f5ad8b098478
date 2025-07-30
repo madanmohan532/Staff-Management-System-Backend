@@ -1,0 +1,60 @@
+package training.iqgateway.staff.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import training.iqgateway.staff.entity.Nurse;
+import training.iqgateway.staff.entity.Nurse.WorkSchedule;
+import training.iqgateway.staff.repository.NurseRepository;
+
+public class NurseServiceImpl implements NurseService {
+	
+	@Autowired
+	NurseRepository nurseRepository;
+
+	@Override
+	public Nurse getNurseById(String nurseId) {
+		// TODO Auto-generated method stub
+		return nurseRepository.findById(nurseId)
+				.orElseThrow(() -> new RuntimeException("Nurse not found with id: " + nurseId));
+	}
+
+	@Override
+	public Nurse updateNurse(Nurse nurse) {
+		// TODO Auto-generated method stub
+		return nurseRepository.save(nurse);
+	}
+
+	@Override
+	public Nurse setNurseAvailability(String nurseId, boolean availbality) {
+		// TODO Auto-generated method stub
+		
+		Nurse nurse = getNurseById(nurseId);
+		nurse.setAvailableStatus(availbality);
+		
+		return updateNurse(nurse);
+	}
+
+	@Override
+	public List<Nurse.WorkingHour> getWorkingHours(String nurseId) {
+		
+		// TODO Auto-generated method stub
+		
+		List<Nurse.WorkingHour> workingHours = null;
+		
+		nurseRepository.findAll().stream().filter(nurse -> nurse.get_id().equals(nurseId))
+			.forEach(nurse -> workingHours.addAll(nurse.getWorkingHours()));
+		
+		
+		
+		return workingHours; 
+	}
+
+	@Override
+	public List<Nurse.WorkSchedule> getWorkingSchedule(String nurseId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

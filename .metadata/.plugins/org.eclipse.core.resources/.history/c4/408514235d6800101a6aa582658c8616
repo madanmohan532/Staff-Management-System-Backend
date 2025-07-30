@@ -1,0 +1,22 @@
+package training.iqgateway.entity;
+
+public class WorkSchedule {
+    private String date;
+    private String from;
+    private String to;
+    private String hospitalId;
+    private String status; // "confirmed", "pending", "cancelled"
+
+    // Constructors, Getters and Setters
+    public WorkSchedule() {}
+
+    public WorkSchedule(String date, String from, String to, String hospitalId, String status) {
+        this.date = date;
+        this.from = from;
+        this.to = to;
+        this.hospitalId = hospitalId;
+        this.status = status;
+    }
+
+    // Getters and Setters...
+}

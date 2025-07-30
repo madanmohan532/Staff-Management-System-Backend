@@ -1,0 +1,21 @@
+package training.iqgateway.admin.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import training.iqgateway.admin.entity.Nurse;
+import training.iqgateway.admin.repository.NurseRepository;
+
+public class NurseServiceImpl implements NurseService {
+	
+	@Autowired
+	NurseRepository nurseRepository;
+
+	@Override
+	public List<Nurse> getAllNurses() {
+		// TODO Auto-generated method stub
+		return nurseRepository.findAll();
+	}
+
+}

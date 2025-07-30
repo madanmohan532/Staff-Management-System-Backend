@@ -1,0 +1,13 @@
+package training.iqgateway.hospital.service;
+
+public class HospitalServiceImpl implements HospitalService {
+
+	@Override
+	public String getHospitalById(String id) {
+		// Placeholder for actual hospital retrieval logic
+		return "Hospital details for ID: " + id;
+	}
+	
+	
+
+}

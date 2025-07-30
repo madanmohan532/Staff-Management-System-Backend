@@ -1,0 +1,26 @@
+package training.iqgateway.staff.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import training.iqgateway.staff.entity.Patient;
+
+public class PatientServiceImpl implements PatientService {
+
+	// Assuming you have a PatientRepository to interact with the database
+	// private final PatientRepository patientRepository;
+
+	// public PatientServiceImpl(PatientRepository patientRepository) {
+	//     this.patientRepository = patientRepository;
+	// }
+	
+	@Autowired
+	PatientRepository patientRepository;
+
+	@Override
+	public Patient getPatientById(String patientId) {
+		// Logic to retrieve a patient by ID from the repository
+		// return patientRepository.findById(patientId).orElse(null);
+		return null; // Placeholder for actual implementation
+	}
+
+}

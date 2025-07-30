@@ -1,0 +1,20 @@
+package training.iqgateway.hospital.service;
+
+import java.util.List;
+import java.util.Map;
+
+import training.iqgateway.hospital.entity.HospitalNurse;
+
+public interface HospitalNurseService {
+	
+	public HospitalNurse createHospitalNurse(HospitalNurse hospitalNurse);
+
+	public List<HospitalNurse> getAllHospitalNurses();
+
+	public HospitalNurse deleteHospitalNurseByStaffId(String staffId);
+
+	public boolean assignNurseToFloor(String floor);
+
+	public Map<Boolean,String> validateWorkingStatus(String staffId);
+
+}

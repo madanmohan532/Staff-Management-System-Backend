@@ -1,0 +1,10 @@
+package training.iqgateway.service;
+
+import training.iqgateway.dto.NurseRegistrationRequestDTO;
+import training.iqgateway.dto.NurseRegistrationResponseDTO;
+
+public interface NurseRegistrationService {
+	
+	NurseRegistrationResponseDTO registerNurse(NurseRegistrationRequestDTO nurseRequestDTO);
+
+}

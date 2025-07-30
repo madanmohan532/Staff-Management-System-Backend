@@ -1,0 +1,11 @@
+package training.iqgateway.staff;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import lombok.Data;
+
+@Data
+@Document(collection = "nurse_details")
+public class Nurse {
+
+}

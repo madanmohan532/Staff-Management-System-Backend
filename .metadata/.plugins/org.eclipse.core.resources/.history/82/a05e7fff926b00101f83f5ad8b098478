@@ -1,0 +1,9 @@
+package training.iqgateway.staff.repository;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import training.iqgateway.staff.entity.Nurse;
+
+public interface NurseRepository extends MongoRepository<Nurse, String>{
+
+}

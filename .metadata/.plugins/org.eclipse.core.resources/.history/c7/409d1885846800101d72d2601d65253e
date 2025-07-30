@@ -1,0 +1,87 @@
+package training.iqgateway.controller;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import training.iqgateway.entity.HospitalRegistrationEntity;
+import training.iqgateway.entity.NurseRegistrationEntity;
+import training.iqgateway.entity.Users;
+import training.iqgateway.service.HospitalRegistrationService;
+import training.iqgateway.service.NurseRegistrationService;
+import training.iqgateway.service.UserService;
+
+@RestController
+@RequestMapping("api/login")
+public class LoginController {
+
+	@Autowired
+	HospitalRegistrationService hospitalRegistrationService;
+
+	@Autowired
+	NurseRegistrationService nurseRegistrationService;
+
+	@Autowired
+	UserService userService;
+
+	@PostMapping
+	public ResponseEntity<?> handleLogin(@RequestParam String email, @RequestParam String password,
+			@RequestParam String role) {
+		Users logUser = null;
+		if (role.equalsIgnoreCase("hospital staff")) {
+			Optional<HospitalRegistrationEntity> hospitalEntity = hospitalRegistrationService.findAllHospitals()
+					.stream().filter(hos -> hos.getContactDetails().getEmail().equals(email)).findFirst();
+
+//			.findFirst().filter(h-> h.getRegistrationStatus().equals("approved"));
+
+			if (hospitalEntity.get() != null) {
+
+				if (hospitalEntity.get().getRegistrationStatus().equals("cancelled")) {
+					return new ResponseEntity<>("Registration is Cancelled by Admin", HttpStatus.FOUND);
+				} else if (hospitalEntity.get().getRegistrationStatus().equals("pending")) {
+					return new ResponseEntity<>("User is Not Validated, Come back Later", HttpStatus.FORBIDDEN);
+				}
+
+			} else {
+				return new ResponseEntity<>("Email Does not Exist, Try Again", HttpStatus.BAD_REQUEST);
+			}
+
+		} else if (role.equalsIgnoreCase("nurse")) {
+			Optional<NurseRegistrationEntity> nurseEntity = nurseRegistrationService.findAllNurses().stream()
+					.filter(nur -> nur.getContactDetails().getEmail().equals(email)).findFirst();
+			if (nurseEntity.get() != null) {
+
+				if (nurseEntity.get().getRegistrationStatus().equals("cancelled")) {
+					return new ResponseEntity<>("Registration is Cancelled by Admin", HttpStatus.FOUND);
+				} else if (nurseEntity.get().getRegistrationStatus().equals("pending")) {
+					return new ResponseEntity<>("User is Not Validated, Come back Later", HttpStatus.FORBIDDEN);
+				}
+
+			} else {
+				return new ResponseEntity<>("Email Does not Exist, Try Again", HttpStatus.BAD_REQUEST);
+			}
+		}
+
+		try {
+			logUser = userService.findByEmail(email);
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			return new ResponseEntity<>("User does not exist", HttpStatus.NOT_FOUND);
+		}
+		if (logUser.getPassword().equals(password)) {
+			return new ResponseEntity<>(logUser, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("Incorrect Password, Try Again", HttpStatus.UNAUTHORIZED);
+		}
+
+		
+
+	}
+
+}

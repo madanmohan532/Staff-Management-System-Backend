@@ -1,0 +1,5 @@
+package training.iqgateway.hospital.service;
+
+public interface HospitalNurseService {
+
+}

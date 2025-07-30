@@ -1,0 +1,140 @@
+package training.iqgateway.hospital.dto;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import lombok.Data;
+
+
+
+
+@Data
+@Document(collection = "nurse_details")
+public class NurseResponseDTO {
+	@Id
+	@Field("_id")
+	private String _id;
+@Field("userId")
+	private String userId;
+
+	@Field("first_name")
+	private String firstName;
+
+	@Field("last_name")
+	private String lastName;
+
+	@Field("password")
+	private String password;
+
+	@Field("available_status")
+	private boolean availableStatus = false;
+
+	@Field("leave_details")
+	private List<LeaveDetail> leaveDetails = new ArrayList<>();
+
+	@Field("contactDetails")
+	private ContactDetails contactDetails;
+
+	@Field("certificate")
+	private String certificate;
+
+	@Field("year_of_experience")
+	private Integer yearOfExperience;
+
+	public Integer getYearOfExperience() {
+		return yearOfExperience;
+	}
+
+	@Indexed(unique = true)
+	@Field("certificateNumber")
+	private String certificateNumber;
+
+	@Field("address")
+	private Address address;
+
+	@Field("current_working_status")
+	private boolean currentWorkingStatus = false;
+
+	@Field("working_hours")
+	private List<WorkingHour> workingHours = new ArrayList<>();
+
+	@Field("work_schedule")
+	private List<WorkSchedule> workSchedule = new ArrayList<>();
+
+	@Field("skills")
+	private List<String> skills;
+
+	@Field("self_description")
+	private String selfDescription;
+
+	@Field("registration_status")
+	private String registrationStatus;
+
+	@Data
+	public static class LeaveDetail {
+		@Field(name = "from_date")
+		private String fromDate;
+		@Field(name = "to_date")
+		private String toDate;
+	}
+
+	@Data
+	public static class Address {
+
+		private String street;
+		private String city;
+		private String state;
+		private String pincode;
+	}
+
+	@Data
+	public static class ContactDetails {
+
+		@Field(name = "phone")
+		private String phone;
+
+		@Field(name = "email")
+		private String email;
+	}
+
+	@Data
+	public static class WorkingHour {
+
+		@Field(name = "date")
+		private String date;
+		@Field(name = "from")
+		private String from;
+		@Field(name = "to")
+		private String to;
+		@Field(name = "hospital_id")
+		private String hospitalId;
+		public WorkingHour(String date, String from, String to, String hospitalId) {
+			super();
+			this.date = date;
+			this.from = from;
+			this.to = to;
+			this.hospitalId = hospitalId;
+		}
+		
+		
+	}
+
+	@Data
+	public static class WorkSchedule {
+		@Field(name = "date")
+		private String date;
+		@Field(name = "from")
+		private String from;
+		@Field(name = "to")
+		private String to;
+		@Field(name = "hospital_id")
+		private String hospitalId;
+		@Field(name = "status")
+		private String status;
+	}
+}

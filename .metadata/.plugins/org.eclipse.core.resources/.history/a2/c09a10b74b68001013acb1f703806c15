@@ -1,0 +1,23 @@
+package training.iqgateway.dto;
+
+import java.util.List;
+
+import training.iqgateway.entity.Address;
+import training.iqgateway.entity.ContactDetails;
+
+public class NurseRegistrationRequestDTO {
+    private String firstName;
+    private String lastName;
+    private String password;
+    private ContactDetails contactDetails;
+    private String certificate; // base64 encoded
+    private String certificateNumber;
+    private Address address;
+    private List<String> skills;
+    private String selfDescription;
+
+    // Constructors
+    public NurseRegistrationRequestDTO() {}
+
+    // Getters and Setters for all fields...
+}

@@ -1,0 +1,104 @@
+package training.iqgateway.admin.utils;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import training.iqgateway.admin.dto.NurseResponseDTO;
+import training.iqgateway.admin.entity.Nurse;
+import training.iqgateway.admin.entity.Nurse.Address;
+import training.iqgateway.admin.entity.Nurse.ContactDetails;
+
+
+public class NurseUtils {
+
+	public static NurseResponseDTO convertToNurseResponseDTO(Nurse nurse) {
+NurseResponseDTO nurseResponseDTO = new NurseResponseDTO();
+		
+		nurseResponseDTO.set_id(nurse.get_id());
+		
+		
+Nurse.Address address = nurse.getAddress();
+		
+		String state = address.getState();
+		String city = address.getCity();
+		String pincode = address.getPincode();
+		String street = address.getStreet();
+		
+		
+		Nurse.ContactDetails contact = nurse.getContactDetails();
+
+		String email = contact.getEmail();
+		String phone = contact.getPhone();
+		
+		
+		
+		nurseResponseDTO.setAddress(new Address(street,state,city,pincode));
+		nurseResponseDTO.setAvailableStatus(nurse.getAvailableStatus());
+		nurseResponseDTO.setCertificate(nurse.getCertificate());
+		nurseResponseDTO.setCertificateNumber(nurse.getCertificateNumber());
+		nurseResponseDTO.setContactDetails(new ContactDetails(phone,email));
+		nurseResponseDTO.setCurrentWorkingStatus(nurse.isCurrentWorkingStatus());
+		nurseResponseDTO.setFirstName(nurse.getFirstName());
+		nurseResponseDTO.setLastName(nurse.getLastName());
+		
+		
+		List<Nurse.LeaveDetail> nurseEntityLeaveDetails = nurse.getLeaveDetails();
+		
+//		List<training.iqgateway.entity.LeaveDetail> nurseResponseLeaveDetails = new ArrayList<>();
+//		String fromDate = null;
+//		String toDate = null;
+		
+		
+//		for(NurseRegistrationEntity.LeaveDetail nurseEntityLeveDetail : nurseEntityLeaveDetails) {
+//			System.out.println(nurseEntityLeveDetail);
+//			nurseResponseLeaveDetails.add(
+//					new training.iqgateway.entity.LeaveDetail(nurseEntityLeveDetail.getFromDate(),
+//							nurseEntityLeveDetail.getToDate()));
+//			
+//		}
+//		
+		
+		List<LeaveDetail> nurseResponseLeaveDetails = nurseEntityLeaveDetails.stream()
+			    .filter(ld -> ld.getFromDate() != null && ld.getToDate() != null)
+			    .map(leaveDetail -> new LeaveDetail(
+			        leaveDetail.getFromDate(),
+			        leaveDetail.getToDate()))
+			    .collect(Collectors.toList());
+		
+		nurseResponseDTO.setLeaveDetails(nurseResponseLeaveDetails);
+		nurseResponseDTO.setRegistrationStatus(nurse.getRegistrationStatus());
+		nurseResponseDTO.setSelfDescription(nurse.getSelfDescription());
+		nurseResponseDTO.setSkills(nurse.getSkills());
+		nurseResponseDTO.setUserId(nurse.getUserId());
+		
+		
+		
+		List<Nurse.WorkingHour> nurseEntityWorkingHours = nurse.getWorkingHours();
+		
+		List<WorkingHour> nurseResponseWorkingHours = nurseEntityWorkingHours.stream()
+				.filter(wh -> wh.getDate() != null && wh.getFrom() !=null && 
+				wh.getTo() !=null && wh.getHospitalId() !=null)
+				.map(workingHour -> new WorkingHour(workingHour.getDate(), workingHour.getFrom(), 
+						workingHour.getTo()	,workingHour.getHospitalId()))
+				.collect(Collectors.toList());
+		
+		
+		
+		nurseResponseDTO.setWorkingHours(nurseResponseWorkingHours);
+		
+		
+		List<Nurse.WorkSchedule> nurseEntityWorkSchedules = nurse.getWorkSchedule();
+		
+		List<WorkSchedule> nurseResponseWorkingSchedules = nurseEntityWorkSchedules.stream()
+				.filter(ws -> ws.getDate() !=null && ws.getFrom() !=null && 
+				ws.getTo() !=null && ws.getHospitalId() !=null && ws.getStatus() !=null)
+				.map(workingSchedule -> new WorkSchedule(workingSchedule.getDate(), workingSchedule.getFrom(), 
+						workingSchedule.getTo(), workingSchedule.getHospitalId(), workingSchedule.getStatus()))
+				.collect(Collectors.toList());
+		
+		nurseResponseDTO.setWorkSchedule(nurseResponseWorkingSchedules);
+		
+		return nurseResponseDTO;
+	}
+
+}

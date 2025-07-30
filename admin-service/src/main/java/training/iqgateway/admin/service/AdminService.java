@@ -1,0 +1,13 @@
+package training.iqgateway.admin.service;
+
+import training.iqgateway.admin.entity.Admin;
+
+public interface AdminService {
+
+	Admin getAdminById(String id);
+
+	Admin updateAdmin(Admin admin);
+	
+	
+
+}

@@ -1,0 +1,21 @@
+package training.iqgateway.admin.entity;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import lombok.Data;
+
+@Data
+@Document(collection = "users")
+public class User {
+	
+	private String _id;
+	private String verificationStatus; // e.g., "PENDING", "VERIFIED", "REJECTED"
+	private String email;
+	private String password;
+	private String role; // e.g., "ADMIN", "USER", etc.
+	
+
+	// Constructors, Getters and Setters
+	
+
+}

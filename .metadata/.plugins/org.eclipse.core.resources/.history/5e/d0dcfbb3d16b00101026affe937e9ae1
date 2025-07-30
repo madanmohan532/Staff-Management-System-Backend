@@ -1,0 +1,13 @@
+package training.iqgateway.zuul;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class ZuulForSmsServicesApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ZuulForSmsServicesApplication.class, args);
+	}
+
+}

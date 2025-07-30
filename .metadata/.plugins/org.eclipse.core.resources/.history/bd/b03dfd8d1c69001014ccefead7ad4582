@@ -1,0 +1,5 @@
+package training.iqgateway.admin.service;
+
+public interface HospitalService {
+
+}

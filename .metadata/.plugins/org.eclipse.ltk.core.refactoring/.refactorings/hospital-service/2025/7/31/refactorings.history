@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;HospitalNurse.java&apos; to &apos;staff-service/src/main/java/training.iqgateway.staff.entity&apos;&#x0D;&#x0A;- Original project: &apos;hospital-service&apos;&#x0D;&#x0A;- Destination element: &apos;staff-service/src/main/java/training.iqgateway.staff.entity&apos;&#x0D;&#x0A;- Original element: &apos;training.iqgateway.hospital.entity.HospitalNurse.java&apos;" description="Copy compilation unit" destination="=staff-service/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;training.iqgateway.staff.entity" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;training.iqgateway.hospital.entity{HospitalNurse.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1753692630363" units="1" version="1.0"/>
+</session>

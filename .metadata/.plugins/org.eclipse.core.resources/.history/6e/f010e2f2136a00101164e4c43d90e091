@@ -1,0 +1,12 @@
+package training.iqgateway.hospital.repository;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import training.iqgateway.hospital.entity.HospitalStaff;
+
+public interface HospitalNurseRepository extends MongoRepository<HospitalStaff, String> {
+
+	// This interface can be extended with custom query methods if needed
+	// For example, to find nurses by specific criteria or request details
+
+}

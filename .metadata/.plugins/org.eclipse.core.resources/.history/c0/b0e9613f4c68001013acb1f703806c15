@@ -1,0 +1,34 @@
+package training.iqgateway.dto;
+
+import java.util.List;
+
+import training.iqgateway.entity.Address;
+import training.iqgateway.entity.ContactDetails;
+import training.iqgateway.entity.LeaveDetail;
+import training.iqgateway.entity.WorkSchedule;
+import training.iqgateway.entity.WorkingHour;
+
+public class NurseRegistrationResponseDTO {
+	
+    private String _id;
+    private String userId;
+    private String firstName;
+    private String lastName;
+    private boolean availableStatus;
+    private List<LeaveDetail> leaveDetails;
+    private ContactDetails contactDetails;
+    private String certificate;
+    private String certificateNumber;
+    private Address address;
+    private boolean currentWorkingStatus;
+    private List<WorkingHour> workingHours;
+    private List<WorkSchedule> workSchedule;
+    private List<String> skills;
+    private String selfDescription;
+    private String registrationStatus;
+
+    // Constructors
+    public NurseRegistrationResponseDTO() {}
+
+    // Getters and Setters for all fields...
+}

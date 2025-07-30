@@ -1,0 +1,59 @@
+package training.iqgateway.admin.entity;
+
+import java.util.List;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+@Document(collection = "admin_details") // replace with your actual collection name
+public class Admin {
+	@Id
+    @Field("_id")
+    private String id;
+
+    @Field("first_name")
+    private String firstName;
+
+    @Field("last_name")
+    private String lastName;
+
+    @Field("contactDetails")
+    private ContactDetails contactDetails;
+
+    @Field("address")
+    private Address address;
+
+    @Field("unique_verification_id")
+    private String uniqueVerificationId;
+
+    @Field("password")
+    private String password;
+
+    @Field("approved_registration_ids")
+    private List<String> approvedRegistrationIds;
+    
+    public static class ContactDetails {
+
+        @Field("phone")
+        private String phone;
+
+        @Field("email")
+        private String email;
+    }
+    
+    public static class Address {
+
+        @Field("street")
+        private String street;
+
+        @Field("city")
+        private String city;
+
+        @Field("state")
+        private String state;
+
+        @Field("pincode")
+        private String pincode;
+    }
+}

@@ -1,0 +1,46 @@
+package training.iqgateway.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.annotation.Id;
+
+public class HospitalRegistrationEntity {
+	@Id
+    private String id;
+    private String userId; 
+    
+    
+    private String name;
+    private String ceoName;
+    private String certificate; 
+    private String password; 
+    
+    private Address address;
+    
+   
+    private ContactDetails contactDetails;
+    
+   
+    private List<String> staffDetails = new ArrayList<>();
+    private String registrationStatus = "pending"; 
+    
+ 
+    public static class Address {
+        private String street;
+        private String city;
+        private String state;
+        private String pincode;
+        
+       
+    }
+    
+ 
+    public static class ContactDetails {
+        private String phone;
+        private String email;
+        
+    }
+    
+   
+}

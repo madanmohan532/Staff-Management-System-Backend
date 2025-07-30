@@ -1,0 +1,26 @@
+package training.iqgateway.admin.utils;
+
+import java.security.SecureRandom;
+
+import training.iqgateway.admin.dto.HospitalRequestDTO;
+import training.iqgateway.admin.entity.User;
+
+public class UserUtils {
+	
+	public static String generateUserId() {
+		
+		long timestamp = System.currentTimeMillis();
+	    int random = new SecureRandom().nextInt(900); // 0-899
+	    String userId = "SMS_User_"+String.format("%07d", (timestamp % 9_000_000) + random);
+		return userId;
+	}
+	
+	public static User convertToUser(HospitalRequestDTO hospitalRequestDTO) {
+		User user = new User();
+		user.setRole("hospital staff");
+		user.setPassword(hospitalRequestDTO.getPassword());
+		user.setEmail(hospitalRequestDTO.getContactDetails().getEmail());
+		user.setVerificationStatus("verified");
+		return user;
+	}
+}

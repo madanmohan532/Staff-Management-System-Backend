@@ -1,0 +1,9 @@
+package training.iqgateway.dto;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import training.iqgateway.entity.HospitalRegistrationEntity;
+
+public interface HospitalRegistrationRepository extends MongoRepository<HospitalRegistrationEntity, String> {
+
+}

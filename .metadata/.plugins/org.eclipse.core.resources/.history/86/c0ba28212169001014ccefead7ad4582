@@ -1,0 +1,18 @@
+package training.iqgateway.admin.service;
+
+import java.util.List;
+
+import training.iqgateway.admin.entity.Hospital;
+import training.iqgateway.admin.repository.HospitalRepository;
+
+public class HospitalServiceImpl implements HospitalService {
+	
+	HospitalRepository hospitalRepository;
+
+	// This method should contain the logic to fetch all hospitals
+	@Override
+	public List<Hospital> getAllHospitals() {
+		return hospitalRepository.findAll();
+	}
+
+}

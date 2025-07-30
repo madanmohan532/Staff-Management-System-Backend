@@ -1,0 +1,106 @@
+package training.iqgateway.admin.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import training.iqgateway.admin.dto.HospitalRequestDTO;
+import training.iqgateway.admin.dto.HospitalResponseDTO;
+import training.iqgateway.admin.dto.NurseRequestDTO;
+import training.iqgateway.admin.dto.NurseResponseDTO;
+import training.iqgateway.admin.entity.Hospital;
+import training.iqgateway.admin.entity.Nurse;
+import training.iqgateway.admin.entity.User;
+import training.iqgateway.admin.service.NurseService;
+import training.iqgateway.admin.service.UserService;
+import training.iqgateway.admin.utils.HospitalUtils;
+import training.iqgateway.admin.utils.NurseUtils;
+import training.iqgateway.admin.utils.UserUtils;
+
+@RestController
+@CrossOrigin(origins = "*")
+@RequestMapping("/api/admin/nurse")
+public class NurseController {
+	
+	@Autowired
+	NurseService nurseService;
+	
+	@Autowired
+	private UserService userService;
+
+	@GetMapping("/nurseDetails")
+	public ResponseEntity<?> getAllNurses() {
+		// Logic to fetch all nurses
+		List<NurseResponseDTO> allNurseResponseDTO = new ArrayList<>();
+
+		List<Nurse> listOfNurseEntity = nurseService.getAllNurses();
+
+		for (Nurse nurse : listOfNurseEntity) {
+			System.out.println(nurse);
+			allNurseResponseDTO.add(NurseUtils.convertToNurseResponseDTO(nurse));
+		}
+
+		return new ResponseEntity<>(allNurseResponseDTO, HttpStatus.OK);
+	}
+	
+	@PutMapping("/updateRegistrationStatus")
+	public ResponseEntity<?> updateRegistrationStatus(@RequestBody NurseRequestDTO nurseRequestDTO) {
+		if(nurseRequestDTO == null || nurseRequestDTO.getRegistrationStatus() == null || nurseRequestDTO.get_id() == null) {
+			return new ResponseEntity<>("Invalid nurse data provided.", HttpStatus.BAD_REQUEST);
+		}
+		
+		String userId = null;
+		
+		if(nurseRequestDTO.getRegistrationStatus().equals("approved")) {
+			userId = UserUtils.generateUserId();
+		}
+		 // Create a new user for the hospital
+	
+		Nurse updateNurseRegistrationStatus = nurseService.updateNurseRegistrationStatus(nurseRequestDTO.getRegistrationStatus(),nurseRequestDTO.get_id(),userId);
+		if(updateNurseRegistrationStatus == null) {
+			return new ResponseEntity<>("Nurse with ID: " + nurseRequestDTO.get_id() + " not found.", HttpStatus.NOT_FOUND);
+		}
+		NurseResponseDTO updatedNurse = NurseUtils.convertToNurseResponseDTO(updateNurseRegistrationStatus); 
+		if(updatedNurse!=null && nurseRequestDTO.getRegistrationStatus().equals("approved")) {
+			User newUser = UserUtils.convertToUser(nurseRequestDTO);
+			newUser.set_id(userId);
+			
+			User user = userService.createUser(newUser);
+			return new ResponseEntity<>(user, HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Can not upadte Nurse Details", HttpStatus.FORBIDDEN);
+	}
+	
+	@PutMapping("/updateNurse")
+	public ResponseEntity<?> updateNurse(@RequestBody Nurse nurse) {
+		if (nurse != null) {
+			Nurse updatedNurse = nurseService.updateNurse(nurse);
+			return new ResponseEntity<>(updatedNurse, HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Nurse with ID: " + nurse.get_id() + " could not be updated.", HttpStatus.NOT_FOUND);
+	}
+	
+	
+
+	@DeleteMapping("/deleteNurse")
+	public ResponseEntity<?> deleteHospital(@RequestParam String nurseId) {
+		// Logic to delete a hospital
+		if(nurseService.deleteNurse(nurseId)) {
+			return new ResponseEntity<>("Nurse with ID: " + nurseId + " has been deleted successfully.", HttpStatus.OK);
+			
+		}
+		return new ResponseEntity<>("Nurse with ID: " + nurseId + " could not be deleted.", HttpStatus.NOT_FOUND);
+	}
+	
+}

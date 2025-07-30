@@ -1,0 +1,63 @@
+package training.iqgateway.admin.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Service;
+
+import training.iqgateway.admin.entity.Hospital;
+import training.iqgateway.admin.entity.Nurse;
+import training.iqgateway.admin.repository.NurseRepository;
+
+@Service
+public class NurseServiceImpl implements NurseService {
+	
+	@Autowired
+	NurseRepository nurseRepository;
+	
+	@Autowired
+	MongoTemplate mongoTemplate;
+
+	@Override
+	public List<Nurse> getAllNurses() {
+		// TODO Auto-generated method stub
+		return nurseRepository.findAll();
+	}
+
+	@Override
+	public Nurse updateNurseRegistrationStatus(String registrationStatus, String nurse_id, String userId) {
+		// TODO Auto-generated method stub
+Query query = Query.query(Criteria.where("_id").is(nurse_id));
+		
+		
+		System.out.println(nurse_id);
+		System.out.println(userId);
+		Update update = new Update().set("userId", userId).set("registration_status", registrationStatus);
+		
+		mongoTemplate.update(Nurse.class).matching(query)
+				.apply(update).first();
+		
+		System.out.println(mongoTemplate.findOne(query, Nurse.class));
+		return mongoTemplate.findOne(query, Nurse.class);
+	}
+
+	@Override
+	public Nurse updateNurse(Nurse nurse) {
+		// TODO Auto-generated method stub
+		return nurseRepository.save(nurse);
+	}
+
+	@Override
+	public boolean deleteNurse(String nurseId) {
+		Query query = Query.query(Criteria.where("_id").is(nurseId));
+		
+		mongoTemplate.remove(query, Nurse.class);
+		Nurse deletedNurse = mongoTemplate.findOne(query, Nurse.class);
+		return deletedNurse == null;
+	}
+
+}
