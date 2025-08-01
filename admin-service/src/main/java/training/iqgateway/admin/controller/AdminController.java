@@ -82,5 +82,35 @@ public class AdminController {
 		
 		return new ResponseEntity<>("User not found or could not be deleted", HttpStatus.NOT_FOUND);
 	}
+	
+	@GetMapping("user/{email}")
+	public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
+		// Logic to fetch user by email
+		if(email == null || email.isEmpty()) {
+			return new ResponseEntity<>("Invalid email provided.", HttpStatus.BAD_REQUEST);
+		}
+		
+		User user = userService.findByEmail(email);
+		if(user != null) {
+			return new ResponseEntity<>(user, HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+	}
+	
+	@GetMapping("admin/{email}")
+	public ResponseEntity<?> getAdminByEmail(@PathVariable String email) {
+		// Logic to fetch user by email
+		if(email == null || email.isEmpty()) {
+			return new ResponseEntity<>("Invalid email provided.", HttpStatus.BAD_REQUEST);
+		}
+		
+		Admin admin = adminService.findByEmail(email);
+		if(admin != null) {
+			return new ResponseEntity<>(admin, HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+	}
 
 }

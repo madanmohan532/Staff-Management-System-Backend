@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import training.iqgateway.admin.dto.NurseRequestDTO;
 import training.iqgateway.admin.dto.NurseResponseDTO;
 import training.iqgateway.admin.entity.Nurse;
 import training.iqgateway.admin.entity.User;
+import training.iqgateway.admin.service.AdminService;
 import training.iqgateway.admin.service.NurseService;
 import training.iqgateway.admin.service.UserService;
 import training.iqgateway.admin.utils.NurseUtils;
@@ -33,7 +35,10 @@ public class NurseController {
 	NurseService nurseService;
 	
 	@Autowired
-	private UserService userService;
+	UserService userService;
+	
+	@Autowired
+	AdminService adminService;
 
 	@GetMapping("/nurseDetails")
 	public ResponseEntity<?> getAllNurses() {
@@ -50,8 +55,8 @@ public class NurseController {
 		return new ResponseEntity<>(allNurseResponseDTO, HttpStatus.OK);
 	}
 	
-	@PutMapping("/updateRegistrationStatus")
-	public ResponseEntity<?> updateRegistrationStatus(@RequestBody NurseRequestDTO nurseRequestDTO) {
+	@PutMapping("/updateRegistrationStatus/{adminId}")
+	public ResponseEntity<?> updateRegistrationStatus(@RequestBody NurseRequestDTO nurseRequestDTO, @PathVariable String adminId	) {
 		if(nurseRequestDTO == null || nurseRequestDTO.getRegistrationStatus() == null || nurseRequestDTO.get_id() == null) {
 			return new ResponseEntity<>("Invalid nurse data provided.", HttpStatus.BAD_REQUEST);
 		}
@@ -68,11 +73,13 @@ public class NurseController {
 			return new ResponseEntity<>("Nurse with ID: " + nurseRequestDTO.get_id() + " not found.", HttpStatus.NOT_FOUND);
 		}
 		NurseResponseDTO updatedNurse = NurseUtils.convertToNurseResponseDTO(updateNurseRegistrationStatus); 
+		
 		if(updatedNurse!=null && nurseRequestDTO.getRegistrationStatus().equals("approved")) {
 			User newUser = UserUtils.convertToUser(nurseRequestDTO);
 			newUser.set_id(userId);
 			
 			User user = userService.createUser(newUser);
+			adminService.updateAdminById(adminId,updatedNurse.get_id());
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		}
 		return new ResponseEntity<>("Can not upadte Nurse Details", HttpStatus.FORBIDDEN);

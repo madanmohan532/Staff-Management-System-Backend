@@ -12,4 +12,6 @@ public interface UserService {
 
 	public boolean deleteUserById(String id);
 
+	public User findByEmail(String email);
+
 }

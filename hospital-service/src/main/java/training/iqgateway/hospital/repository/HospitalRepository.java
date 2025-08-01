@@ -8,5 +8,5 @@ import training.iqgateway.hospital.entity.Hospital;
 public interface HospitalRepository extends MongoRepository<Hospital, String> {
 	// This interface will automatically provide CRUD operations for Hospital entities
 	// Additional custom query methods can be defined here if needed
-
+	
 }

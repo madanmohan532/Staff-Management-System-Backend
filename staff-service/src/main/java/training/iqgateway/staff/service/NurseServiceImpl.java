@@ -1,10 +1,16 @@
 package training.iqgateway.staff.service;
 
+import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import training.iqgateway.staff.entity.LeaveDetail;
 import training.iqgateway.staff.entity.Nurse;
 import training.iqgateway.staff.repository.NurseRepository;
 
@@ -13,6 +19,10 @@ public class NurseServiceImpl implements NurseService {
 	
 	@Autowired
 	NurseRepository nurseRepository;
+	
+
+	@Autowired
+	MongoTemplate mongoTemplate;
 
 	@Override
 	public Nurse getNurseById(String nurseId) {
@@ -59,10 +69,53 @@ public class NurseServiceImpl implements NurseService {
 		
 		List<Nurse.WorkSchedule> workSchedules = null;
 		
-		nurseRepository.findAll().stream().filter(nurse -> nurse.get_id().equals(nurseId))
-			.forEach(nurse -> workSchedules.addAll(nurse.getWorkSchedule()));
+		System.out.println(nurseId);
 		
+		Optional<Nurse> byId = nurseRepository.findById(nurseId);
+		
+		if(byId.isPresent()) {
+			workSchedules = byId.get().getWorkSchedule();
+		}
+		
+//	    .ifPresent(nurse -> {
+//	        if (nurse.getWorkSchedule() != null) {
+//	            workSchedules.addAll(nurse.getWorkSchedule());
+//	        }
+//	    });
+		System.out.println(workSchedules+"sfjsdkfjk");
 		return workSchedules;
+	}
+
+	@Override
+	public Nurse getNurseByEmail(String email) {
+		
+		Query query = new Query();
+		query.addCriteria(Criteria.where("contactDetails.email").is(email));
+		// TODO Auto-generated method stub
+		
+		return mongoTemplate.findOne(query, Nurse.class);
+	
+	}
+	
+	@Override
+	public void applyLeave(LeaveDetail leaveDetail) {
+		// TODO Auto-generated method stub
+		
+		Nurse nurseById = getNurseById(leaveDetail.getNurseId());
+		
+		List<training.iqgateway.staff.entity.Nurse.LeaveDetail> leaveDetails = nurseById.getLeaveDetails();
+		
+		Nurse.LeaveDetail l = new Nurse.LeaveDetail();
+//		Instant from = ;
+		l.setFromDate(Instant.parse(leaveDetail.getFrom()));
+		l.setToDate(Instant.parse(leaveDetail.getTo()));
+		
+		leaveDetails.add(l);
+		nurseRepository.save(nurseById);
+//		
+//		leaveDetails.add()
+		
+		
 	}
 
 }

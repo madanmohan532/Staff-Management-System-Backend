@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import training.iqgateway.hospital.entity.HospitalNurse;
@@ -33,7 +34,7 @@ public class HospitalStaffController {
 		// Placeholder for actual staff retrieval logic
 		
 		List<HospitalNurse> allHospitalNurses = hospitalNurseService.getAllHospitalNurses();
-		System.out.println("All Hospital Nurses: " + allHospitalNurses);
+		
 		
 		if(allHospitalNurses!=null) {
 			return new ResponseEntity<>(allHospitalNurses, HttpStatus.OK);
@@ -52,14 +53,27 @@ public class HospitalStaffController {
 		return new ResponseEntity<>("Hospital Nurse created successfully", HttpStatus.CREATED);
 	}
 	
+	@PutMapping("/updateHospitalNurse")
+	public ResponseEntity<?> updateHospitalNurse(@RequestParam String hospitalStaffId){
+		HospitalNurse updateHospitalNurse = hospitalNurseService.updateHospitalNurse(hospitalStaffId);
+		return new ResponseEntity<>(updateHospitalNurse,HttpStatus.OK);
+	}
 	
 	
 	
-//	@PutMapping("/assignNurseToFloor/{floorId}")
-//	public ResponseEntity<?> assignNurseToFloor(@PathVariable String floor){
-//		
-//		hospitalNurseService.assignNurseToFloor(floor);
-//	}
+	
+	@PutMapping("/assignNurseToFloor")
+	public ResponseEntity<?> assignNurseToFloor(@RequestParam String floor, @RequestParam String hospitalStaffId){
+		
+		System.out.println(" i ma here");
+		
+		boolean assignNurseToFloor = hospitalNurseService.assignNurseToFloor(floor,hospitalStaffId);
+		if(assignNurseToFloor)
+			return new ResponseEntity<>("Floor Updated Successfully",HttpStatus.OK);
+		
+		return new ResponseEntity<>("Floor Can not be Updated",HttpStatus.NOT_MODIFIED);
+		
+	}
 	
 	
 	
@@ -90,5 +104,16 @@ public class HospitalStaffController {
 		return new ResponseEntity<>("Hospital Nurse not found with staff ID: " + staffId, HttpStatus.NOT_FOUND);
 	}
 	
+	
+	@GetMapping("/hospitalNurses")
+	public ResponseEntity<?> getHospitalNursesByHospitalId(@RequestParam String hospitalId){
+		System.out.println("i am here");
+		List<HospitalNurse> hospitalNurseByHospitalId = hospitalNurseService.getHospitalNurseByHospitalId(hospitalId);
+		if(hospitalNurseByHospitalId!=null) {
+			return new ResponseEntity<>(hospitalNurseByHospitalId,HttpStatus.OK);
+		}
+		return new ResponseEntity<>("No Nurse found in hospital",HttpStatus.NOT_FOUND);
+		
+	}
 
 }

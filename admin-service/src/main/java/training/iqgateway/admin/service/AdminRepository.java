@@ -5,5 +5,12 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import training.iqgateway.admin.entity.Admin;
 
 public interface AdminRepository extends MongoRepository<Admin, String> {
+	
+	// This interface will automatically provide methods for CRUD operations
+	// on the Admin entity, such as save, findById, findAll, deleteById, etc.
+	// Additional custom query methods can be defined here if needed.
+	
+	// Example of a custom query method:
+	
 
 }

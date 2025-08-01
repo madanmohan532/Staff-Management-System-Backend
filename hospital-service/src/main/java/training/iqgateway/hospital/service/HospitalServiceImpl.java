@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.mongodb.client.result.UpdateResult;
 
+
 import training.iqgateway.hospital.dto.NurseResponseDTO;
 import training.iqgateway.hospital.dto.NurseResponseDTO.WorkSchedule;
 import training.iqgateway.hospital.entity.CancelRequestDetails;
@@ -173,6 +174,14 @@ public class HospitalServiceImpl implements HospitalService {
 		}).toList();
 		
 		return nurseResponseRepository.save(nurseDetails);
+	}
+
+	@Override
+	public Hospital findByEmail(String email) {
+		// TODO Auto-generated method stub
+		Query query = new Query();
+		query.addCriteria(Criteria.where("contactDetails.email").is(email));
+		return mongoTemplate.findOne(query, Hospital.class);
 	}
 
 }

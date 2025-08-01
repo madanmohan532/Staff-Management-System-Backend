@@ -15,5 +15,7 @@ public interface UserRepository extends MongoRepository<User, String> {
 	
 	// Example of a custom query method:
 	// List<User> findByEmail(String email);
+	
+	User findByEmail(String email);
 
 }

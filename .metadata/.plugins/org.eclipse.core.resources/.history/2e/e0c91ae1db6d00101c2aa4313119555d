@@ -1,0 +1,20 @@
+package training.iqgateway.hospital.service;
+
+import java.util.List;
+
+import training.iqgateway.hospital.dto.NurseResponseDTO;
+import training.iqgateway.hospital.entity.CancelRequestDetails;
+import training.iqgateway.hospital.entity.Hospital;
+import training.iqgateway.hospital.entity.NurseRequest;
+import training.iqgateway.hospital.entity.RequestDetails;
+
+public interface HospitalService {
+
+	public Hospital getHospitalById(String id);
+	
+	public List<NurseResponseDTO> getNurseByRequestDetails(RequestDetails requestDetails);
+
+	public NurseResponseDTO requestSingleNurse(NurseRequest singleNurseRequestDetails);
+
+	public NurseResponseDTO cancelSingleNurseRequest(CancelRequestDetails cancelSingleRequestDetails);
+}

@@ -8,6 +8,11 @@ public interface AdminService {
 
 	Admin updateAdmin(Admin admin);
 	
+	Admin findByEmail(String email);
+	
+	Admin updateAdminById(String adminId, String nurseId);
+	
+	
 	
 
 }

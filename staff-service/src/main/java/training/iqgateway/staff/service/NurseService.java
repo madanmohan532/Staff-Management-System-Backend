@@ -2,6 +2,7 @@ package training.iqgateway.staff.service;
 
 import java.util.List;
 
+import training.iqgateway.staff.entity.LeaveDetail;
 import training.iqgateway.staff.entity.Nurse;
 
 public interface NurseService {
@@ -16,5 +17,9 @@ public interface NurseService {
 	List<Nurse.WorkingHour> getWorkingHours(String nurseId);
 	
 	List<Nurse.WorkSchedule> getWorkingSchedule(String nurseId);
+
+	Nurse getNurseByEmail(String email);
+
+	void applyLeave(LeaveDetail leaveDetail);
 
 }

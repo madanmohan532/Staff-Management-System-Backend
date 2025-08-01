@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import training.iqgateway.staff.entity.HospitalNurse;
+import training.iqgateway.staff.entity.LeaveDetail;
 import training.iqgateway.staff.entity.Nurse;
 import training.iqgateway.staff.entity.Patient;
 import training.iqgateway.staff.service.NurseService;
@@ -47,6 +50,23 @@ public class NurseController {
 			nurse = nurseService.getNurseById(nurseId);
 		} catch (Exception e) {
 			return new ResponseEntity<>("Nurse not found with id: " + nurseId, HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<>(nurse, HttpStatus.OK);
+	}
+	
+	@GetMapping("/getNurse/{email}")
+	public ResponseEntity<?> getNurseDetailsByEmail(@PathVariable String email) {
+		// Logic to fetch nurse details by ID
+
+		// Placeholder for actual nurse retrieval logic
+
+		Nurse nurse = null;
+
+		try {
+			nurse = nurseService.getNurseByEmail(email);
+		} catch (Exception e) {
+			return new ResponseEntity<>("Nurse not found with email: " + email, HttpStatus.NOT_FOUND);
 		}
 
 		return new ResponseEntity<>(nurse, HttpStatus.OK);
@@ -134,6 +154,15 @@ public class NurseController {
 		return new ResponseEntity<>("Patient details for patient with ID: " + patientId, HttpStatus.OK);
 	}
 	
+	@PutMapping("/applyLeave")
+	public ResponseEntity<?> applyLeaveForNurse(@RequestBody LeaveDetail leaveDetail){
+		
+		nurseService.applyLeave(leaveDetail);
+		
+		return new ResponseEntity<>("Leave Applied Successfully",HttpStatus.OK);
+		
+	}
+	
 	
 	@PutMapping("/updatePatientDetails")
 	public ResponseEntity<?> updatePatientDetails(Patient patient) {
@@ -165,6 +194,7 @@ public class NurseController {
 		
 		workingHours = nurseService.getWorkingHours(nurseId);
 		
+		
 		return new ResponseEntity<>(workingHours, HttpStatus.OK);
 	}
 	
@@ -179,7 +209,7 @@ public class NurseController {
 		List<Nurse.WorkSchedule> workingSchedule = null;
 		
 			workingSchedule = nurseService.getWorkingSchedule(nurseId);
-		
+
 
 		return new ResponseEntity<>(workingSchedule, HttpStatus.OK);
 	}

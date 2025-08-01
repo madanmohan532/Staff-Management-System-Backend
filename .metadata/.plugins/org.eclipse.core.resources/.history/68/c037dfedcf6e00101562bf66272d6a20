@@ -1,0 +1,9 @@
+package training.iqgateway.staff.entity;
+
+public class LeaveDetail {
+	
+	private String from;
+	private String to;
+	private String nurseId;
+
+}

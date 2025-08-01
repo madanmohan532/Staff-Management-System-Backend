@@ -1,5 +1,7 @@
 package training.iqgateway.hospital.repository;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,5 +16,9 @@ public interface HospitalNurseRepository extends MongoRepository<HospitalNurse, 
 	HospitalNurse deleteByStaffId(String staffId);
 	
 	HospitalNurse findByStaffId(String staffId);
+	
+	List<HospitalNurse> findByHospitalId(String hospitalId);
+	
+	HospitalNurse findByHospitalStaffId(String hospitalStaffId);
 	
 }

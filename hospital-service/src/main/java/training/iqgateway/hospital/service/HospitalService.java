@@ -17,4 +17,6 @@ public interface HospitalService {
 	public NurseResponseDTO requestSingleNurse(NurseRequest singleNurseRequestDetails);
 
 	public NurseResponseDTO cancelSingleNurseRequest(CancelRequestDetails cancelSingleRequestDetails);
+
+	public Hospital findByEmail(String email);
 }

@@ -1,8 +1,0 @@
-package training.iqgateway.service;
-
-import training.iqgateway.entity.Users;
-
-public interface UserService {
-	
-	Users findByEmail();
-}

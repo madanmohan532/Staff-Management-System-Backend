@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,13 +40,18 @@ public class HospitalNurseServiceImpl implements HospitalNurseService {
 	}
 
 	@Override
-	public boolean assignNurseToFloor(String floor) {
-		
-		// TODO Auto-generated method stub
+	public boolean assignNurseToFloor(String floor, String id) {
 		
 		
+		HospitalNurse hospitalNurse = hospitalNurseRepository.findByHospitalStaffId(id);
 		
-		return false;
+		System.out.println(hospitalNurse);
+		hospitalNurse.setFloorAssigned(floor);
+		
+		hospitalNurseRepository.save(hospitalNurse);
+		
+		
+		return hospitalNurse!=null;
 	}
 
 	@Override
@@ -89,6 +95,25 @@ public class HospitalNurseServiceImpl implements HospitalNurseService {
 	public HospitalNurse getHospitalNurseByStaffId(String staffId) {
 		// TODO Auto-generated method stub
 		return hospitalNurseRepository.findByStaffId(staffId);
+	}
+
+	@Override
+	public List<HospitalNurse> getHospitalNurseByHospitalId(String hospitalId) {
+		
+		
+		// TODO Auto-generated method stub
+		return hospitalNurseRepository.findByHospitalId(hospitalId);
+	}
+
+	@Override
+	public HospitalNurse updateHospitalNurse(String hospitalStaffId) {
+		// TODO Auto-generated method stub
+		
+		HospitalNurse byId = hospitalNurseRepository.findByHospitalStaffId(hospitalStaffId);
+		byId.setWorkingStatus(false);
+		
+		return hospitalNurseRepository.save(byId);
+		
 	}
 
 }

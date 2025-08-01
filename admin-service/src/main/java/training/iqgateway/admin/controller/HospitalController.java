@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import training.iqgateway.admin.dto.HospitalRequestDTO;
 import training.iqgateway.admin.dto.HospitalResponseDTO;
 import training.iqgateway.admin.entity.Hospital;
 import training.iqgateway.admin.entity.User;
+import training.iqgateway.admin.service.AdminService;
 import training.iqgateway.admin.service.HospitalService;
 import training.iqgateway.admin.service.UserService;
 import training.iqgateway.admin.utils.HospitalUtils;
@@ -33,6 +35,9 @@ public class HospitalController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	AdminService adminService;
 	
 	@GetMapping("/hospitalDetails")
 	public List<HospitalResponseDTO> getAllHospitals() {
@@ -52,8 +57,8 @@ public class HospitalController {
 	}
 	
 	
-	@PutMapping("/updateRegistrationStatus")
-	public ResponseEntity<?> updateRegistrationStatus(@RequestBody HospitalRequestDTO hospitalRequestDTO) {
+	@PutMapping("/updateRegistrationStatus/{adminId}")
+	public ResponseEntity<?> updateRegistrationStatus(@RequestBody HospitalRequestDTO hospitalRequestDTO, @PathVariable String adminId) {
 		if(hospitalRequestDTO == null || hospitalRequestDTO.getRegistrationStatus() == null || hospitalRequestDTO.get_id() == null) {
 			return new ResponseEntity<>("Invalid hospital data provided.", HttpStatus.BAD_REQUEST);
 		}
@@ -75,6 +80,10 @@ public class HospitalController {
 			newUser.set_id(userId);
 			
 			User user = userService.createUser(newUser);
+			
+			
+			adminService.updateAdminById(adminId,updatedHospital.get_id());
+			
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		}
 		return new ResponseEntity<>("Can not upadte Hospital Details", HttpStatus.FORBIDDEN);

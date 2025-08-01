@@ -13,10 +13,14 @@ public interface HospitalNurseService {
 
 	public HospitalNurse deleteHospitalNurseByStaffId(String staffId);
 
-	public boolean assignNurseToFloor(String floor);
+	public boolean assignNurseToFloor(String floor,String hospitalStaffId);
 
 	public Map<Boolean,String> validateWorkingStatus(String staffId);
 
 	public HospitalNurse getHospitalNurseByStaffId(String staffId);
+
+	public List<HospitalNurse> getHospitalNurseByHospitalId(String hospitalId);
+
+	public HospitalNurse updateHospitalNurse(String id);
 
 }
