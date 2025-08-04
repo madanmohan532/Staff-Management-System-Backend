@@ -9,12 +9,12 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import lombok.Data;
 
 @Data
-@Document(collection = "patients_details")
+@Document(collection = "patient_details")
 public class Patient {
     @Id
     private String id;
     
-    @Field("patient_id")
+    @Field("patientId")
     private String patientId;
     
     @Field("first_name")

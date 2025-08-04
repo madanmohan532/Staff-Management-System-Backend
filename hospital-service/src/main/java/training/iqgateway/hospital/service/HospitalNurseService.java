@@ -3,6 +3,7 @@ package training.iqgateway.hospital.service;
 import java.util.List;
 import java.util.Map;
 
+import training.iqgateway.hospital.dto.NurseResponseDTO.WorkingHour;
 import training.iqgateway.hospital.entity.HospitalNurse;
 
 public interface HospitalNurseService {
@@ -22,5 +23,9 @@ public interface HospitalNurseService {
 	public List<HospitalNurse> getHospitalNurseByHospitalId(String hospitalId);
 
 	public HospitalNurse updateHospitalNurse(String id);
+
+	public void addWorkingHour(WorkingHour workingHour, String staffId);
+
+	HospitalNurse deleteHospitalNurseRequest(String nurseId, String from, String to, String hospitalId);
 
 }

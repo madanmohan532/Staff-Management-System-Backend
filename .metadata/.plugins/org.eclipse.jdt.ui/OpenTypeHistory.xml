@@ -5,5 +5,5 @@
     <typeInfo handle="=registration-service/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;training.iqgateway.service{NurseRegistrationService.java[NurseRegistrationService" modifiers="513" timestamp="1753346789940"/>
     <typeInfo handle="=admin-service/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;training.iqgateway.admin.service{UserService.java[UserService" modifiers="513" timestamp="1753860589221"/>
     <typeInfo handle="=admin-service/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;training.iqgateway.admin.service{NurseService.java[NurseService" modifiers="513" timestamp="1753463148196"/>
-    <typeInfo handle="=hospital-service/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;training.iqgateway.hospital.service{HospitalNurseService.java[HospitalNurseService" modifiers="513" timestamp="1753981991153"/>
+    <typeInfo handle="=hospital-service/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;training.iqgateway.hospital.service{HospitalNurseService.java[HospitalNurseService" modifiers="513" timestamp="1754227817882"/>
 </typeInfoHistroy>

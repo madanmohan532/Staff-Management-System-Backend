@@ -1,5 +1,0 @@
-package training.iqgateway.admin.entity;
-
-public class ContactDetails extends training.iqgateway.admin.entity.Nurse.ContactDetails {
-
-}

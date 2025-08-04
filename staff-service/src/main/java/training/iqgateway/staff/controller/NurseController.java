@@ -1,11 +1,16 @@
 package training.iqgateway.staff.controller;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,14 +18,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import training.iqgateway.staff.entity.DeleteNurseRequest;
 import training.iqgateway.staff.entity.HospitalNurse;
 import training.iqgateway.staff.entity.LeaveDetail;
 import training.iqgateway.staff.entity.Nurse;
 import training.iqgateway.staff.entity.Patient;
+import training.iqgateway.staff.entity.RequestResponse;
 import training.iqgateway.staff.service.NurseService;
 import training.iqgateway.staff.service.PatientService;
 
@@ -37,6 +43,8 @@ public class NurseController {
 
 	@Autowired
 	private PatientService patientService;
+
+    
 
 	@GetMapping("/{nurseId}")
 	public ResponseEntity<?> getNurseDetails(@PathVariable String nurseId) {
@@ -115,19 +123,20 @@ public class NurseController {
 		// Placeholder for actual patient retrieval logic
 		// This would typically involve fetching patients from a service or repository
 		
-		String validateWorkingStatusURI = "http://localhost:9193/api/hospital/nurse/validateWorkingStatus/" + nurseId;
-		
-		Map<Boolean,String> validationObject = restTemplate.getForObject(validateWorkingStatusURI, Map.class);
-		
-		
-		
-		if(validationObject.containsKey(false)) {
-			return new ResponseEntity<>(validationObject, HttpStatus.NOT_FOUND);
-		}
+//		String validateWorkingStatusURI = "http://localhost:9999/hospital-service/api/hospital/nurse/validateWorkingStatus/" + nurseId;
+//		
+//		Map<Boolean,String> validationObject = restTemplate.getForObject(validateWorkingStatusURI, Map.class);
+//		
+//		System.out.println(validationObject);
+//		
+//		
+//		if(validationObject.containsKey(false)) {
+//			return new ResponseEntity<>(validationObject, HttpStatus.NOT_FOUND);
+//		}
 		
 		ArrayList<Patient> patients = new ArrayList<>();
 		
-		HospitalNurse hospitalNurse = restTemplate.getForObject("http://localhost:9193/api/hospital/nurse/getHospitalNurseByStaffId/" + nurseId, HospitalNurse.class);
+		HospitalNurse hospitalNurse = restTemplate.getForObject("http://localhost:9999/hospital-service/api/hospital/nurse/getHospitalNurseByStaffId/" + nurseId, HospitalNurse.class);
 		
 		hospitalNurse.getPatientsAllocatedTo().forEach(patient -> {
 			patients.add(patientService.getPatientById(patient));
@@ -139,6 +148,25 @@ public class NurseController {
 	}
 	
 	
+	
+	@GetMapping("/getPatientDetailsByHospitalId/{hospitalId}")
+	public ResponseEntity<?> getPatientDetailsByHospitalId(@PathVariable String hospitalId) {
+		
+		List<Patient> allPatients = new ArrayList<>();
+		
+		System.out.println(patientService.getPatientsByHospitalId(hospitalId));
+		
+		
+		
+		allPatients = patientService.getPatientsByHospitalId(hospitalId);
+		System.out.println(allPatients);
+		return new ResponseEntity<>(allPatients,HttpStatus.OK);
+		
+		
+	}
+	
+	
+	
 	@GetMapping("/getPatientDetailsById/{patientId}")
 	public ResponseEntity<?> getPatientDetailsById(@PathVariable String patientId) {
 		// Logic to fetch patient details by ID
@@ -148,11 +176,15 @@ public class NurseController {
 		
 		Patient patient = patientService.getPatientById(patientId);	
 		
-		
+		System.out.println(patient);
 		
 		
 		return new ResponseEntity<>("Patient details for patient with ID: " + patientId, HttpStatus.OK);
 	}
+	
+	
+	
+	
 	
 	@PutMapping("/applyLeave")
 	public ResponseEntity<?> applyLeaveForNurse(@RequestBody LeaveDetail leaveDetail){
@@ -165,16 +197,18 @@ public class NurseController {
 	
 	
 	@PutMapping("/updatePatientDetails")
-	public ResponseEntity<?> updatePatientDetails(Patient patient) {
+	public ResponseEntity<?> updatePatientDetails(@RequestBody Patient updatePatient) {
 		// Logic to update patient details
 
 		// Placeholder for actual patient update logic
 		// This would typically involve updating the patient in a service or repository
 		
+		System.out.println(updatePatient);
+		
 		Patient updatedPatient = null;
 		
 		try {
-			updatedPatient = patientService.updatePatient(patient);
+			updatedPatient = patientService.updatePatient(updatePatient);
 		} catch (Exception e) {
 			return new ResponseEntity<>("Error updating patient details: " + e.getMessage(),
 					HttpStatus.INTERNAL_SERVER_ERROR);
@@ -212,6 +246,50 @@ public class NurseController {
 
 
 		return new ResponseEntity<>(workingSchedule, HttpStatus.OK);
+	}
+	
+	
+	@PutMapping("/responseToHospitalRequest")
+	public ResponseEntity<?> respondToHospitalRequest(@RequestBody RequestResponse requestResponse){
+		
+		System.out.println("i am here");
+		
+		Nurse updatedNurse = nurseService.respondToRequest(requestResponse);
+		
+		if(requestResponse.getStatus().equals("accepted")) {
+			String workingHourUpdateUrl = "http://localhost:9999/hospital-service/api/hospital/nurse/addWorkingHour/"+requestResponse.getNurseId();
+			
+			Nurse.WorkingHour wh = new Nurse.WorkingHour(requestResponse.getDate(),Instant.parse(requestResponse.getFrom()),
+					Instant.parse(requestResponse.getTo()),requestResponse.getHospitalId());
+			System.out.println("i am here");
+			
+			restTemplate.postForEntity(workingHourUpdateUrl,wh, HospitalNurse.class);
+			return new ResponseEntity<>(updatedNurse,HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>("",HttpStatus.NOT_FOUND);
+		
+	}
+	
+	@PutMapping("rejectToHospitalRequest")
+	public ResponseEntity<?> rejectHospitalRequest(@RequestBody RequestResponse requestResponse){
+		Nurse updateNurse = nurseService.rejectRequest(requestResponse);
+		
+		DeleteNurseRequest deleteNurseRequest = new DeleteNurseRequest(requestResponse.getNurseId(),requestResponse.getFrom(),requestResponse.getTo(),requestResponse.getHospitalId());
+		
+		 HttpHeaders headers = new HttpHeaders();
+	        headers.setContentType(MediaType.APPLICATION_JSON);
+		  HttpEntity<DeleteNurseRequest> requestEntity = new HttpEntity<>(deleteNurseRequest, headers);
+		if(requestResponse.getStatus().equals("rejected")) {
+			String deleteRequestNurse = "http://localhost:9999/hospital-service/api/hospital/nurse/deleteHospitalNurseRequest";
+			restTemplate.exchange(deleteRequestNurse, HttpMethod.DELETE, requestEntity,
+					
+					Void.class);
+			return new ResponseEntity<>("Nurse request delted successfully", HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>("Cannot delete nurse requst",HttpStatus.NOT_ACCEPTABLE);
+		
 	}
 	
 	

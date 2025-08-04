@@ -1,5 +1,7 @@
 package training.iqgateway.staff.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +31,20 @@ public class PatientServiceImpl implements PatientService {
 	@Override
 	public Patient updatePatient(Patient patient) {
 		// TODO Auto-generated method stub
+		
+		Patient byPatientId = patientRepository.findByPatientId(patient.getPatientId());
+		
+		patient.setId(byPatientId.getId());
+		
 		return patientRepository.save(patient); 
+	}
+
+	@Override
+	public List<Patient> getPatientsByHospitalId(String hospitalId) {
+		// TODO Auto-generated method stub
+		
+		System.out.println(patientRepository.findAll());
+		return patientRepository.findAll();
 	}
 
 }

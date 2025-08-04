@@ -184,7 +184,7 @@ hospitalStaff.setHospitalStaffId(HospitalNurseUtils.generateHospitalStaffId());
 		
 		System.out.println(hospitalNurseService.deleteHospitalNurseByStaffId(cancelSingleRequestDetails.getStaffId()));
 		
-		if(hospitalNurseService.deleteHospitalNurseByStaffId(cancelSingleRequestDetails.getStaffId())!=null) {
+		if(hospitalNurseService.deleteHospitalNurseRequest(cancelSingleRequestDetails.getStaffId(), cancelSingleRequestDetails.getFrom(),cancelSingleRequestDetails.getTo(), cancelSingleRequestDetails.getHospitalId())!=null) {
 			try {
 				if(hospitalService.cancelSingleNurseRequest(cancelSingleRequestDetails)!=null)
 					return new ResponseEntity<>("Nurse request cancelled successfully", HttpStatus.OK);
@@ -196,6 +196,8 @@ hospitalStaff.setHospitalStaffId(HospitalNurseUtils.generateHospitalStaffId());
 		
 		return new ResponseEntity<>("Cannot delete Nurse Request in hospital nurse Details", HttpStatus.NOT_FOUND);
 	}
+	
+	
 	
 
 }

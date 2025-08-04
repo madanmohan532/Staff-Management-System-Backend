@@ -1,0 +1,22 @@
+package training.iqgateway.staff.entity;
+
+import lombok.Data;
+
+@Data
+public class DeleteNurseRequest {
+	
+	private String staffId;
+	private String from;
+	private String to;
+	private String hospitalId;
+	public DeleteNurseRequest(String staffId, String from, String to, String hospitalId) {
+		super();
+		this.staffId = staffId;
+		this.from = from;
+		this.to = to;
+		this.hospitalId = hospitalId;
+	}
+	
+	
+
+}

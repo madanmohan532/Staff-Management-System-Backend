@@ -1,0 +1,13 @@
+package training.iqgateway.staff.entity;
+
+import lombok.Data;
+
+@Data
+public class RequestResponse {
+	
+	private String nurseId;
+	private String responseStatus;
+	private String hospitalId;
+
+
+}

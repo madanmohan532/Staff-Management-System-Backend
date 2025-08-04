@@ -1,15 +1,16 @@
 package training.iqgateway.hospital.service;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import training.iqgateway.hospital.dto.NurseResponseDTO.WorkingHour;
 import training.iqgateway.hospital.entity.HospitalNurse;
 import training.iqgateway.hospital.repository.HospitalNurseRepository;
 
@@ -34,9 +35,24 @@ public class HospitalNurseServiceImpl implements HospitalNurseService {
 	@Override
 	public HospitalNurse deleteHospitalNurseByStaffId(String staffId) {
 		// TODO Auto-generated method stub
+		
+		
 
 		
 		return hospitalNurseRepository.deleteByStaffId(staffId);
+	}
+	
+	
+	@Override
+	public HospitalNurse deleteHospitalNurseRequest(String nurseId, String from, String to, String hospitalId) {
+		
+		HospitalNurse hospitalNurse2 = getAllHospitalNurses().stream().filter(hospitalNurse -> hospitalNurse.getHospitalId().equals(hospitalId)&& hospitalNurse.getStaffId().equals(nurseId)&&hospitalNurse.getRequestedFrom().equals(Instant.parse(from))&&
+				hospitalNurse.getRequestedUpto().equals(Instant.parse(to))).findFirst().get();
+		System.out.println(hospitalNurse2);
+		
+		
+		
+		return null;
 	}
 
 	@Override
@@ -113,6 +129,41 @@ public class HospitalNurseServiceImpl implements HospitalNurseService {
 		byId.setWorkingStatus(false);
 		
 		return hospitalNurseRepository.save(byId);
+		
+	}
+
+	@Override
+	public void addWorkingHour(WorkingHour workingHour, String staffId) {
+		// TODO Auto-generated method stub
+		
+		HospitalNurse byStaffId = hospitalNurseRepository.findByStaffId(staffId);
+		
+		HospitalNurse.WorkingHours wkh = new HospitalNurse.WorkingHours();
+		wkh.setFrom(workingHour.getFrom());
+		wkh.setTo(workingHour.getTo());
+		
+		System.out.println(wkh);
+		
+	
+		List<HospitalNurse.WorkingHours> workingHoursWithHospital = byStaffId.getWorkingHoursWithHospital();
+		if(workingHoursWithHospital == null) {
+			byStaffId.setWorkingHoursWithHospital(new ArrayList<HospitalNurse.WorkingHours>(Arrays.asList(wkh)));
+			System.out.println(byStaffId);
+		}else {
+			workingHoursWithHospital.add(wkh);
+		}
+		System.out.println(byStaffId);
+		
+//		HospitalNurse.WorkingHours wkh = new HospitalNurse.WorkingHours();
+//		wkh.setFrom(workingHour.getFrom());
+//		wkh.setTo(workingHour.getTo());
+//		
+//		workingHoursWithHospital.add(wkh);
+		
+		
+		byStaffId.setStaffRequestStatus("accepted");
+		
+		hospitalNurseRepository.save(byStaffId);
 		
 	}
 

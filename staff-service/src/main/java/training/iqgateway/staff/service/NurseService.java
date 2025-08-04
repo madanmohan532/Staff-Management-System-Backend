@@ -4,6 +4,7 @@ import java.util.List;
 
 import training.iqgateway.staff.entity.LeaveDetail;
 import training.iqgateway.staff.entity.Nurse;
+import training.iqgateway.staff.entity.RequestResponse;
 
 public interface NurseService {
 	
@@ -21,5 +22,9 @@ public interface NurseService {
 	Nurse getNurseByEmail(String email);
 
 	void applyLeave(LeaveDetail leaveDetail);
+
+	Nurse respondToRequest(RequestResponse requestResponse);
+
+	Nurse rejectRequest(RequestResponse requestResponse);
 
 }

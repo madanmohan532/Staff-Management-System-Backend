@@ -1,8 +1,0 @@
-package training.iqgateway.hospital.service;
-
-import training.iqgateway.hospital.entity.Hospital;
-
-public interface HospitalService {
-
-	public Hospital getHospitalById(String id);
-}

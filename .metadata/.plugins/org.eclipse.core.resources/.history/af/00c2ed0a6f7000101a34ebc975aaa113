@@ -1,0 +1,11 @@
+package training.iqgateway.hospital.entity;
+
+public class DeleteNurseRequest {
+	
+	private String staffId;
+	private String from;
+	private String to;
+	private String hospitalId;
+	
+
+}

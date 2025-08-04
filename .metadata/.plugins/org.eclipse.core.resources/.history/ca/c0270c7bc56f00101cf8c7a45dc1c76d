@@ -1,0 +1,10 @@
+package training.iqgateway.staff.entity;
+
+public class RequestResponse {
+	
+	private String staffId;
+	private String responseStatus;
+	private String hospitalId;
+
+
+}

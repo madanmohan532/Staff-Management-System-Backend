@@ -1,6 +1,7 @@
 package training.iqgateway.staff.service;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,9 +10,11 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import training.iqgateway.staff.entity.LeaveDetail;
 import training.iqgateway.staff.entity.Nurse;
+import training.iqgateway.staff.entity.RequestResponse;
 import training.iqgateway.staff.repository.NurseRepository;
 
 @Service
@@ -19,6 +22,9 @@ public class NurseServiceImpl implements NurseService {
 	
 	@Autowired
 	NurseRepository nurseRepository;
+	
+	@Autowired
+	RestTemplate restTemplate;
 	
 
 	@Autowired
@@ -52,7 +58,7 @@ public class NurseServiceImpl implements NurseService {
 		
 		// TODO Auto-generated method stub
 		
-		List<Nurse.WorkingHour> workingHours = null;
+		List<Nurse.WorkingHour> workingHours = new ArrayList<>();
 		
 		nurseRepository.findAll().stream().filter(nurse -> nurse.get_id().equals(nurseId))
 			.forEach(nurse -> workingHours.addAll(nurse.getWorkingHours()));
@@ -116,6 +122,46 @@ public class NurseServiceImpl implements NurseService {
 //		leaveDetails.add()
 		
 		
+	}
+
+	@Override
+	public Nurse respondToRequest(RequestResponse requestResponse) {
+		// TODO Auto-generated method stub
+		Nurse nurseById = getNurseById(requestResponse.getNurseId());
+		
+		List<Nurse.WorkSchedule> workSchedules = nurseById.getWorkSchedule();
+		
+		for (Nurse.WorkSchedule workSchedule : workSchedules) {
+			if(workSchedule.getHospitalId().equals(requestResponse.getHospitalId()) && workSchedule.getDate().equals(requestResponse.getDate())
+					&& workSchedule.getFrom().equals(Instant.parse(requestResponse.getFrom())) && workSchedule.getTo().equals(Instant.parse(requestResponse.getTo()))) {
+				workSchedule.setStatus(requestResponse.getStatus());
+			}
+		}
+		
+		nurseById.setWorkSchedule(workSchedules);
+		
+		
+		
+		
+		return nurseRepository.save(nurseById);
+	}
+
+	@Override
+	public Nurse rejectRequest(RequestResponse requestResponse) {
+		// TODO Auto-generated method stub
+		Nurse nurseById = getNurseById(requestResponse.getNurseId());
+		List<Nurse.WorkSchedule> workSchedules = nurseById.getWorkSchedule();
+		for (Nurse.WorkSchedule workSchedule : workSchedules) {
+			if(workSchedule.getHospitalId().equals(requestResponse.getHospitalId()) && workSchedule.getDate().equals(requestResponse.getDate())
+					&& workSchedule.getFrom().equals(Instant.parse(requestResponse.getFrom())) && workSchedule.getTo().equals(Instant.parse(requestResponse.getTo()))) {
+				workSchedule.setStatus(requestResponse.getStatus());
+			}
+		}
+		
+		nurseById.setWorkSchedule(workSchedules);
+		
+		
+		return nurseRepository.save(nurseById);
 	}
 
 }

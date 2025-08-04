@@ -112,6 +112,15 @@ public class Nurse {
 		private Instant to;
 		@Field(name = "hospital_id")
 		private String hospitalId;
+		public WorkingHour(String date, Instant from, Instant to, String hospitalId) {
+			super();
+			this.date = date;
+			this.from = from;
+			this.to = to;
+			this.hospitalId = hospitalId;
+		}
+		
+		
 	}
 
 	@Data
