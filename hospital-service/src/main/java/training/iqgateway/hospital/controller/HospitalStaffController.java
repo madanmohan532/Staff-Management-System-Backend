@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
-import training.iqgateway.hospital.dto.NurseResponseDTO.WorkingHour;
 import training.iqgateway.hospital.entity.DeleteNurseRequest;
 import training.iqgateway.hospital.entity.HospitalNurse;
+import training.iqgateway.hospital.entity.RemoveHospitalNurse;
+import training.iqgateway.hospital.entity.RequestResponse;
 import training.iqgateway.hospital.service.HospitalNurseService;
 
 @RestController
@@ -29,6 +30,9 @@ public class HospitalStaffController {
 	
 	@Autowired
 	HospitalNurseService hospitalNurseService;
+	
+	@Autowired
+	RestTemplate restTemplate;
 	
 	@GetMapping("/getHospitalNurseDetails")
 	public ResponseEntity<?> getHospitalNurseDetails() {
@@ -60,6 +64,17 @@ public class HospitalStaffController {
 	public ResponseEntity<?> updateHospitalNurse(@RequestParam String hospitalStaffId){
 		HospitalNurse updateHospitalNurse = hospitalNurseService.updateHospitalNurse(hospitalStaffId);
 		return new ResponseEntity<>(updateHospitalNurse,HttpStatus.OK);
+	}
+	
+	
+	
+	@PutMapping("/changeWorkingStatus")
+	public ResponseEntity<?> changeWorkingStatus(@RequestParam String hospitalStaffId, @RequestParam boolean workingStatus){
+		HospitalNurse changeWorkingStatus = hospitalNurseService.changeWorkingStatus(hospitalStaffId,workingStatus);
+		if(changeWorkingStatus==null) {
+			return new ResponseEntity<>("Not found ",HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(changeWorkingStatus,HttpStatus.OK);
 	}
 	
 	
@@ -121,22 +136,42 @@ public class HospitalStaffController {
 		
 	}
 	
-	@PostMapping("/addWorkingHour/{nurseId}")
-	public HospitalNurse addWorkingHours(@RequestBody WorkingHour workingHour, @PathVariable String nurseId){
+	@PostMapping("/addWorkingHour")
+	public HospitalNurse addWorkingHours(@RequestBody RequestResponse requestResponse){
 		
-		hospitalNurseService.addWorkingHour(workingHour,nurseId);
+		System.out.println("i am inside add working hours");
 		
-		return hospitalNurseService.getHospitalNurseByStaffId(nurseId);
+		return hospitalNurseService.addWorkingHour(requestResponse);
 		
 	}
 
 	
-	@DeleteMapping("/deleteHospitalNurseRequest")
-	public void deleteNurseRequest(@RequestBody DeleteNurseRequest deleteNurseRequest) {
+	@PostMapping("/updateNurseResponseHospitalNurseRequest")
+	public HospitalNurse deleteNurseRequest(@RequestBody DeleteNurseRequest deleteNurseRequest) {
 		
-		HospitalNurse deleteHospitalNurseRequest = hospitalNurseService.deleteHospitalNurseRequest(deleteNurseRequest.getNurseId(), deleteNurseRequest.getFrom(), deleteNurseRequest.getTo(), deleteNurseRequest.getHospitalId());
-		if(deleteHospitalNurseRequest !=null) {
-			
+		HospitalNurse rejectedHospitalNurseRequest = hospitalNurseService.updateNurseResponseHospitalNurseRequest(deleteNurseRequest);
+		if(rejectedHospitalNurseRequest !=null) {
+			return rejectedHospitalNurseRequest;
+		}
+		return null;
+	}
+	
+	
+	@PutMapping("/removeHospitalNurse")
+	public ResponseEntity<?> removeHospitalNurse(@RequestBody RemoveHospitalNurse removeHospitalNurse) {
+		// Logic to remove a hospital nurse
+
+		// Placeholder for actual removal logic
+		HospitalNurse removedNurse = hospitalNurseService.removeHospitalNurse(removeHospitalNurse.getHospitalStaffId());
+		
+		String workingHourUpdateUrl = "http://localhost:9999/staff-service/api/nurse/removeNurse";
+		restTemplate.put(workingHourUpdateUrl, removeHospitalNurse, HospitalNurse.class);
+		
+		
+		if (removedNurse != null) {
+			return new ResponseEntity<>(removedNurse, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("Hospital Nurse not found with ID: " + removeHospitalNurse.getHospitalStaffId(), HttpStatus.NOT_FOUND);
 		}
 	}
 	

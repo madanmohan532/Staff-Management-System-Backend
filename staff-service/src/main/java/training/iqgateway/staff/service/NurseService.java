@@ -2,8 +2,11 @@ package training.iqgateway.staff.service;
 
 import java.util.List;
 
+import training.iqgateway.staff.entity.ClockInRequest;
+import training.iqgateway.staff.entity.ClockOutRequest;
 import training.iqgateway.staff.entity.LeaveDetail;
 import training.iqgateway.staff.entity.Nurse;
+import training.iqgateway.staff.entity.RemoveHospitalNurse;
 import training.iqgateway.staff.entity.RequestResponse;
 
 public interface NurseService {
@@ -26,5 +29,11 @@ public interface NurseService {
 	Nurse respondToRequest(RequestResponse requestResponse);
 
 	Nurse rejectRequest(RequestResponse requestResponse);
+
+	Nurse clockIn(ClockInRequest from);
+
+	Nurse clockOut(ClockOutRequest clockOutRequest);
+
+	Nurse removeNurse(RemoveHospitalNurse removeNurse);
 
 }

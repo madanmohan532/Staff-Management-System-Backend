@@ -1,0 +1,17 @@
+package training.iqgateway.hospital.service;
+
+import java.util.List;
+
+import training.iqgateway.hospital.entity.Patient;
+
+public interface PatientService {
+	
+	Patient getPatientById(String patientId);
+
+	Patient updatePatient(Patient patient);
+
+	List<Patient> getPatientsByHospitalId(String hospitalId);
+
+	Patient addPatient(training.iqgateway.hospital.entity.Patient patient);
+
+}

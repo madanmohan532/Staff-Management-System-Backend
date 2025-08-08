@@ -1,6 +1,6 @@
 package training.iqgateway.hospital.service;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,8 +10,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import training.iqgateway.hospital.dto.NurseResponseDTO.WorkingHour;
+import training.iqgateway.hospital.entity.DeleteNurseRequest;
 import training.iqgateway.hospital.entity.HospitalNurse;
+import training.iqgateway.hospital.entity.RequestResponse;
 import training.iqgateway.hospital.repository.HospitalNurseRepository;
 
 @Service
@@ -45,14 +46,19 @@ public class HospitalNurseServiceImpl implements HospitalNurseService {
 	
 	@Override
 	public HospitalNurse deleteHospitalNurseRequest(String nurseId, String from, String to, String hospitalId) {
-		
-		HospitalNurse hospitalNurse2 = getAllHospitalNurses().stream().filter(hospitalNurse -> hospitalNurse.getHospitalId().equals(hospitalId)&& hospitalNurse.getStaffId().equals(nurseId)&&hospitalNurse.getRequestedFrom().equals(Instant.parse(from))&&
-				hospitalNurse.getRequestedUpto().equals(Instant.parse(to))).findFirst().get();
-		System.out.println(hospitalNurse2);
-		
-		
-		
-		return null;
+		HospitalNurse hospitalNurse2 = getAllHospitalNurses().stream()
+	        .filter(hospitalNurse -> hospitalNurse.getHospitalId().equals(hospitalId)
+	            && hospitalNurse.getStaffId().equals(nurseId)
+	            && hospitalNurse.getRequestedFrom().equals(from)
+	            && hospitalNurse.getRequestedUpto().equals(to))
+	        .findFirst()
+	        .orElse(null);
+	    System.out.println(hospitalNurse2);
+	    
+	    
+	    
+	    // You may want to delete or update the found nurse here
+	    return hospitalNurse2;
 	}
 
 	@Override
@@ -63,6 +69,8 @@ public class HospitalNurseServiceImpl implements HospitalNurseService {
 		
 		System.out.println(hospitalNurse);
 		hospitalNurse.setFloorAssigned(floor);
+		
+//		hospitalNurseRepository.findByHospitalId(id)
 		
 		hospitalNurseRepository.save(hospitalNurse);
 		
@@ -75,7 +83,8 @@ public class HospitalNurseServiceImpl implements HospitalNurseService {
 		
 		// TODO Auto-generated method stub
 		
-		HospitalNurse hospitalNurse = hospitalNurseRepository.findByStaffId(staffId);
+//		HospitalNurse hospitalNurse = hospitalNurseRepository.findByStaffId(staffId);
+		HospitalNurse hospitalNurse = new HospitalNurse();
 		if (hospitalNurse != null) {
 			
 			Boolean workingStatus = hospitalNurse.isWorkingStatus();
@@ -84,21 +93,19 @@ public class HospitalNurseServiceImpl implements HospitalNurseService {
 				return Collections.singletonMap(workingStatus, "nurse is not working with hospital"); // Nurse is not working, with the hospital
 			} 
 			
-			Instant currentTime = Instant.now();
-			
-			Instant requestedFrom = hospitalNurse.getRequestedFrom();
-			Instant requestedTo = hospitalNurse.getRequestedUpto();
-			
-			if(currentTime.isAfter(requestedTo)) {
-				hospitalNurse.setWorkingStatus(false);
-				hospitalNurseRepository.save(hospitalNurse);
-				return Collections.singletonMap(false, "nurse is not working with hospital");
-			}
-			else if(currentTime.isBefore(requestedFrom)) {
+			LocalDateTime currentTime = null;
+			String requestedFrom = hospitalNurse.getRequestedFrom();
+			String requestedTo = hospitalNurse.getRequestedUpto();
+//			if(currentTime.isAfter(requestedTo)) {
+//				hospitalNurse.setWorkingStatus(false);
+//				hospitalNurseRepository.save(hospitalNurse);
+//				return Collections.singletonMap(false, "nurse is not working with hospital");
+//			}
+//			else if(currentTime.isBefore(requestedFrom)) {
 				
 				
 				return Collections.singletonMap(workingStatus, "nurse is working, but can not be accessed before the scheduled time with hospital");
-			}
+//			}
 			
 			
 		}
@@ -133,38 +140,84 @@ public class HospitalNurseServiceImpl implements HospitalNurseService {
 	}
 
 	@Override
-	public void addWorkingHour(WorkingHour workingHour, String staffId) {
-		// TODO Auto-generated method stub
-		
-		HospitalNurse byStaffId = hospitalNurseRepository.findByStaffId(staffId);
-		
-		HospitalNurse.WorkingHours wkh = new HospitalNurse.WorkingHours();
-		wkh.setFrom(workingHour.getFrom());
-		wkh.setTo(workingHour.getTo());
-		
-		System.out.println(wkh);
-		
-	
-		List<HospitalNurse.WorkingHours> workingHoursWithHospital = byStaffId.getWorkingHoursWithHospital();
-		if(workingHoursWithHospital == null) {
-			byStaffId.setWorkingHoursWithHospital(new ArrayList<HospitalNurse.WorkingHours>(Arrays.asList(wkh)));
-			System.out.println(byStaffId);
-		}else {
-			workingHoursWithHospital.add(wkh);
-		}
-		System.out.println(byStaffId);
-		
-//		HospitalNurse.WorkingHours wkh = new HospitalNurse.WorkingHours();
-//		wkh.setFrom(workingHour.getFrom());
-//		wkh.setTo(workingHour.getTo());
-//		
-//		workingHoursWithHospital.add(wkh);
-		
-		
-		byStaffId.setStaffRequestStatus("accepted");
-		
-		hospitalNurseRepository.save(byStaffId);
-		
+	public HospitalNurse addWorkingHour(RequestResponse requestResponse) {
+		List<HospitalNurse> byHospitalId = hospitalNurseRepository.findByHospitalId(requestResponse.getHospitalId());
+	    String from = requestResponse.getFrom();
+	    String to = requestResponse.getTo();
+	    HospitalNurse filteredNurse = byHospitalId.stream()
+	        .filter(nurse -> nurse.getRequestedFrom().equals(from)
+	            && nurse.getRequestedUpto().equals(to)
+	            && nurse.getStaffRequestStatus().equals("requested")
+	            && nurse.getStaffId().equals(requestResponse.getNurseId()))
+	        .findFirst()
+	        .orElse(null);
+	    System.out.println(filteredNurse);
+	    if (filteredNurse == null) return null;
+	    HospitalNurse.WorkingHours wkh = new HospitalNurse.WorkingHours();
+	    wkh.setFrom(from);
+	    wkh.setTo(to);
+	    List<HospitalNurse.WorkingHours> workingHoursWithHospital = filteredNurse.getWorkingHoursWithHospital();
+	    if (workingHoursWithHospital == null) {
+	    	workingHoursWithHospital = new ArrayList<>();
+	    	workingHoursWithHospital.add(wkh);
+	        filteredNurse.setWorkingHoursWithHospital(workingHoursWithHospital);
+	    } else {
+	        workingHoursWithHospital.add(wkh);
+	    }
+	    filteredNurse.setStaffRequestStatus("accepted");
+	    System.out.println(filteredNurse);
+	    HospitalNurse byHospitalStaffId = hospitalNurseRepository.findByHospitalStaffId(filteredNurse.getHospitalStaffId());
+	    System.out.println(byHospitalStaffId);
+	    filteredNurse.setId(byHospitalStaffId.getId());
+	    return hospitalNurseRepository.save(filteredNurse);
 	}
+	
+	
+
+	@Override
+	public HospitalNurse changeWorkingStatus(String hospitalStaffId, boolean workingStatus) {
+		// TODO Auto-generated method stub
+		 HospitalNurse byHospitalStaffId = hospitalNurseRepository.findByHospitalStaffId(hospitalStaffId);
+		 if(byHospitalStaffId!=null) {
+			 byHospitalStaffId.setWorkingStatus(workingStatus);
+			 return hospitalNurseRepository.save(byHospitalStaffId);
+		 }
+		 
+		 return null;
+		 
+	}
+
+	@Override
+	public HospitalNurse updateNurseResponseHospitalNurseRequest(DeleteNurseRequest deleteNurseRequest) {
+		// TODO Auto-generated method stub
+		List<HospitalNurse> byHospitalId = hospitalNurseRepository.findByHospitalId(deleteNurseRequest.getHospitalId());
+	    String from = deleteNurseRequest.getFrom();
+	    String to = deleteNurseRequest.getTo();
+	    HospitalNurse filteredNurse = byHospitalId.stream()
+	        .filter(nurse -> nurse.getRequestedFrom().equals(from)
+	            && nurse.getRequestedUpto().equals(to)
+	            && nurse.getStaffRequestStatus().equals("requested")
+	            && nurse.getStaffId().equals(deleteNurseRequest.getNurseId()))
+	        .findFirst()
+	        .orElse(null);
+	    
+	    filteredNurse.setStaffRequestStatus("rejected");
+		
+		
+	    HospitalNurse byHospitalStaffId = hospitalNurseRepository.findByHospitalStaffId(filteredNurse.getHospitalStaffId());
+	    System.out.println(byHospitalStaffId);
+	    filteredNurse.setId(byHospitalStaffId.getId());
+	    return hospitalNurseRepository.save(filteredNurse);
+	}
+
+	@Override
+	public HospitalNurse removeHospitalNurse(String hospitalStaffId) {
+		// TODO Auto-generated method stub
+		HospitalNurse byHospitalStaffId = hospitalNurseRepository.findByHospitalStaffId(hospitalStaffId);
+		byHospitalStaffId.setStaffRequestStatus("removed");
+		return hospitalNurseRepository.save(byHospitalStaffId);
+	}
+
+
 
 }

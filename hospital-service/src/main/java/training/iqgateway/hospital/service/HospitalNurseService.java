@@ -1,10 +1,13 @@
 package training.iqgateway.hospital.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
 import training.iqgateway.hospital.dto.NurseResponseDTO.WorkingHour;
+import training.iqgateway.hospital.entity.DeleteNurseRequest;
 import training.iqgateway.hospital.entity.HospitalNurse;
+import training.iqgateway.hospital.entity.RequestResponse;
 
 public interface HospitalNurseService {
 	
@@ -24,8 +27,14 @@ public interface HospitalNurseService {
 
 	public HospitalNurse updateHospitalNurse(String id);
 
-	public void addWorkingHour(WorkingHour workingHour, String staffId);
+	public HospitalNurse addWorkingHour(RequestResponse requestResponse);
 
 	HospitalNurse deleteHospitalNurseRequest(String nurseId, String from, String to, String hospitalId);
+	
+	HospitalNurse removeHospitalNurse(String hospitalStaffId);
+
+	public HospitalNurse changeWorkingStatus(String hospitalStaffId, boolean workingStatus);
+
+	public HospitalNurse updateNurseResponseHospitalNurseRequest(DeleteNurseRequest deleteNurseRequest);
 
 }

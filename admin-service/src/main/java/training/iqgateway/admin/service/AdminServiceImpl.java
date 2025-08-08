@@ -35,6 +35,7 @@ public class AdminServiceImpl implements AdminService {
 	public Admin findByEmail(String email) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("contactDetails.email").is(email));
+		
 		return mongoTemplate.findOne(query, Admin.class);
 	}
 

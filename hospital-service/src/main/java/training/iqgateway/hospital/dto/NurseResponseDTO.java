@@ -1,6 +1,7 @@
 package training.iqgateway.hospital.dto;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,9 +80,9 @@ public class NurseResponseDTO {
 	@Data
 	public static class LeaveDetail {
 		@Field(name = "from_date")
-		private Instant fromDate;
+		private String fromDate;
 		@Field(name = "to_date")
-		private Instant toDate;
+		private String toDate;
 	}
 
 	@Data
@@ -109,27 +110,18 @@ public class NurseResponseDTO {
 		@Field(name = "date")
 		private String date;
 		@Field(name = "from")
-		private Instant from;
+		private String from;
 		@Field(name = "to")
-		private Instant to;
+		private String to;
 		@Field(name = "hospital_id")
 		private String hospitalId;
-		
-		public WorkingHour(String date, Instant from, Instant to, String hospitalId) {
+		public WorkingHour(String date, String from, String to, String hospitalId) {
 			super();
 			this.date = date;
 			this.from = from;
 			this.to = to;
 			this.hospitalId = hospitalId;
 		}
-//			super();
-//			this.date = date;
-//			this.from = from;
-//			this.to = to;
-//			this.hospitalId = hospitalId;
-//		}
-//		
-		
 	}
 
 	@Data
@@ -137,14 +129,14 @@ public class NurseResponseDTO {
 		@Field(name = "date")
 		private String date;
 		@Field(name = "from")
-		private Instant from;
+		private String from;
 		@Field(name = "to")
-		private Instant to;
+		private String to;
 		@Field(name = "hospital_id")
 		private String hospitalId;
 		@Field(name = "status")
 		private String status;
-		public WorkSchedule(String date, Instant from, Instant to, String hospitalId, String status) {
+		public WorkSchedule(String date, String from, String to, String hospitalId, String status) {
 			super();
 			this.date = date;
 			this.from = from;

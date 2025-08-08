@@ -8688,3 +8688,506 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.springfra
 2025-08-04 11:55:32,411 [Worker-17: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
 2025-08-04 11:55:32,421 [Worker-17: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
 2025-08-04 11:55:32,425 [Worker-17: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-04 21:33:31,574 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2025-08-04 21:49:21,192 [Worker-25: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-api:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.2\junit-jupiter-api-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @95:7)  @ line 95, column 7
+
+2025-08-04 21:49:21,200 [Worker-25: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-params:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.8.2\junit-jupiter-params-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @89:7)  @ line 89, column 7
+
+2025-08-04 21:49:21,211 [Worker-25: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.opentest4j:opentest4j:jar:1.2.0 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</scm>\n</project>\n<?xml ... @50:7)  @ line 50, column 7
+
+2025-08-04 21:49:21,235 [Worker-25: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.objenesis:objenesis:jar:3.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\objenesis\objenesis\3.2\objenesis-3.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</build>\n\n</project>\n<?xml ... @92:7)  @ line 92, column 7
+
+2025-08-04 21:49:51,464 [Worker-28: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-04 21:49:51,532 [Worker-28: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-04 21:49:51,540 [Worker-28: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-04 21:49:59,977 [Worker-33: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-04 21:49:59,985 [Worker-33: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-04 21:49:59,992 [Worker-33: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-04 22:03:34,340 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-12.0.21; built: 2025-05-09T00:32:00.688Z; git: 1c4719601e31b05b7d68910d2edd980259f1f53c; jvm 21.0.7+6-LTS
+2025-08-04 22:03:34,457 [Start Help Server] INFO  o.e.j.server.handler.ContextHandler - Started oeje8n.ContextHandler$CoreContextHandler@440bbf7c{/help,/help,b=null,a=AVAILABLE,h=oeje8n.ContextHandler$CoreContextHandler$CoreToNestedHandler@2d755a74{STARTED}}
+2025-08-04 22:03:34,458 [Start Help Server] INFO  o.e.j.s.DefaultSessionIdManager - Session workerName=node0
+2025-08-04 22:03:34,558 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@48d8808f{HTTP/1.1, (http/1.1)}{127.0.0.1:54140}
+2025-08-04 22:03:34,606 [Start Help Server] INFO  org.eclipse.jetty.server.Server - Started oejs.Server@1a1dbaa8{STARTING}[12.0.21,sto=0] @1891413ms
+2025-08-04 22:48:36,137 [Worker-33: Launching admin-service - AdminServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-04 22:48:36,172 [Worker-33: Launching admin-service - AdminServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-04 22:48:36,194 [Worker-33: Launching admin-service - AdminServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\admin-service\src\test\resources
+2025-08-04 22:58:44,451 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped oejs.Server@1a1dbaa8{STOPPING}[12.0.21,sto=0]
+2025-08-04 22:58:44,462 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@48d8808f{HTTP/1.1, (http/1.1)}{127.0.0.1:0}
+2025-08-05 10:09:52,048 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2025-08-05 10:11:10,384 [Worker-3: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-api:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.2\junit-jupiter-api-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @95:7)  @ line 95, column 7
+
+2025-08-05 10:11:10,402 [Worker-3: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-params:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.8.2\junit-jupiter-params-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @89:7)  @ line 89, column 7
+
+2025-08-05 10:11:10,418 [Worker-3: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.opentest4j:opentest4j:jar:1.2.0 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</scm>\n</project>\n<?xml ... @50:7)  @ line 50, column 7
+
+2025-08-05 10:11:10,455 [Worker-3: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.objenesis:objenesis:jar:3.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\objenesis\objenesis\3.2\objenesis-3.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</build>\n\n</project>\n<?xml ... @92:7)  @ line 92, column 7
+
+2025-08-05 10:16:39,325 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-12.0.21; built: 2025-05-09T00:32:00.688Z; git: 1c4719601e31b05b7d68910d2edd980259f1f53c; jvm 21.0.7+6-LTS
+2025-08-05 10:16:39,427 [Start Help Server] INFO  o.e.j.server.handler.ContextHandler - Started oeje8n.ContextHandler$CoreContextHandler@5a69f376{/help,/help,b=null,a=AVAILABLE,h=oeje8n.ContextHandler$CoreContextHandler$CoreToNestedHandler@b8ff0de{STARTED}}
+2025-08-05 10:16:39,427 [Start Help Server] INFO  o.e.j.s.DefaultSessionIdManager - Session workerName=node0
+2025-08-05 10:16:39,501 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@1af78e13{HTTP/1.1, (http/1.1)}{127.0.0.1:58775}
+2025-08-05 10:16:39,535 [Start Help Server] INFO  org.eclipse.jetty.server.Server - Started oejs.Server@26eb2170{STARTING}[12.0.21,sto=0] @449989ms
+2025-08-05 10:42:54,511 [Worker-17: Launching admin-service - AdminServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-05 10:42:54,555 [Worker-17: Launching admin-service - AdminServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-05 10:42:54,562 [Worker-17: Launching admin-service - AdminServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\admin-service\src\test\resources
+2025-08-05 13:24:55,202 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped oejs.Server@26eb2170{STOPPING}[12.0.21,sto=0]
+2025-08-05 13:24:55,244 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@1af78e13{HTTP/1.1, (http/1.1)}{127.0.0.1:0}
+2025-08-05 14:54:45,970 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2025-08-05 14:55:01,993 [Worker-19: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-api:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.2\junit-jupiter-api-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @95:7)  @ line 95, column 7
+
+2025-08-05 14:55:01,998 [Worker-19: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-params:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.8.2\junit-jupiter-params-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @89:7)  @ line 89, column 7
+
+2025-08-05 14:55:02,006 [Worker-19: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.opentest4j:opentest4j:jar:1.2.0 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</scm>\n</project>\n<?xml ... @50:7)  @ line 50, column 7
+
+2025-08-05 14:55:02,065 [Worker-19: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.objenesis:objenesis:jar:3.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\objenesis\objenesis\3.2\objenesis-3.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</build>\n\n</project>\n<?xml ... @92:7)  @ line 92, column 7
+
+2025-08-05 14:56:00,312 [Worker-18: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-05 14:56:00,326 [Worker-18: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-05 14:56:00,331 [Worker-18: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-05 14:56:05,396 [Worker-8: Launching admin-service - AdminServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-05 14:56:05,411 [Worker-8: Launching admin-service - AdminServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-05 14:56:05,423 [Worker-8: Launching admin-service - AdminServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\admin-service\src\test\resources
+2025-08-05 15:08:57,864 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-12.0.21; built: 2025-05-09T00:32:00.688Z; git: 1c4719601e31b05b7d68910d2edd980259f1f53c; jvm 21.0.7+6-LTS
+2025-08-05 15:08:57,920 [Start Help Server] INFO  o.e.j.server.handler.ContextHandler - Started oeje8n.ContextHandler$CoreContextHandler@3b2a4644{/help,/help,b=null,a=AVAILABLE,h=oeje8n.ContextHandler$CoreContextHandler$CoreToNestedHandler@2e382648{STARTED}}
+2025-08-05 15:08:57,920 [Start Help Server] INFO  o.e.j.s.DefaultSessionIdManager - Session workerName=node0
+2025-08-05 15:08:57,960 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@62caf504{HTTP/1.1, (http/1.1)}{127.0.0.1:50929}
+2025-08-05 15:08:57,986 [Start Help Server] INFO  org.eclipse.jetty.server.Server - Started oejs.Server@c0ea676{STARTING}[12.0.21,sto=0] @893770ms
+2025-08-05 15:44:53,152 [Worker-14: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-05 15:44:53,157 [Worker-14: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-05 15:44:53,160 [Worker-14: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-05 15:47:10,547 [Worker-5: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-05 15:47:10,553 [Worker-5: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-05 15:47:10,555 [Worker-5: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-05 17:34:42,012 [Worker-22: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-05 17:34:42,019 [Worker-22: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-05 17:34:42,023 [Worker-22: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-05 17:34:49,361 [Worker-4: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-05 17:34:49,370 [Worker-4: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-05 17:34:49,375 [Worker-4: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-05 17:39:00,450 [Worker-22: Build Project] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-05 17:39:00,455 [Worker-22: Build Project] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-05 17:39:00,458 [Worker-22: Build Project] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-05 17:48:11,630 [Worker-23: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-05 17:48:11,637 [Worker-23: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-05 17:48:11,640 [Worker-23: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-05 19:35:35,852 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped oejs.Server@c0ea676{STOPPING}[12.0.21,sto=0]
+2025-08-05 19:35:35,936 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@62caf504{HTTP/1.1, (http/1.1)}{127.0.0.1:0}
+2025-08-06 06:14:35,996 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2025-08-06 06:15:46,890 [Worker-122: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-api:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.2\junit-jupiter-api-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @95:7)  @ line 95, column 7
+
+2025-08-06 06:15:46,904 [Worker-122: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-params:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.8.2\junit-jupiter-params-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @89:7)  @ line 89, column 7
+
+2025-08-06 06:15:46,921 [Worker-122: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.opentest4j:opentest4j:jar:1.2.0 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</scm>\n</project>\n<?xml ... @50:7)  @ line 50, column 7
+
+2025-08-06 06:15:46,951 [Worker-122: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.objenesis:objenesis:jar:3.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\objenesis\objenesis\3.2\objenesis-3.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</build>\n\n</project>\n<?xml ... @92:7)  @ line 92, column 7
+
+2025-08-06 06:37:10,808 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-12.0.21; built: 2025-05-09T00:32:00.688Z; git: 1c4719601e31b05b7d68910d2edd980259f1f53c; jvm 21.0.7+6-LTS
+2025-08-06 06:37:10,933 [Start Help Server] INFO  o.e.j.server.handler.ContextHandler - Started oeje8n.ContextHandler$CoreContextHandler@14ced2f7{/help,/help,b=null,a=AVAILABLE,h=oeje8n.ContextHandler$CoreContextHandler$CoreToNestedHandler@23c3db1a{STARTED}}
+2025-08-06 06:37:10,934 [Start Help Server] INFO  o.e.j.s.DefaultSessionIdManager - Session workerName=node0
+2025-08-06 06:37:11,037 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@a10f71{HTTP/1.1, (http/1.1)}{127.0.0.1:59543}
+2025-08-06 06:37:11,085 [Start Help Server] INFO  org.eclipse.jetty.server.Server - Started oejs.Server@3a52cee2{STARTING}[12.0.21,sto=0] @1411200ms
+2025-08-06 07:33:47,349 [Worker-134: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 07:33:47,370 [Worker-134: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 07:33:47,375 [Worker-134: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-06 07:36:48,839 [Worker-128: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 07:36:48,877 [Worker-128: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 07:36:48,881 [Worker-128: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-06 07:38:15,616 [Worker-156: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 07:38:15,622 [Worker-156: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 07:38:15,625 [Worker-156: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-06 07:50:39,237 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped oejs.Server@3a52cee2{STOPPING}[12.0.21,sto=0]
+2025-08-06 07:50:39,247 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@a10f71{HTTP/1.1, (http/1.1)}{127.0.0.1:0}
+2025-08-06 09:43:33,591 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2025-08-06 09:44:20,741 [Worker-5: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-api:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.2\junit-jupiter-api-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @95:7)  @ line 95, column 7
+
+2025-08-06 09:44:20,763 [Worker-5: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-params:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.8.2\junit-jupiter-params-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @89:7)  @ line 89, column 7
+
+2025-08-06 09:44:20,796 [Worker-5: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.opentest4j:opentest4j:jar:1.2.0 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</scm>\n</project>\n<?xml ... @50:7)  @ line 50, column 7
+
+2025-08-06 09:44:20,861 [Worker-5: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.objenesis:objenesis:jar:3.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\objenesis\objenesis\3.2\objenesis-3.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</build>\n\n</project>\n<?xml ... @92:7)  @ line 92, column 7
+
+2025-08-06 15:42:11,535 [Worker-7: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2025-08-06 15:43:15,731 [Worker-18: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-api:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.2\junit-jupiter-api-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @95:7)  @ line 95, column 7
+
+2025-08-06 15:43:15,738 [Worker-18: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-params:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.8.2\junit-jupiter-params-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @89:7)  @ line 89, column 7
+
+2025-08-06 15:43:15,748 [Worker-18: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.opentest4j:opentest4j:jar:1.2.0 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</scm>\n</project>\n<?xml ... @50:7)  @ line 50, column 7
+
+2025-08-06 15:43:15,772 [Worker-18: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.objenesis:objenesis:jar:3.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\objenesis\objenesis\3.2\objenesis-3.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</build>\n\n</project>\n<?xml ... @92:7)  @ line 92, column 7
+
+2025-08-06 16:58:47,428 [Worker-29: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 16:58:47,444 [Worker-29: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 16:58:47,450 [Worker-29: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\admin-service\src\test\resources
+2025-08-06 16:58:48,597 [Worker-29: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 16:58:48,600 [Worker-29: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 16:58:48,605 [Worker-29: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-06 16:58:48,964 [Worker-29: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 16:58:48,967 [Worker-29: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 16:58:48,975 [Worker-29: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\registration-service\src\test\resources
+2025-08-06 16:58:49,241 [Worker-29: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 16:58:49,243 [Worker-29: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 16:58:49,245 [Worker-29: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-06 16:58:53,580 [Worker-29: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-08-06 16:58:53,580 [Worker-29: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2025-08-06 16:58:53,580 [Worker-29: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2025-08-06 16:58:53,589 [Worker-29: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-08-06 16:58:53,593 [Worker-29: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-08-06 16:58:53,593 [Worker-29: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2025-08-06 16:58:53,594 [Worker-29: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\zuul-for-sms-services\src\test\resources
+2025-08-06 17:10:29,864 [Worker-30: Build Project] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:10:29,870 [Worker-30: Build Project] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:10:29,873 [Worker-30: Build Project] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-06 17:11:36,836 [Worker-35: Build Project] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:11:36,842 [Worker-35: Build Project] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:11:36,844 [Worker-35: Build Project] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-06 17:20:42,182 [Worker-41: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:20:42,185 [Worker-41: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:20:42,188 [Worker-41: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\Eureka-Server-SMS\src\test\resources
+2025-08-06 17:20:42,594 [Worker-41: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:20:42,599 [Worker-41: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:20:42,605 [Worker-41: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\admin-service\src\test\resources
+2025-08-06 17:20:42,892 [Worker-41: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:20:42,895 [Worker-41: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:20:42,898 [Worker-41: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-06 17:20:43,130 [Worker-41: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:20:43,132 [Worker-41: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:20:43,139 [Worker-41: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\registration-service\src\test\resources
+2025-08-06 17:20:43,505 [Worker-41: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:20:43,509 [Worker-41: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:20:43,515 [Worker-41: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-06 17:20:43,829 [Worker-41: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-08-06 17:20:43,830 [Worker-41: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2025-08-06 17:20:43,830 [Worker-41: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2025-08-06 17:20:43,833 [Worker-41: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-08-06 17:20:43,836 [Worker-41: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-08-06 17:20:43,837 [Worker-41: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2025-08-06 17:20:43,837 [Worker-41: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\zuul-for-sms-services\src\test\resources
+2025-08-06 17:25:35,533 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:25:35,537 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:25:35,541 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\Eureka-Server-SMS\src\test\resources
+2025-08-06 17:25:35,836 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:25:35,840 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:25:35,842 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\admin-service\src\test\resources
+2025-08-06 17:25:36,223 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:25:36,226 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:25:36,231 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-06 17:25:36,536 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:25:36,539 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:25:36,544 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\registration-service\src\test\resources
+2025-08-06 17:25:36,715 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:25:36,717 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:25:36,719 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-06 17:25:36,837 [Worker-44: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-08-06 17:25:36,837 [Worker-44: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2025-08-06 17:25:36,837 [Worker-44: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2025-08-06 17:25:36,839 [Worker-44: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-08-06 17:25:36,842 [Worker-44: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-08-06 17:25:36,842 [Worker-44: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2025-08-06 17:25:36,842 [Worker-44: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\zuul-for-sms-services\src\test\resources
+2025-08-06 17:29:13,268 [Worker-40: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:29:13,272 [Worker-40: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:29:13,277 [Worker-40: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\Eureka-Server-SMS\src\test\resources
+2025-08-06 17:29:13,675 [Worker-40: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:29:13,689 [Worker-40: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:29:13,693 [Worker-40: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\admin-service\src\test\resources
+2025-08-06 17:29:13,988 [Worker-40: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:29:13,990 [Worker-40: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:29:13,992 [Worker-40: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-06 17:29:14,222 [Worker-40: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:29:14,224 [Worker-40: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:29:14,230 [Worker-40: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\registration-service\src\test\resources
+2025-08-06 17:29:14,445 [Worker-40: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:29:14,448 [Worker-40: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:29:14,452 [Worker-40: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-06 17:29:14,698 [Worker-40: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-08-06 17:29:14,698 [Worker-40: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2025-08-06 17:29:14,698 [Worker-40: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2025-08-06 17:29:14,700 [Worker-40: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-08-06 17:29:14,702 [Worker-40: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-08-06 17:29:14,703 [Worker-40: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2025-08-06 17:29:14,703 [Worker-40: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\zuul-for-sms-services\src\test\resources
+2025-08-06 17:29:47,633 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:29:47,637 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:29:47,639 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\Eureka-Server-SMS\src\test\resources
+2025-08-06 17:29:47,985 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:29:47,989 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:29:47,994 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\admin-service\src\test\resources
+2025-08-06 17:29:48,419 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:29:48,423 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:29:48,425 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-06 17:29:48,621 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:29:48,623 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:29:48,627 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\registration-service\src\test\resources
+2025-08-06 17:29:48,790 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:29:48,792 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:29:48,794 [Worker-44: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-06 17:29:48,897 [Worker-44: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-08-06 17:29:48,897 [Worker-44: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2025-08-06 17:29:48,897 [Worker-44: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2025-08-06 17:29:48,899 [Worker-44: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-08-06 17:29:48,900 [Worker-44: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-08-06 17:29:48,900 [Worker-44: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2025-08-06 17:29:48,900 [Worker-44: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\zuul-for-sms-services\src\test\resources
+2025-08-06 17:42:49,878 [Worker-62: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:42:49,884 [Worker-62: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:42:49,888 [Worker-62: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-06 17:46:40,926 [Worker-50: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 17:46:40,932 [Worker-50: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 17:46:40,934 [Worker-50: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-06 20:45:21,609 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2025-08-06 21:12:33,816 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-12.0.21; built: 2025-05-09T00:32:00.688Z; git: 1c4719601e31b05b7d68910d2edd980259f1f53c; jvm 21.0.7+6-LTS
+2025-08-06 21:12:33,891 [Start Help Server] INFO  o.e.j.server.handler.ContextHandler - Started oeje8n.ContextHandler$CoreContextHandler@5c69460e{/help,/help,b=null,a=AVAILABLE,h=oeje8n.ContextHandler$CoreContextHandler$CoreToNestedHandler@57744038{STARTED}}
+2025-08-06 21:12:33,892 [Start Help Server] INFO  o.e.j.s.DefaultSessionIdManager - Session workerName=node0
+2025-08-06 21:12:33,956 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@6cb570b8{HTTP/1.1, (http/1.1)}{127.0.0.1:54380}
+2025-08-06 21:12:33,986 [Start Help Server] INFO  org.eclipse.jetty.server.Server - Started oejs.Server@48f61bd4{STARTING}[12.0.21,sto=0] @1680309ms
+2025-08-06 21:33:39,369 [Worker-157: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-api:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.2\junit-jupiter-api-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @95:7)  @ line 95, column 7
+
+2025-08-06 21:33:39,374 [Worker-157: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-params:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.8.2\junit-jupiter-params-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @89:7)  @ line 89, column 7
+
+2025-08-06 21:33:39,384 [Worker-157: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.opentest4j:opentest4j:jar:1.2.0 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</scm>\n</project>\n<?xml ... @50:7)  @ line 50, column 7
+
+2025-08-06 21:33:39,403 [Worker-157: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.objenesis:objenesis:jar:3.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\objenesis\objenesis\3.2\objenesis-3.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</build>\n\n</project>\n<?xml ... @92:7)  @ line 92, column 7
+
+2025-08-06 21:34:07,792 [Worker-155: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 21:34:07,804 [Worker-155: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 21:34:07,808 [Worker-155: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-06 21:34:27,905 [Worker-165: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-06 21:34:27,914 [Worker-165: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-06 21:34:27,919 [Worker-165: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-07 01:00:26,193 [Worker-176: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 01:00:26,215 [Worker-176: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 01:00:26,218 [Worker-176: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\admin-service\src\test\resources
+2025-08-07 01:46:24,274 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped oejs.Server@48f61bd4{STOPPING}[12.0.21,sto=0]
+2025-08-07 01:46:24,280 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@6cb570b8{HTTP/1.1, (http/1.1)}{127.0.0.1:0}
+2025-08-07 07:20:31,742 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2025-08-07 07:20:48,141 [Worker-14: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-api:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.2\junit-jupiter-api-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @95:7)  @ line 95, column 7
+
+2025-08-07 07:20:48,147 [Worker-14: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-params:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.8.2\junit-jupiter-params-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @89:7)  @ line 89, column 7
+
+2025-08-07 07:20:48,160 [Worker-14: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.opentest4j:opentest4j:jar:1.2.0 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</scm>\n</project>\n<?xml ... @50:7)  @ line 50, column 7
+
+2025-08-07 07:20:48,188 [Worker-14: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.objenesis:objenesis:jar:3.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\objenesis\objenesis\3.2\objenesis-3.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</build>\n\n</project>\n<?xml ... @92:7)  @ line 92, column 7
+
+2025-08-07 07:21:05,525 [Worker-104: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 07:21:05,567 [Worker-104: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 07:21:05,583 [Worker-104: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-07 07:29:03,152 [Worker-18: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 07:29:03,181 [Worker-18: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 07:29:03,185 [Worker-18: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\Eureka-Server-SMS\src\test\resources
+2025-08-07 07:29:05,355 [Worker-18: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 07:29:05,364 [Worker-18: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 07:29:05,370 [Worker-18: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\admin-service\src\test\resources
+2025-08-07 07:29:06,354 [Worker-18: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 07:29:06,361 [Worker-18: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 07:29:06,369 [Worker-18: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-07 07:29:07,701 [Worker-18: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 07:29:07,706 [Worker-18: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 07:29:07,721 [Worker-18: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\registration-service\src\test\resources
+2025-08-07 07:29:08,670 [Worker-18: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 07:29:08,675 [Worker-18: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 07:29:08,680 [Worker-18: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-07 07:29:10,532 [Worker-18: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-08-07 07:29:10,532 [Worker-18: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2025-08-07 07:29:10,533 [Worker-18: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2025-08-07 07:29:10,586 [Worker-18: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-08-07 07:29:10,593 [Worker-18: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-08-07 07:29:10,594 [Worker-18: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2025-08-07 07:29:10,594 [Worker-18: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\zuul-for-sms-services\src\test\resources
+2025-08-07 07:34:17,669 [Worker-56: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 07:34:17,674 [Worker-56: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 07:34:17,681 [Worker-56: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-07 07:35:16,404 [Worker-77: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 07:35:16,413 [Worker-77: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 07:35:16,418 [Worker-77: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-07 07:46:30,642 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-12.0.21; built: 2025-05-09T00:32:00.688Z; git: 1c4719601e31b05b7d68910d2edd980259f1f53c; jvm 21.0.7+6-LTS
+2025-08-07 07:46:30,713 [Start Help Server] INFO  o.e.j.server.handler.ContextHandler - Started oeje8n.ContextHandler$CoreContextHandler@534c753b{/help,/help,b=null,a=AVAILABLE,h=oeje8n.ContextHandler$CoreContextHandler$CoreToNestedHandler@12f6ab4b{STARTED}}
+2025-08-07 07:46:30,714 [Start Help Server] INFO  o.e.j.s.DefaultSessionIdManager - Session workerName=node0
+2025-08-07 07:46:30,762 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@6d62cff1{HTTP/1.1, (http/1.1)}{127.0.0.1:53175}
+2025-08-07 07:46:30,791 [Start Help Server] INFO  org.eclipse.jetty.server.Server - Started oejs.Server@44a8226c{STARTING}[12.0.21,sto=0] @1583799ms
+2025-08-07 07:48:40,279 [Worker-85: Launching registration-service - RegistrationServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 07:48:40,288 [Worker-85: Launching registration-service - RegistrationServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 07:48:40,294 [Worker-85: Launching registration-service - RegistrationServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\registration-service\src\test\resources
+2025-08-07 07:52:23,603 [Worker-104: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 07:52:23,607 [Worker-104: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 07:52:23,612 [Worker-104: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\Eureka-Server-SMS\src\test\resources
+2025-08-07 07:52:24,023 [Worker-104: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 07:52:24,031 [Worker-104: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 07:52:24,036 [Worker-104: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\admin-service\src\test\resources
+2025-08-07 07:52:24,617 [Worker-104: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 07:52:24,622 [Worker-104: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 07:52:24,628 [Worker-104: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-07 07:52:25,038 [Worker-104: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 07:52:25,042 [Worker-104: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 07:52:25,060 [Worker-104: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\registration-service\src\test\resources
+2025-08-07 07:52:25,449 [Worker-104: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 07:52:25,451 [Worker-104: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 07:52:25,453 [Worker-104: Building Workspace] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-07 07:52:26,525 [Worker-104: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-08-07 07:52:26,525 [Worker-104: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2025-08-07 07:52:26,526 [Worker-104: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2025-08-07 07:52:26,534 [Worker-104: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2025-08-07 07:52:26,540 [Worker-104: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-08-07 07:52:26,540 [Worker-104: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2025-08-07 07:52:26,541 [Worker-104: Building Workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\zuul-for-sms-services\src\test\resources
+2025-08-07 07:52:33,410 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped oejs.Server@44a8226c{STOPPING}[12.0.21,sto=0]
+2025-08-07 07:52:33,420 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@6d62cff1{HTTP/1.1, (http/1.1)}{127.0.0.1:0}
+2025-08-07 09:50:12,609 [Worker-7: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2025-08-07 09:53:05,115 [Worker-14: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-api:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.2\junit-jupiter-api-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @95:7)  @ line 95, column 7
+
+2025-08-07 09:53:05,131 [Worker-14: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-params:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.8.2\junit-jupiter-params-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @89:7)  @ line 89, column 7
+
+2025-08-07 09:53:05,151 [Worker-14: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.opentest4j:opentest4j:jar:1.2.0 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</scm>\n</project>\n<?xml ... @50:7)  @ line 50, column 7
+
+2025-08-07 09:53:05,207 [Worker-14: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.objenesis:objenesis:jar:3.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\objenesis\objenesis\3.2\objenesis-3.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</build>\n\n</project>\n<?xml ... @92:7)  @ line 92, column 7
+
+2025-08-07 10:28:48,657 [Worker-27: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 10:28:48,687 [Worker-27: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 10:28:48,695 [Worker-27: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-07 10:29:05,834 [Worker-8: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 10:29:05,846 [Worker-8: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 10:29:05,856 [Worker-8: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-07 10:34:19,893 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-12.0.21; built: 2025-05-09T00:32:00.688Z; git: 1c4719601e31b05b7d68910d2edd980259f1f53c; jvm 21.0.7+6-LTS
+2025-08-07 10:34:19,982 [Start Help Server] INFO  o.e.j.server.handler.ContextHandler - Started oeje8n.ContextHandler$CoreContextHandler@55e32953{/help,/help,b=null,a=AVAILABLE,h=oeje8n.ContextHandler$CoreContextHandler$CoreToNestedHandler@292689ef{STARTED}}
+2025-08-07 10:34:19,983 [Start Help Server] INFO  o.e.j.s.DefaultSessionIdManager - Session workerName=node0
+2025-08-07 10:34:20,060 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@560789e0{HTTP/1.1, (http/1.1)}{127.0.0.1:55970}
+2025-08-07 10:34:20,085 [Start Help Server] INFO  org.eclipse.jetty.server.Server - Started oejs.Server@6e79a5fc{STARTING}[12.0.21,sto=0] @2693779ms
+2025-08-07 10:41:42,121 [Worker-18: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 10:41:42,128 [Worker-18: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 10:41:42,134 [Worker-18: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-07 10:41:50,911 [Worker-3: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 10:41:50,918 [Worker-3: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 10:41:50,921 [Worker-3: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-07 10:53:57,233 [Worker-26: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 10:53:57,241 [Worker-26: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 10:53:57,246 [Worker-26: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-07 11:08:19,955 [Worker-23: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 11:08:19,976 [Worker-23: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 11:08:19,986 [Worker-23: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-07 11:08:29,687 [Worker-24: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 11:08:29,693 [Worker-24: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 11:08:29,695 [Worker-24: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-07 11:16:23,968 [Worker-26: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 11:16:23,977 [Worker-26: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 11:16:23,981 [Worker-26: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-07 14:24:58,774 [Worker-46: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 14:24:58,782 [Worker-46: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 14:24:58,790 [Worker-46: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-07 14:25:05,091 [Worker-22: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 14:25:05,102 [Worker-22: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 14:25:05,106 [Worker-22: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-07 14:25:52,437 [Worker-36: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 14:25:52,445 [Worker-36: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 14:25:52,450 [Worker-36: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-07 14:46:05,594 [Worker-44: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 14:46:05,604 [Worker-44: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 14:46:05,608 [Worker-44: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-07 14:46:11,542 [Worker-37: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 14:46:11,551 [Worker-37: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 14:46:11,554 [Worker-37: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-07 17:13:44,543 [Worker-43: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-07 17:13:44,566 [Worker-43: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-07 17:13:44,571 [Worker-43: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-07 17:45:52,640 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped oejs.Server@6e79a5fc{STOPPING}[12.0.21,sto=0]
+2025-08-07 17:45:52,680 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@560789e0{HTTP/1.1, (http/1.1)}{127.0.0.1:0}
+2025-08-07 21:53:57,287 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2025-08-07 21:54:54,007 [Worker-15: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-api:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.2\junit-jupiter-api-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @95:7)  @ line 95, column 7
+
+2025-08-07 21:54:54,019 [Worker-15: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-params:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.8.2\junit-jupiter-params-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @89:7)  @ line 89, column 7
+
+2025-08-07 21:54:54,038 [Worker-15: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.opentest4j:opentest4j:jar:1.2.0 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</scm>\n</project>\n<?xml ... @50:7)  @ line 50, column 7
+
+2025-08-07 21:54:54,084 [Worker-15: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.objenesis:objenesis:jar:3.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\objenesis\objenesis\3.2\objenesis-3.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</build>\n\n</project>\n<?xml ... @92:7)  @ line 92, column 7
+
+2025-08-08 10:54:53,546 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2025-08-08 10:55:26,365 [Worker-0: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-api:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.2\junit-jupiter-api-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @95:7)  @ line 95, column 7
+
+2025-08-08 10:55:26,371 [Worker-0: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-params:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.8.2\junit-jupiter-params-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @89:7)  @ line 89, column 7
+
+2025-08-08 10:55:26,380 [Worker-0: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.opentest4j:opentest4j:jar:1.2.0 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</scm>\n</project>\n<?xml ... @50:7)  @ line 50, column 7
+
+2025-08-08 10:55:26,402 [Worker-0: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.objenesis:objenesis:jar:3.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\objenesis\objenesis\3.2\objenesis-3.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</build>\n\n</project>\n<?xml ... @92:7)  @ line 92, column 7
+
+2025-08-08 10:56:24,220 [Worker-4: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-08 10:56:24,238 [Worker-4: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-08 10:56:24,242 [Worker-4: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-08 23:03:16,522 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2025-08-08 23:03:33,448 [Worker-148: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-api:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.2\junit-jupiter-api-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @95:7)  @ line 95, column 7
+
+2025-08-08 23:03:33,455 [Worker-148: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.junit.jupiter:junit-jupiter-params:jar:5.8.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.8.2\junit-jupiter-params-5.8.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</dependencies>\n</project>\n<?xml ... @89:7)  @ line 89, column 7
+
+2025-08-08 23:03:33,465 [Worker-148: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.opentest4j:opentest4j:jar:1.2.0 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</scm>\n</project>\n<?xml ... @50:7)  @ line 50, column 7
+
+2025-08-08 23:03:33,493 [Worker-148: Check for devtools] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.objenesis:objenesis:jar:3.2 is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model
+[FATAL] Non-parseable POM C:\Users\madanmohan.g\.m2\repository\org\objenesis\objenesis\3.2\objenesis-3.2.pom: processing instruction can not have PITarget with reserved xml name (position: END_TAG seen ...</build>\n\n</project>\n<?xml ... @92:7)  @ line 92, column 7
+
+2025-08-08 23:03:55,096 [Worker-140: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-08 23:03:55,138 [Worker-140: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-08 23:03:55,150 [Worker-140: Launching staff-service - StaffServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\staff-service\src\test\resources
+2025-08-09 01:00:38,868 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-12.0.21; built: 2025-05-09T00:32:00.688Z; git: 1c4719601e31b05b7d68910d2edd980259f1f53c; jvm 21.0.7+6-LTS
+2025-08-09 01:00:39,012 [Start Help Server] INFO  o.e.j.server.handler.ContextHandler - Started oeje8n.ContextHandler$CoreContextHandler@6addaced{/help,/help,b=null,a=AVAILABLE,h=oeje8n.ContextHandler$CoreContextHandler$CoreToNestedHandler@19de3a1e{STARTED}}
+2025-08-09 01:00:39,013 [Start Help Server] INFO  o.e.j.s.DefaultSessionIdManager - Session workerName=node0
+2025-08-09 01:00:39,103 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@4e3730d9{HTTP/1.1, (http/1.1)}{127.0.0.1:65360}
+2025-08-09 01:00:39,143 [Start Help Server] INFO  org.eclipse.jetty.server.Server - Started oejs.Server@7a93ee2f{STARTING}[12.0.21,sto=0] @7097316ms
+2025-08-09 01:04:51,291 [Worker-122: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2025-08-09 01:04:56,999 [Worker-122: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.iqgateway:hospital-service:0.0.1-SNAPSHOT @ C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\pom.xml.
+2025-08-09 01:05:06,983 [Worker-122: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /hospital-service/src/main/java
+2025-08-09 01:05:06,984 [Worker-122: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /hospital-service/src/main/resources
+2025-08-09 01:05:06,984 [Worker-122: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /hospital-service/src/main/resources
+2025-08-09 01:05:06,985 [Worker-122: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /hospital-service/src/test/java
+2025-08-09 01:05:06,986 [Worker-122: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /hospital-service/src/test/resources
+2025-08-09 01:05:07,855 [Worker-122: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed for 1 poms: local refresh takes 0.00 sec, refresh facades takes 15.00 sec, update config takes 0.00 sec 
+2025-08-09 01:05:20,852 [Worker-166: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-09 01:05:20,879 [Worker-166: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-09 01:05:20,887 [Worker-166: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-09 01:16:21,636 [Worker-148: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-08-09 01:16:21,645 [Worker-148: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-09 01:16:21,648 [Worker-148: Launching hospital-service - HospitalServiceApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\madanmohan.g\OneDrive - iqgateway pvt ltd\Desktop\Capstone_Docs\StaffManagementSystem_Backend\hospital-service\src\test\resources
+2025-08-09 01:45:07,346 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped oejs.Server@7a93ee2f{STOPPING}[12.0.21,sto=0]
+2025-08-09 01:45:07,357 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@4e3730d9{HTTP/1.1, (http/1.1)}{127.0.0.1:0}

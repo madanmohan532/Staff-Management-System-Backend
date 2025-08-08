@@ -1,5 +1,7 @@
 package training.iqgateway.hospital.entity;
 
+import java.time.LocalDateTime;
+
 import lombok.Data;
 
 @Data

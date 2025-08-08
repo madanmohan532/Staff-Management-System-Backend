@@ -10,5 +10,11 @@ public class HospitalNurseUtils {
 	    return "HOS_NURSE"+String.format("%07d", (timestamp % 9_000_000) + random);
 		
 	}
+	
+	public static String generatePatientId() {
+		long timestamp = System.currentTimeMillis();
+	    int random = new SecureRandom().nextInt(900); // 0-899
+	    return "PAT"+String.format("%07d", (timestamp % 9_000_000) + random);
+	}
 
 }

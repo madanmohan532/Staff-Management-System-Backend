@@ -1,6 +1,6 @@
 package training.iqgateway.admin.entity;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,9 +76,9 @@ public class Nurse {
 	@Data
 	public static class LeaveDetail {
 		@Field(name = "from_date")
-		private Instant fromDate;
+		private String fromDate;
 		@Field(name = "to_date")
-		private Instant toDate;
+		private String toDate;
 	}
 
 	@Data
@@ -106,9 +106,9 @@ public class Nurse {
 		@Field(name = "date")
 		private String date;
 		@Field(name = "from")
-		private Instant from;
+		private String from;
 		@Field(name = "to")
-		private Instant to;
+		private String to;
 		@Field(name = "hospital_id")
 		private String hospitalId;
 	}
@@ -118,9 +118,9 @@ public class Nurse {
 		@Field(name = "date")
 		private String date;
 		@Field(name = "from")
-		private Instant from;
+		private String from;
 		@Field(name = "to")
-		private Instant to;
+		private String to;
 		@Field(name = "hospital_id")
 		private String hospitalId;
 		@Field(name = "status")

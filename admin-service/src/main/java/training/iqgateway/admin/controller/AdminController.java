@@ -3,6 +3,7 @@ package training.iqgateway.admin.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -49,6 +50,7 @@ public class AdminController {
 		
 		// Logic to update admin details
 		Admin updatedAdmin = adminService.updateAdmin(admin);
+		
 		if(updatedAdmin != null) {
 			return new ResponseEntity<>(updatedAdmin, HttpStatus.OK);
 		}
@@ -105,12 +107,23 @@ public class AdminController {
 			return new ResponseEntity<>("Invalid email provided.", HttpStatus.BAD_REQUEST);
 		}
 		
+		System.out.println(email);
+		
 		Admin admin = adminService.findByEmail(email);
+		
+		System.out.println(admin);
 		if(admin != null) {
 			return new ResponseEntity<>(admin, HttpStatus.OK);
 		}
 		
 		return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
 	}
+	
+//	@PutMapping
+//	public ResponseEntity<?> updateAdminDetails(@RequestBody Admin admin){
+//		Admin updateAdmin = adminService.updateAdmin(admin);
+//		
+//		return new ResponseEntity<>(updateAdmin,HttpStatus.OK);
+//	}
 
 }

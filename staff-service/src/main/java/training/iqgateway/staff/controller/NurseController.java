@@ -1,32 +1,31 @@
 package training.iqgateway.staff.controller;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import training.iqgateway.staff.entity.ClockInRequest;
+import training.iqgateway.staff.entity.ClockOutRequest;
 import training.iqgateway.staff.entity.DeleteNurseRequest;
 import training.iqgateway.staff.entity.HospitalNurse;
 import training.iqgateway.staff.entity.LeaveDetail;
 import training.iqgateway.staff.entity.Nurse;
 import training.iqgateway.staff.entity.Patient;
+import training.iqgateway.staff.entity.RemoveHospitalNurse;
 import training.iqgateway.staff.entity.RequestResponse;
+import training.iqgateway.staff.repository.NurseRepository;
 import training.iqgateway.staff.service.NurseService;
 import training.iqgateway.staff.service.PatientService;
 
@@ -34,6 +33,8 @@ import training.iqgateway.staff.service.PatientService;
 @RequestMapping("/api/nurse")
 @CrossOrigin(origins = "*")
 public class NurseController {
+
+    private final NurseRepository nurseRepository;
 
 	@Autowired
 	NurseService nurseService;
@@ -43,6 +44,11 @@ public class NurseController {
 
 	@Autowired
 	private PatientService patientService;
+
+
+    NurseController(NurseRepository nurseRepository) {
+        this.nurseRepository = nurseRepository;
+    }
 
     
 
@@ -183,6 +189,28 @@ public class NurseController {
 	}
 	
 	
+	@PostMapping("/clockIn")
+	public ResponseEntity<?> clockIn(@RequestBody ClockInRequest clockInRequest){
+		
+		Nurse clockIn = nurseService.clockIn(clockInRequest);
+		if(clockIn !=null) {
+			return new ResponseEntity<>(clockIn,HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Nurse not Found", HttpStatus.NOT_FOUND);
+	}
+	
+	
+	
+	
+	@PostMapping("/clockOut")
+	public ResponseEntity<?> clockOut(@RequestBody ClockOutRequest clockOutRequest){
+		Nurse clockOut = nurseService.clockOut(clockOutRequest);
+		if(clockOut !=null) {
+			return new ResponseEntity<>(clockOut,HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Nurse not Found", HttpStatus.NOT_FOUND);
+	}
+	
 	
 	
 	
@@ -254,20 +282,23 @@ public class NurseController {
 		
 		System.out.println("i am here");
 		
+		System.out.println(requestResponse);
+		
 		Nurse updatedNurse = nurseService.respondToRequest(requestResponse);
 		
+		System.out.println(updatedNurse);
+		
 		if(requestResponse.getStatus().equals("accepted")) {
-			String workingHourUpdateUrl = "http://localhost:9999/hospital-service/api/hospital/nurse/addWorkingHour/"+requestResponse.getNurseId();
+			String workingHourUpdateUrl = "http://localhost:9999/hospital-service/api/hospital/nurse/addWorkingHour";
 			
-			Nurse.WorkingHour wh = new Nurse.WorkingHour(requestResponse.getDate(),Instant.parse(requestResponse.getFrom()),
-					Instant.parse(requestResponse.getTo()),requestResponse.getHospitalId());
-			System.out.println("i am here");
+			Nurse.WorkingHour wh = new Nurse.WorkingHour(requestResponse.getDate(), requestResponse.getFrom(), requestResponse.getTo(), requestResponse.getHospitalId());
+			System.out.println("i am here before calling rest template");
 			
-			restTemplate.postForEntity(workingHourUpdateUrl,wh, HospitalNurse.class);
+			restTemplate.postForEntity(workingHourUpdateUrl,requestResponse, HospitalNurse.class);
 			return new ResponseEntity<>(updatedNurse,HttpStatus.OK);
 		}
 		
-		return new ResponseEntity<>("",HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>("nothing ",HttpStatus.NOT_FOUND);
 		
 	}
 	
@@ -277,20 +308,30 @@ public class NurseController {
 		
 		DeleteNurseRequest deleteNurseRequest = new DeleteNurseRequest(requestResponse.getNurseId(),requestResponse.getFrom(),requestResponse.getTo(),requestResponse.getHospitalId());
 		
-		 HttpHeaders headers = new HttpHeaders();
-	        headers.setContentType(MediaType.APPLICATION_JSON);
-		  HttpEntity<DeleteNurseRequest> requestEntity = new HttpEntity<>(deleteNurseRequest, headers);
+		  
 		if(requestResponse.getStatus().equals("rejected")) {
-			String deleteRequestNurse = "http://localhost:9999/hospital-service/api/hospital/nurse/deleteHospitalNurseRequest";
-			restTemplate.exchange(deleteRequestNurse, HttpMethod.DELETE, requestEntity,
-					
-					Void.class);
-			return new ResponseEntity<>("Nurse request delted successfully", HttpStatus.OK);
+			String deleteRequestNurse = "http://localhost:9999/hospital-service/api/hospital/nurse/updateNurseResponseHospitalNurseRequest";
+			restTemplate.postForEntity(deleteRequestNurse, requestResponse, HospitalNurse.class);
+			return new ResponseEntity<>(deleteNurseRequest, HttpStatus.OK);
 		}
 		
 		return new ResponseEntity<>("Cannot delete nurse requst",HttpStatus.NOT_ACCEPTABLE);
 		
 	}
+	
+	
+	
+	@PutMapping("/removeNurse")
+	public Nurse removeNurse(@RequestBody RemoveHospitalNurse removeHospitalNurse) {
+		// Logic to remove a nurse
+
+		// Placeholder for actual nurse removal logic
+		// This would typically involve removing the nurse from a service or repository
+		
+		return nurseService.removeNurse(removeHospitalNurse);
+		
+	}
+	
 	
 	
 }

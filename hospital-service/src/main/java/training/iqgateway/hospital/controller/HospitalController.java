@@ -1,6 +1,7 @@
 package training.iqgateway.hospital.controller;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,9 +23,12 @@ import training.iqgateway.hospital.entity.CancelRequestDetails;
 import training.iqgateway.hospital.entity.Hospital;
 import training.iqgateway.hospital.entity.HospitalNurse;
 import training.iqgateway.hospital.entity.NurseRequest;
+import training.iqgateway.hospital.entity.Patient;
 import training.iqgateway.hospital.entity.RequestDetails;
 import training.iqgateway.hospital.service.HospitalNurseService;
 import training.iqgateway.hospital.service.HospitalService;
+import training.iqgateway.hospital.service.PatientService;
+import training.iqgateway.hospital.service.PatientServiceImpl;
 import training.iqgateway.hospital.utils.HospitalNurseUtils;
 
 @RestController
@@ -32,14 +36,23 @@ import training.iqgateway.hospital.utils.HospitalNurseUtils;
 @RequestMapping("/api/hospital")
 public class HospitalController {
 
+    private final PatientServiceImpl patientServiceImpl;
+
 	@Autowired
 	HospitalService hospitalService;
 
 	@Autowired
 	HospitalNurseService hospitalNurseService;
+	
+	@Autowired
+	PatientService patientService;
 
 	@Autowired
 	RestTemplate restTemplate;
+
+    HospitalController(PatientServiceImpl patientServiceImpl) {
+        this.patientServiceImpl = patientServiceImpl;
+    }
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getHospitalById(@PathVariable String id) {
@@ -64,14 +77,23 @@ public class HospitalController {
 		return new ResponseEntity<>("No Hospital Found with Email"+email,HttpStatus.NOT_FOUND);
 	}
 
-	@PutMapping()
-	public void updateHospitalDetails(@RequestBody Hospital hospital) {
+	@PutMapping("/updateHospitalDetails")
+	public ResponseEntity<?> updateHospitalDetails(@RequestBody Hospital hospital) {
 		// Logic to update hospital details
 		// Placeholder for actual hospital update logic
-
-		String updateHospitalURI = "http://localhost:9192/api/admin/hospital/updateHospital";
-
-		restTemplate.put(updateHospitalURI, hospital);
+//
+//		String updateHospitalURI = "http://localhost:9192/api/admin/hospital/updateHospital";
+//
+//		restTemplate.put(updateHospitalURI, hospital);
+		
+		Hospital updatedHospital = hospitalService.updateHospital(hospital);
+		
+		if(updatedHospital != null) {
+			return new ResponseEntity<>(updatedHospital, HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>("Could not update hospital details",HttpStatus.NOT_FOUND);
+		
 
 	}
 
@@ -133,26 +155,18 @@ System.out.println("Inside requestSingleNurse method");
 			if (requestSingleNurse != null) {
 				
 				System.out.println("Iam inside first if condition");
-
+				
 				HospitalNurse hospitalStaff = new HospitalNurse();
-
-				// set the hospital staff details and save it
-
 				hospitalStaff.setStaffId(singleNurseRequestDetails.getStaffId());
 				hospitalStaff.setHospitalId(singleNurseRequestDetails.getHospitalId());
-hospitalStaff.setHospitalStaffId(HospitalNurseUtils.generateHospitalStaffId());
-				Instant from = Instant.parse(singleNurseRequestDetails.getFrom());
-				Instant to = Instant.parse(singleNurseRequestDetails.getTo());
-//			hospitalStaff.setHospitalStaffId(HospitalNurseUtils.generateHospitalStaffId());
-				hospitalStaff.setRequestedFrom(from);
-				hospitalStaff.setRequestedUpto(to);
-				hospitalStaff.setRequestedOn(Instant.now());
+				hospitalStaff.setHospitalStaffId(HospitalNurseUtils.generateHospitalStaffId());
+				hospitalStaff.setRequestedFrom(singleNurseRequestDetails.getFrom());
+				hospitalStaff.setRequestedUpto(singleNurseRequestDetails.getTo());
+				hospitalStaff.setRequestedOn(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+				hospitalStaff.setAvailableFrom(singleNurseRequestDetails.getFrom());
+				hospitalStaff.setAvailableUpto(singleNurseRequestDetails.getTo());
 				hospitalStaff.setStaffRequestStatus("requested");
-				hospitalStaff.setRequestedFrom(from);
-				hospitalStaff.setRequestedUpto(to);
 				hospitalStaff.setWorkingStatus(false);
-				hospitalStaff.setAvailableFrom(from);
-				hospitalStaff.setAvailableUpto(to);
 				
 				System.out.println("I am here before calling createHospitalNurse");
 
@@ -182,7 +196,7 @@ hospitalStaff.setHospitalStaffId(HospitalNurseUtils.generateHospitalStaffId());
 	public ResponseEntity<?> cancelSingleNurseRequest(@RequestBody CancelRequestDetails cancelSingleRequestDetails) {
 		// Logic to cancel a single nurse request
 		
-		System.out.println(hospitalNurseService.deleteHospitalNurseByStaffId(cancelSingleRequestDetails.getStaffId()));
+		System.out.println(hospitalNurseService.deleteHospitalNurseRequest(cancelSingleRequestDetails.getStaffId(), cancelSingleRequestDetails.getFrom(), cancelSingleRequestDetails.getTo(), cancelSingleRequestDetails.getHospitalId()));
 		
 		if(hospitalNurseService.deleteHospitalNurseRequest(cancelSingleRequestDetails.getStaffId(), cancelSingleRequestDetails.getFrom(),cancelSingleRequestDetails.getTo(), cancelSingleRequestDetails.getHospitalId())!=null) {
 			try {
@@ -197,6 +211,20 @@ hospitalStaff.setHospitalStaffId(HospitalNurseUtils.generateHospitalStaffId());
 		return new ResponseEntity<>("Cannot delete Nurse Request in hospital nurse Details", HttpStatus.NOT_FOUND);
 	}
 	
+	
+	
+	@PostMapping("addPatient")
+	public ResponseEntity<?> addPatientDetails(@RequestBody Patient patient)
+	{
+		return new ResponseEntity<>(patientService.addPatient(patient),HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("getAllPatientsByHospitalId/{hospitalId}")
+	public ResponseEntity<?> getAllPatients(@PathVariable String hospitalId){
+		
+		return new ResponseEntity<>(patientService.getPatientsByHospitalId(hospitalId), HttpStatus.OK);
+	}
 	
 	
 

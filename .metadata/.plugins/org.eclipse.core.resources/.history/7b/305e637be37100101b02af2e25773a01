@@ -1,0 +1,154 @@
+package training.iqgateway.hospital.controller;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import training.iqgateway.hospital.dto.NurseResponseDTO.WorkingHour;
+import training.iqgateway.hospital.entity.DeleteNurseRequest;
+import training.iqgateway.hospital.entity.HospitalNurse;
+import training.iqgateway.hospital.service.HospitalNurseService;
+
+@RestController
+@CrossOrigin(origins = "*")
+@RequestMapping("/api/hospital/nurse")
+public class HospitalStaffController {
+	
+	@Autowired
+	HospitalNurseService hospitalNurseService;
+	
+	@GetMapping("/getHospitalNurseDetails")
+	public ResponseEntity<?> getHospitalNurseDetails() {
+		// Logic to fetch staff details
+		
+		// Placeholder for actual staff retrieval logic
+		
+		List<HospitalNurse> allHospitalNurses = hospitalNurseService.getAllHospitalNurses();
+		
+		
+		if(allHospitalNurses!=null) {
+			return new ResponseEntity<>(allHospitalNurses, HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>("Hospital Nurse details retrieved successfully", HttpStatus.OK);
+	}
+	
+	
+	@PostMapping("/createHospitalNurse")
+	public ResponseEntity<?> createHospitalNurse(@RequestBody HospitalNurse hospitalNurse) {
+		// Logic to create a new hospital nurse
+		
+		hospitalNurseService.createHospitalNurse(hospitalNurse);
+		
+		return new ResponseEntity<>("Hospital Nurse created successfully", HttpStatus.CREATED);
+	}
+	
+	@PutMapping("/updateHospitalNurse")
+	public ResponseEntity<?> updateHospitalNurse(@RequestParam String hospitalStaffId){
+		HospitalNurse updateHospitalNurse = hospitalNurseService.updateHospitalNurse(hospitalStaffId);
+		return new ResponseEntity<>(updateHospitalNurse,HttpStatus.OK);
+	}
+	
+	
+	
+	@PutMapping("changeWorkingStatus")
+	public ResponseEntity<?> changeWorkingStatus(@RequestParam String hospitalStaffId, @RequestParam boolean workingStatus){
+		HospitalNurse changeWorkingStatus = hospitalNurseService.changeWorkingStatus(hospitalStaffId,workingStatus);
+		if(changeWorkingStatus==null) {
+			return new ResponseEntity<>("Not found ",HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>()
+	}
+	
+	
+	
+	
+	@PutMapping("/assignNurseToFloor")
+	public ResponseEntity<?> assignNurseToFloor(@RequestParam String floor, @RequestParam String hospitalStaffId){
+		
+		System.out.println(" i ma here");
+		
+		boolean assignNurseToFloor = hospitalNurseService.assignNurseToFloor(floor,hospitalStaffId);
+		if(assignNurseToFloor)
+			return new ResponseEntity<>("Floor Updated Successfully",HttpStatus.OK);
+		
+		return new ResponseEntity<>("Floor Can not be Updated",HttpStatus.NOT_MODIFIED);
+		
+	}
+	
+	
+	
+	
+	@GetMapping("/validateWorkingStatus/{nurseId}")
+	public Map<Boolean,String> validateWorkingStatus(@PathVariable String nurseId) {
+		// Logic to validate working status of a nurse
+		
+		Map<Boolean, String> validateWorkingStatus = hospitalNurseService.validateWorkingStatus(nurseId);
+		
+		System.out.println(validateWorkingStatus);
+		
+		
+		
+		return validateWorkingStatus;
+	}
+	
+	
+	@GetMapping("/getHospitalNurseByStaffId/{nurseId}")
+	public ResponseEntity<?> getHospitalNurseByStaffId(@PathVariable String nurseId) {
+		// Logic to fetch hospital nurse by staff ID
+		
+		HospitalNurse hospitalNurse = hospitalNurseService.getHospitalNurseByStaffId(nurseId);
+		System.out.println(hospitalNurse);
+		
+		if(hospitalNurse != null) {
+			return new ResponseEntity<>(hospitalNurse, HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>("Hospital Nurse not found with staff ID: " + nurseId, HttpStatus.NOT_FOUND);
+	}
+	
+	
+	@GetMapping("/hospitalNurses")
+	public ResponseEntity<?> getHospitalNursesByHospitalId(@RequestParam String hospitalId){
+		System.out.println("i am here");
+		List<HospitalNurse> hospitalNurseByHospitalId = hospitalNurseService.getHospitalNurseByHospitalId(hospitalId);
+		if(hospitalNurseByHospitalId!=null) {
+			return new ResponseEntity<>(hospitalNurseByHospitalId,HttpStatus.OK);
+		}
+		return new ResponseEntity<>("No Nurse found in hospital",HttpStatus.NOT_FOUND);
+		
+	}
+	
+	@PostMapping("/addWorkingHour/{nurseId}")
+	public HospitalNurse addWorkingHours(@RequestBody WorkingHour workingHour, @PathVariable String nurseId){
+		
+		hospitalNurseService.addWorkingHour(workingHour,nurseId);
+		
+		return hospitalNurseService.getHospitalNurseByStaffId(nurseId);
+		
+	}
+
+	
+	@DeleteMapping("/deleteHospitalNurseRequest")
+	public void deleteNurseRequest(@RequestBody DeleteNurseRequest deleteNurseRequest) {
+		
+		HospitalNurse deleteHospitalNurseRequest = hospitalNurseService.deleteHospitalNurseRequest(deleteNurseRequest.getNurseId(), deleteNurseRequest.getFrom(), deleteNurseRequest.getTo(), deleteNurseRequest.getHospitalId());
+		if(deleteHospitalNurseRequest !=null) {
+			
+		}
+	}
+	
+}

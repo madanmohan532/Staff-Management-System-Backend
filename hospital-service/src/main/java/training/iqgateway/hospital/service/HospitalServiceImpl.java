@@ -1,6 +1,6 @@
 package training.iqgateway.hospital.service;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,9 +129,9 @@ public class HospitalServiceImpl implements HospitalService {
 	    List<WorkSchedule> workSchedule2 = nurseDetails.getWorkSchedule();
 	    
 	    workSchedule2.add(new WorkSchedule(
-	            singleNurseRequestDetails.getDate(),  // "yyyy-MM-dd"
-	            Instant.parse(singleNurseRequestDetails.getFrom()),  // "2023-06-20T08:00:00Z"
-	            		Instant.parse(singleNurseRequestDetails.getTo()),    // "2023-06-20T16:00:00Z"
+	            singleNurseRequestDetails.getDate(),
+	            singleNurseRequestDetails.getFrom(),
+	            singleNurseRequestDetails.getTo(),
 	            singleNurseRequestDetails.getHospitalId(),
 	            "requested"
 	    ));
@@ -165,9 +165,9 @@ public class HospitalServiceImpl implements HospitalService {
 		List<WorkSchedule> updateNurseWorkSchedule = nurseDetails.getWorkSchedule().stream()
 		.map(workSchedule -> {
 			if (workSchedule.getDate().equals(cancelSingleRequestDetails.getDate()) &&
-					workSchedule.getFrom().equals(Instant.parse(cancelSingleRequestDetails.getFrom())) &&
-					workSchedule.getTo().equals(Instant.parse(cancelSingleRequestDetails.getTo())) &&
-					workSchedule.getHospitalId().equals(cancelSingleRequestDetails.getHospitalId())) {
+        workSchedule.getFrom().equals(cancelSingleRequestDetails.getFrom()) &&
+        workSchedule.getTo().equals(cancelSingleRequestDetails.getTo()) &&
+        workSchedule.getHospitalId().equals(cancelSingleRequestDetails.getHospitalId())) {
 				workSchedule.setStatus(cancelSingleRequestDetails.getStatus());
 			}
 			return workSchedule;
@@ -182,6 +182,12 @@ public class HospitalServiceImpl implements HospitalService {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("contactDetails.email").is(email));
 		return mongoTemplate.findOne(query, Hospital.class);
+	}
+
+	@Override
+	public Hospital updateHospital(Hospital hospital) {
+		// TODO Auto-generated method stub
+		return hospitalRepository.save(hospital);
 	}
 
 }

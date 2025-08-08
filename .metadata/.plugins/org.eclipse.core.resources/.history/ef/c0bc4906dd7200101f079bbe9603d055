@@ -1,0 +1,35 @@
+package training.iqgateway.hospital.service;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
+
+import training.iqgateway.hospital.dto.NurseResponseDTO.WorkingHour;
+import training.iqgateway.hospital.entity.HospitalNurse;
+import training.iqgateway.hospital.entity.RequestResponse;
+
+public interface HospitalNurseService {
+	
+	public HospitalNurse createHospitalNurse(HospitalNurse hospitalNurse);
+
+	public List<HospitalNurse> getAllHospitalNurses();
+
+	public HospitalNurse deleteHospitalNurseByStaffId(String staffId);
+
+	public boolean assignNurseToFloor(String floor,String hospitalStaffId);
+
+	public Map<Boolean,String> validateWorkingStatus(String staffId);
+
+	public HospitalNurse getHospitalNurseByStaffId(String staffId);
+
+	public List<HospitalNurse> getHospitalNurseByHospitalId(String hospitalId);
+
+	public HospitalNurse updateHospitalNurse(String id);
+
+	public HospitalNurse addWorkingHour(RequestResponse requestResponse);
+
+	HospitalNurse deleteHospitalNurseRequest(String nurseId, LocalDateTime from, LocalDateTime to, String hospitalId);
+
+	public HospitalNurse changeWorkingStatus(String hospitalStaffId, boolean workingStatus);
+
+}

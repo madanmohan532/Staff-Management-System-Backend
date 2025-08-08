@@ -1,6 +1,5 @@
 package training.iqgateway.hospital.entity;
 
-import java.time.Instant;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -32,10 +31,10 @@ public class HospitalNurse {
     private List<String> patientsAllocatedTo;
 
     @Field("available_from")
-    private Instant availableFrom;
+    private String availableFrom;
 
     @Field("available_upto")
-    private Instant availableUpto;
+    private String availableUpto;
 
     @Field("replaced_by")
     private String replacedBy;
@@ -44,16 +43,16 @@ public class HospitalNurse {
     private String floorAssigned;
 
     @Field("requested_on")
-    private Instant requestedOn;
+    private String requestedOn;
 
     @Field("accepted_on")
-    private Instant acceptedOn;
+    private String acceptedOn;
 
     @Field("requested_from")
-    private Instant requestedFrom;
+    private String requestedFrom;
 
     @Field("requested_upto")
-    private Instant requestedUpto;
+    private String requestedUpto;
 
     @Field("working_hours_with_hospital")
     private List<WorkingHours> workingHoursWithHospital;
@@ -64,9 +63,9 @@ public class HospitalNurse {
     @Data
     public static class WorkingHours {
         @Field("from")
-        private Instant from;
+        private String from;
         
         @Field("to")
-        private Instant to;
+        private String to;
     }
 }

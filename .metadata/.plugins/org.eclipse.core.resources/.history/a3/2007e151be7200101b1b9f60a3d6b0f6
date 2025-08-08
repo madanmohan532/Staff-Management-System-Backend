@@ -1,0 +1,17 @@
+package training.iqgateway.hospital.entity;
+
+import lombok.Data;
+import java.time.LocalDateTime;
+
+@Data
+public class RequestResponse {
+	
+	private String nurseId;
+	private String status;
+	private LocalDateTime from;
+	private LocalDateTime to;
+	private String date;
+	private String hospitalId;
+
+
+}
