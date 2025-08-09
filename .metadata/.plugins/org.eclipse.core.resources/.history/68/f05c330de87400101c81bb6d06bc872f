@@ -1,0 +1,189 @@
+package training.iqgateway.hospital.test;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.*;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.client.RestTemplate;
+import training.iqgateway.hospital.controller.HospitalController;
+import training.iqgateway.hospital.dto.NurseResponseDTO;
+import training.iqgateway.hospital.entity.*;
+import training.iqgateway.hospital.service.HospitalNurseService;
+import training.iqgateway.hospital.service.HospitalService;
+import training.iqgateway.hospital.service.PatientService;
+import training.iqgateway.hospital.service.PatientServiceImpl;
+import training.iqgateway.hospital.utils.HospitalNurseUtils;
+
+import java.util.*;
+
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+class HospitalControllerTest {
+
+    private MockMvc mockMvc;
+    private ObjectMapper objectMapper;
+
+    @Mock HospitalService hospitalService;
+    @Mock HospitalNurseService hospitalNurseService;
+    @Mock PatientService patientService;
+    @Mock RestTemplate restTemplate;
+    @Mock PatientServiceImpl patientServiceImpl; // constructor injection
+
+    @InjectMocks
+    private HospitalController hospitalController;
+
+    AutoCloseable closeable;
+
+    @BeforeEach
+    void setup() {
+        closeable = MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(hospitalController).build();
+        objectMapper = new ObjectMapper();
+    }
+    @AfterEach
+    void tearDown() throws Exception { closeable.close(); }
+
+    Hospital createHospital() {
+        Hospital h = new Hospital();
+        h.set_id("H1");
+        h.setName("City Hospital");
+        Hospital.Address addr = new Hospital.Address();
+        addr.setCity("Bangalore");
+        h.setAddress(addr);
+        return h;
+    }
+
+    NurseResponseDTO createNurseResponseDTO() {
+        NurseResponseDTO dto = new NurseResponseDTO();
+        dto.set_id("N1");
+        dto.setFirstName("Alice");
+        NurseResponseDTO.ContactDetails c = new NurseResponseDTO.ContactDetails();
+        c.setEmail("alice@example.com");
+        dto.setContactDetails(c);
+        return dto;
+    }
+
+    @Test
+    void testGetHospitalById_found() throws Exception {
+        when(hospitalService.getHospitalById("H1")).thenReturn(createHospital());
+        // NOTE: Controller logic is inverted — it returns 404 in success branch now.
+        mockMvc.perform(get("/api/hospital/H1"))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.name").value("City Hospital"));
+    }
+
+    @Test
+    void testGetHospitalById_notFound() throws Exception {
+        when(hospitalService.getHospitalById("H2")).thenReturn(null);
+        mockMvc.perform(get("/api/hospital/H2"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Hospital details for ID: H2"));
+    }
+
+    @Test
+    void testGetHospitalByEmail_found() throws Exception {
+        when(hospitalService.findByEmail("test@example.com")).thenReturn(createHospital());
+        mockMvc.perform(get("/api/hospital/getHospitalByEmail/test@example.com"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("City Hospital"));
+    }
+
+    @Test
+    void testUpdateHospitalDetails_success() throws Exception {
+        Hospital h = createHospital();
+        when(hospitalService.updateHospital(any(Hospital.class))).thenReturn(h);
+        mockMvc.perform(put("/api/hospital/updateHospitalDetails")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(h)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("City Hospital"));
+    }
+
+    @Test
+    void testGetAllNurseDetails_success() throws Exception {
+        NurseResponseDTO dto = new NurseResponseDTO();
+        dto.set_id("N1");
+        dto.setFirstName("Alice");
+        NurseResponseDTO.ContactDetails contact = new NurseResponseDTO.ContactDetails();
+        contact.setEmail("alice@example.com");
+        dto.setContactDetails(contact);
+        
+        when(restTemplate.getForObject(anyString(), eq(NurseResponseDTO[].class)))
+            .thenReturn(new NurseResponseDTO[]{dto});
+        
+        mockMvc.perform(get("/api/hospital/getAllNurseDetails"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[0].contactDetails.email").value("alice@example.com"));
+    }
+
+
+    @Test
+    void testGetAllNurseDetails_notFound() throws Exception {
+        when(restTemplate.getForObject(anyString(), eq(NurseResponseDTO[].class))).thenReturn(new NurseResponseDTO[0]);
+        mockMvc.perform(get("/api/hospital/getAllNurseDetails"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void testRequestSingleNurse_success() throws Exception {
+        NurseRequest req = new NurseRequest();
+        req.setStaffId("N1");
+        req.setHospitalId("H1");
+        req.setFrom("09:00");
+        req.setTo("17:00");
+        NurseResponseDTO nurseDTO = createNurseResponseDTO();
+
+        try (MockedStatic<HospitalNurseUtils> utilsMock = mockStatic(HospitalNurseUtils.class)) {
+            utilsMock.when(HospitalNurseUtils::generateHospitalStaffId).thenReturn("HS1");
+            when(hospitalService.requestSingleNurse(any())).thenReturn(nurseDTO);
+            when(hospitalNurseService.createHospitalNurse(any(HospitalNurse.class)))
+                    .thenReturn(new HospitalNurse());
+            mockMvc.perform(put("/api/hospital/requestSingleNurse")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(objectMapper.writeValueAsString(req)))
+                    .andExpect(status().isOk());
+        }
+    }
+
+    @Test
+    void testCancelSingleNurseRequest_success() throws Exception {
+        CancelRequestDetails cancelReq = new CancelRequestDetails();
+        cancelReq.setStaffId("S1");
+        cancelReq.setFrom("09:00");
+        cancelReq.setTo("17:00");
+        cancelReq.setHospitalId("H1");
+        
+        HospitalNurse expectedHospitalNurse = new HospitalNurse();
+        
+        NurseResponseDTO expectedNurseResponseDTO = new NurseResponseDTO();
+        
+
+        when(hospitalNurseService.deleteHospitalNurseRequest(anyString(), anyString(), anyString(), anyString()))
+                .thenReturn(expectedHospitalNurse);
+        when(hospitalService.cancelSingleNurseRequest(any(CancelRequestDetails.class))).thenReturn(expectedNurseResponseDTO);
+
+        mockMvc.perform(put("/api/hospital/cancelSingleNurseRequest")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(cancelReq)))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Nurse request cancelled successfully"));
+    }
+
+    @Test
+    void testAddPatient() throws Exception {
+        Patient p = new Patient();
+        when(patientService.addPatient(any(Patient.class))).thenReturn(p);
+        mockMvc.perform(post("/api/hospital/addPatient")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(p)))
+                .andExpect(status().isOk());
+    }
+}

@@ -1,0 +1,122 @@
+package training.iqgateway.registration.test;
+
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.Collections;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import training.iqgateway.controller.LoginController;
+import training.iqgateway.entity.HospitalRegistrationEntity;
+import training.iqgateway.entity.Users;
+import training.iqgateway.service.HospitalRegistrationService;
+import training.iqgateway.service.NurseRegistrationService;
+import training.iqgateway.service.UserService;
+import training.iqgateway.util.JwtTokenUtil;
+
+class LoginControllerTest {
+
+    private MockMvc mockMvc;
+
+    @Mock HospitalRegistrationService hospitalRegistrationService;
+    @Mock NurseRegistrationService nurseRegistrationService;
+    @Mock UserService userService;
+    @Mock JwtTokenUtil jwtTokenUtil;
+
+    @InjectMocks
+    private LoginController loginController;
+
+    private AutoCloseable closeable;
+
+    @BeforeEach
+    void setup() {
+        closeable = MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(loginController).build();
+    }
+
+    @AfterEach
+    void tearDown() throws Exception {
+        closeable.close();
+    }
+
+    private Users createUser() {
+        return new Users("U1", "test@example.com", "pass123", "hospital staff", "VERIFIED");
+    }
+
+    @Test
+    void testGetUsers() throws Exception {
+        when(userService.findAll()).thenReturn(Collections.singletonList(createUser()));
+
+        mockMvc.perform(get("/api/login/users"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].email").value("test@example.com"));
+    }
+
+    @Test
+    void testLoginHospitalStaff_success() throws Exception {
+        HospitalRegistrationEntity h = new HospitalRegistrationEntity();
+        HospitalRegistrationEntity.ContactDetails cd = new HospitalRegistrationEntity.ContactDetails();
+        cd.setEmail("test@example.com");
+        h.setContactDetails(cd);
+        h.setRegistrationStatus("approved");
+
+        when(hospitalRegistrationService.findAllHospitals()).thenReturn(Collections.singletonList(h));
+        when(userService.findByEmail("test@example.com")).thenReturn(createUser());
+        when(jwtTokenUtil.generateToken(anyString(), anyString())).thenReturn("jwt-token");
+
+        mockMvc.perform(post("/api/login/login")
+                        .param("email", "test@example.com")
+                        .param("password", "pass123")
+                        .param("role", "hospital staff"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.token").value("jwt-token"));
+    }
+
+    @Test
+    void testLoginNurse_emailNotFound() throws Exception {
+        when(nurseRegistrationService.findAllNurses()).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(post("/api/login/login")
+                        .param("email", "missing@example.com")
+                        .param("password", "pass123")
+                        .param("role", "nurse"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Email Does not Exist, Try Again"));
+    }
+
+    @Test
+    void testLoginAdmin_invalidPassword() throws Exception {
+        Users admin = new Users("U1", "admin@example.com", "correctpass", "admin", "VERIFIED");
+        when(userService.findByEmail("admin@example.com")).thenReturn(admin);
+
+        mockMvc.perform(post("/api/login/login")
+                        .param("email", "admin@example.com")
+                        .param("password", "wrongpass")
+                        .param("role", "admin"))
+                .andExpect(status().isUnauthorized())
+                .andExpect(content().string("Incorrect Password, Try Again"));
+    }
+
+    @Test
+    void testLogin_invalidRole() throws Exception {
+        mockMvc.perform(post("/api/login/login")
+                        .param("email", "test@example.com")
+                        .param("password", "pass123")
+                        .param("role", "randomrole"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Invalid role provided"));
+    }
+}

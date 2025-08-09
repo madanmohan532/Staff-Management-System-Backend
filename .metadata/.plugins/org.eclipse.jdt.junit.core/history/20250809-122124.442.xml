@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="LoginControllerTest" project="registration-service" tests="5" started="5" failures="0" errors="0" ignored="0">
+  <testsuite name="training.iqgateway.registration.test.LoginControllerTest" time="2.899" displayname="LoginControllerTest" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.registration.test.LoginControllerTest]">
+    <testcase name="testGetUsers" classname="training.iqgateway.registration.test.LoginControllerTest" time="2.778" displayname="testGetUsers()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.registration.test.LoginControllerTest]/[method:testGetUsers()]"/>
+    <testcase name="testLoginHospitalStaff_success" classname="training.iqgateway.registration.test.LoginControllerTest" time="0.071" displayname="testLoginHospitalStaff_success()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.registration.test.LoginControllerTest]/[method:testLoginHospitalStaff_success()]"/>
+    <testcase name="testLoginNurse_emailNotFound" classname="training.iqgateway.registration.test.LoginControllerTest" time="0.02" displayname="testLoginNurse_emailNotFound()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.registration.test.LoginControllerTest]/[method:testLoginNurse_emailNotFound()]"/>
+    <testcase name="testLogin_invalidRole" classname="training.iqgateway.registration.test.LoginControllerTest" time="0.012" displayname="testLogin_invalidRole()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.registration.test.LoginControllerTest]/[method:testLogin_invalidRole()]"/>
+    <testcase name="testLoginAdmin_invalidPassword" classname="training.iqgateway.registration.test.LoginControllerTest" time="0.016" displayname="testLoginAdmin_invalidPassword()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.registration.test.LoginControllerTest]/[method:testLoginAdmin_invalidPassword()]"/>
+  </testsuite>
+</testrun>

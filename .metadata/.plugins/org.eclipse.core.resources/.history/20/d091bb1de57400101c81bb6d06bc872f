@@ -1,0 +1,167 @@
+package training.iqgateway.admin.test;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import training.iqgateway.admin.controller.HospitalController;
+import training.iqgateway.admin.dto.HospitalRequestDTO;
+import training.iqgateway.admin.dto.HospitalResponseDTO;
+import training.iqgateway.admin.entity.Hospital;
+import training.iqgateway.admin.entity.User;
+import training.iqgateway.admin.service.AdminService;
+import training.iqgateway.admin.service.HospitalService;
+import training.iqgateway.admin.service.UserService;
+import training.iqgateway.admin.utils.HospitalUtils;
+import training.iqgateway.admin.utils.UserUtils;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+public class HospitalControllerTest {
+
+    private MockMvc mockMvc;
+    private ObjectMapper objectMapper;
+
+    @Mock private HospitalService hospitalService;
+    @Mock private UserService userService;
+    @Mock private AdminService adminService;
+
+    @InjectMocks
+    private HospitalController hospitalController;
+
+    private AutoCloseable closeable;
+
+    @BeforeEach
+    void setUp() {
+        closeable = MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(hospitalController).build();
+        objectMapper = new ObjectMapper();
+    }
+
+    @AfterEach
+    void tearDown() throws Exception {
+        closeable.close();
+    }
+
+    // --------- Helper Methods ----------
+    private Hospital createHospitalEntity() {
+        Hospital hospital = new Hospital();
+        hospital.set_id("H1");
+        hospital.setName("City Hospital");
+        Hospital.Address address = new Hospital.Address();
+        address.setCity("Bangalore");
+        address.setStreet("MG Road");
+        address.setState("KA");
+        address.setPincode("560001");
+        hospital.setAddress(address);
+        Hospital.ContactDetails contact = new Hospital.ContactDetails();
+        contact.setEmail("hospital@example.com");
+        contact.setPhone("9876543210");
+        hospital.setContactDetails(contact);
+        hospital.setRegistrationStatus("PENDING");
+        return hospital;
+    }
+
+    private HospitalRequestDTO createHospitalRequestDTO() {
+        HospitalRequestDTO dto = new HospitalRequestDTO();
+        dto.set_id("H1");
+        dto.setRegistrationStatus("approved");
+        dto.setPassword("pass123");
+        HospitalRequestDTO.ContactDetails contact = new HospitalRequestDTO.ContactDetails();
+        contact.setEmail("hospital@example.com");
+        contact.setPhone("9876543210");
+        dto.setContactDetails(contact);
+        return dto;
+    }
+
+    private HospitalResponseDTO createHospitalResponseDTO() {
+        HospitalResponseDTO dto = new HospitalResponseDTO();
+        dto.set_id("H1");
+        dto.setName("City Hospital");
+        dto.setRegistrationStatus("approved");
+        HospitalResponseDTO.Address addr = new HospitalResponseDTO.Address();
+        addr.setCity("Bangalore");
+        dto.setAddress(addr);
+        HospitalResponseDTO.ContactDetails contact = new HospitalResponseDTO.ContactDetails();
+        contact.setEmail("hospital@example.com");
+        dto.setContactDetails(contact);
+        return dto;
+    }
+
+    private User createUserEntity() {
+        User user = new User();
+        user.set_id("U1");
+        user.setEmail("hospital@example.com");
+        user.setPassword("pass123");
+        user.setRole("hospital staff");
+        user.setVerificationStatus("verified");
+        return user;
+    }
+
+    // --------- Tests ----------
+
+    @Test
+    void testGetAllHospitals_success() throws Exception {
+        Hospital hospital = createHospitalEntity();
+        try (MockedStatic<HospitalUtils> hospitalUtilsMock = mockStatic(HospitalUtils.class)) {
+            when(hospitalService.getAllHospitals()).thenReturn(List.of(hospital));
+            hospitalUtilsMock.when(() -> HospitalUtils.convertToHospitalResponseDTO(hospital))
+                    .thenReturn(createHospitalResponseDTO());
+
+            mockMvc.perform(get("/api/admin/hospital/hospitalDetails"))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$[0].contactDetails.email").value("hospital@example.com"))
+                    .andExpect(jsonPath("$[0].address.city").value("Bangalore"));
+        }
+    }
+
+    @Test
+    void testUpdateRegistrationStatus_approved_success() throws Exception {
+        HospitalRequestDTO req = createHospitalRequestDTO();
+        Hospital hospitalEntity = createHospitalEntity();
+        hospitalEntity.setRegistrationStatus("approved");
+        HospitalResponseDTO resDTO = createHospitalResponseDTO();
+        resDTO.setRegistrationStatus("approved");
+        User createdUser = createUserEntity();
+
+        try (MockedStatic<UserUtils> userUtilsMock = mockStatic(UserUtils.class);
+             MockedStatic<HospitalUtils> hospitalUtilsMock = mockStatic(HospitalUtils.class)) {
+
+            userUtilsMock.when(UserUtils::generateUserId).thenReturn("U1");
+            userUtilsMock.when(() -> UserUtils.convertToUser(req)).thenReturn(createdUser);
+
+            when(hospitalService.updateHospitalRegistrationStatus("approved", "H1", "U1"))
+                    .thenReturn(hospitalEntity);
+            hospitalUtilsMock.when(() -> HospitalUtils.convertToHospitalResponseDTO(hospitalEntity))
+                    .thenReturn(resDTO);
+            when(userService.createUser(any(User.class))).thenReturn(createdUser);
+            when(adminService.updateAdminById("A1", "H1")).thenReturn(adminService.getAdminById("A1"));
+
+            mockMvc.perform(put("/api/admin/hospital/updateRegistrationStatus/{adminId}", "A1")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(objectMapper.writeValueAsString(req)))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.email").value("hospital@example.com"));
+        }
+    }
+
+    @Test
+    void testDeleteHospital_success() throws Exception {
+        when(hospitalService.deleteHospital("H1")).thenReturn(true);
+        mockMvc.perform(delete("/api/admin/hospital/deleteHospital").param("hospitalId", "H1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Hospital with ID: H1 has been deleted successfully."));
+    }
+}

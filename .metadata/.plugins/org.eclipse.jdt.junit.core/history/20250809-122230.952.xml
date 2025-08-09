@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="RegistrationControllerTest" project="registration-service" tests="6" started="6" failures="1" errors="0" ignored="0">
+  <testsuite name="training.iqgateway.registration.test.RegistrationControllerTest" time="3.974" displayname="RegistrationControllerTest" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.registration.test.RegistrationControllerTest]">
+    <testcase name="testRegisterHospital_success" classname="training.iqgateway.registration.test.RegistrationControllerTest" time="3.78" displayname="testRegisterHospital_success()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.registration.test.RegistrationControllerTest]/[method:testRegisterHospital_success()]"/>
+    <testcase name="testRegisterNurse_success" classname="training.iqgateway.registration.test.RegistrationControllerTest" time="0.065" displayname="testRegisterNurse_success()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.registration.test.RegistrationControllerTest]/[method:testRegisterNurse_success()]"/>
+    <testcase name="testGetAllNurses_success" classname="training.iqgateway.registration.test.RegistrationControllerTest" time="0.027" displayname="testGetAllNurses_success()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.registration.test.RegistrationControllerTest]/[method:testGetAllNurses_success()]"/>
+    <testcase name="testRegisterNurse_duplicateEmail" classname="training.iqgateway.registration.test.RegistrationControllerTest" time="0.042" displayname="testRegisterNurse_duplicateEmail()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.registration.test.RegistrationControllerTest]/[method:testRegisterNurse_duplicateEmail()]">
+      <failure>java.lang.AssertionError: Status expected:&lt;409&gt; but was:&lt;201&gt;&#13;
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:61)&#13;
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:128)&#13;
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:640)&#13;
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)&#13;
+	at training.iqgateway.registration.test.RegistrationControllerTest.testRegisterNurse_duplicateEmail(RegistrationControllerTest.java:137)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</failure>
+    </testcase>
+    <testcase name="testRegisterHospital_duplicateEmail" classname="training.iqgateway.registration.test.RegistrationControllerTest" time="0.03" displayname="testRegisterHospital_duplicateEmail()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.registration.test.RegistrationControllerTest]/[method:testRegisterHospital_duplicateEmail()]"/>
+    <testcase name="testGetAllHospitals_success" classname="training.iqgateway.registration.test.RegistrationControllerTest" time="0.028" displayname="testGetAllHospitals_success()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.registration.test.RegistrationControllerTest]/[method:testGetAllHospitals_success()]"/>
+  </testsuite>
+</testrun>

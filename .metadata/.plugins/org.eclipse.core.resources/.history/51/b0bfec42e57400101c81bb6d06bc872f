@@ -1,0 +1,210 @@
+package training.iqgateway.admin.test;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import training.iqgateway.admin.controller.AdminController;
+import training.iqgateway.admin.entity.Admin;
+import training.iqgateway.admin.entity.User;
+import training.iqgateway.admin.service.AdminService;
+import training.iqgateway.admin.service.UserService;
+
+public class AdminControllerTest {
+
+    private MockMvc mockMvc;
+
+    @Mock
+    private AdminService adminService;
+
+    @Mock
+    private UserService userService;
+
+    @InjectMocks
+    private AdminController adminController;
+
+    private ObjectMapper objectMapper;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(adminController).build();
+        objectMapper = new ObjectMapper();
+    }
+
+    // --- Utility method to build a sample Admin ---
+    private Admin createSampleAdmin() {
+        Admin admin = new Admin();
+        admin.setId("A1");
+        admin.setFirstName("John");
+        admin.setLastName("Doe");
+        admin.setUniqueVerificationId("UV123");
+        admin.setPassword("secret123");
+
+        Admin.ContactDetails contactDetails = new Admin.ContactDetails();
+        contactDetails.setEmail("admin@example.com");
+        contactDetails.setPhone("9876543210");
+        admin.setContactDetails(contactDetails);
+
+        Admin.Address address = new Admin.Address();
+        address.setStreet("123 Main St");
+        address.setCity("Bangalore");
+        address.setState("KA");
+        address.setPincode("560001");
+        admin.setAddress(address);
+
+        admin.setApprovedRegistrationIds(Arrays.asList("HOSP1", "NURSE1"));
+        return admin;
+    }
+
+    // --- Utility method to build a sample User ---
+    private User createSampleUser() {
+        User user = new User();
+        user.set_id("U1");
+        user.setEmail("user1@example.com");
+        user.setPassword("pass123");
+        user.setRole("USER");
+        user.setVerificationStatus("VERIFIED");
+        return user;
+    }
+
+    @Test
+    void testGetAdminById_found() throws Exception {
+        Admin admin = createSampleAdmin();
+        when(adminService.getAdminById("A1")).thenReturn(admin);
+
+        mockMvc.perform(get("/api/admin/admin/A1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.contactDetails.email").value("admin@example.com"))
+                .andExpect(jsonPath("$.address.city").value("Bangalore"));
+    }
+
+    @Test
+    void testGetAdminById_notFound() throws Exception {
+        when(adminService.getAdminById("XYZ")).thenReturn(null);
+
+        mockMvc.perform(get("/api/admin/admin/XYZ"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("Admin not found"));
+    }
+
+//    @Test
+//    void testUpdateAdminDetails_success() throws Exception {
+//        Admin admin = createSampleAdmin();
+//        when(adminService.updateAdmin(any(Admin.class))).thenReturn(admin);
+//
+//        mockMvc.perform(put("/api/admin/admin")
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(objectMapper.writeValueAsString(admin)))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.firstName").value("John"))
+//                .andExpect(jsonPath("$.contactDetails.phone").value("9876543210"));
+//    }
+
+    @Test
+    void testUpdateAdminDetails_invalidData() throws Exception {
+        Admin invalidAdmin = new Admin(); // Missing ID
+        mockMvc.perform(put("/api/admin/admin")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(invalidAdmin)))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Invalid admin data provided."));
+    }
+
+    @Test
+    void testGetAllUsers_success() throws Exception {
+        User u1 = createSampleUser();
+        when(userService.getAllUsers()).thenReturn(List.of(u1));
+
+        mockMvc.perform(get("/api/admin/admin/users"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].email").value("user1@example.com"))
+                .andExpect(jsonPath("$[0].verificationStatus").value("VERIFIED"));
+    }
+
+    @Test
+    void testGetAllUsers_notFound() throws Exception {
+        when(userService.getAllUsers()).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/api/admin/admin/users"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("No users found"));
+    }
+
+//    @Test
+//    void testDeleteUserById_success() throws Exception {
+//        when(userService.deleteUserById("U1")).thenReturn(true);
+//
+//        mockMvc.perform(delete("/api/admin/admin/users/U1"))
+//                .andExpect(status().isOk())
+//                .andExpect(content().string("User deleted successfully"));
+//    }
+
+//    @Test
+//    void testDeleteUserById_notFound() throws Exception {
+//        when(userService.deleteUserById("U2")).thenReturn(false);
+//
+//        mockMvc.perform(delete("/api/admin/admin/users/U2"))
+//                .andExpect(status().isNotFound())
+//                .andExpect(content().string("User not found or could not be deleted"));
+//    }
+
+    @Test
+    void testGetUserByEmail_found() throws Exception {
+        User user = createSampleUser();
+        when(userService.findByEmail("user1@example.com")).thenReturn(user);
+
+        mockMvc.perform(get("/api/admin/admin/user/user1@example.com"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.email").value("user1@example.com"))
+                .andExpect(jsonPath("$.role").value("USER"));
+    }
+
+    @Test
+    void testGetUserByEmail_notFound() throws Exception {
+        when(userService.findByEmail("missing@example.com")).thenReturn(null);
+
+        mockMvc.perform(get("/api/admin/admin/user/missing@example.com"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("User not found"));
+    }
+
+    @Test
+    void testGetAdminByEmail_found() throws Exception {
+        Admin admin = createSampleAdmin();
+        when(adminService.findByEmail("admin@example.com")).thenReturn(admin);
+
+        mockMvc.perform(get("/api/admin/admin/admin/admin@example.com"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.contactDetails.email").value("admin@example.com"));
+    }
+
+    @Test
+    void testGetAdminByEmail_notFound() throws Exception {
+        when(adminService.findByEmail("missing@example.com")).thenReturn(null);
+
+        mockMvc.perform(get("/api/admin/admin/admin/missing@example.com"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("User not found"));
+    }
+}

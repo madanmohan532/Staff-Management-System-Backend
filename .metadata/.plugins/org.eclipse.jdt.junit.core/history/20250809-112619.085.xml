@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="NurseControllerTest" project="admin-service" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="training.iqgateway.admin.test.NurseControllerTest" time="4.109" displayname="NurseControllerTest" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.admin.test.NurseControllerTest]">
+    <testcase name="testUpdateRegistrationStatusApproved_success" classname="training.iqgateway.admin.test.NurseControllerTest" time="4.036" displayname="testUpdateRegistrationStatusApproved_success()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.admin.test.NurseControllerTest]/[method:testUpdateRegistrationStatusApproved_success()]"/>
+    <testcase name="testGetAllNurses_success" classname="training.iqgateway.admin.test.NurseControllerTest" time="0.073" displayname="testGetAllNurses_success()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.admin.test.NurseControllerTest]/[method:testGetAllNurses_success()]"/>
+  </testsuite>
+</testrun>

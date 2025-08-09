@@ -1,0 +1,253 @@
+package com.iqgateway.admin.test;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import training.iqgateway.admin.controller.NurseController;
+import training.iqgateway.admin.dto.NurseRequestDTO;
+import training.iqgateway.admin.dto.NurseResponseDTO;
+import training.iqgateway.admin.entity.Nurse;
+import training.iqgateway.admin.entity.User;
+import training.iqgateway.admin.service.AdminService;
+import training.iqgateway.admin.service.NurseService;
+import training.iqgateway.admin.service.UserService;
+import training.iqgateway.admin.utils.NurseUtils;
+import training.iqgateway.admin.utils.UserUtils;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+public class NurseControllerTest {
+
+    private MockMvc mockMvc;
+    private ObjectMapper objectMapper;
+
+    @Mock
+    private NurseService nurseService;
+    @Mock
+    private UserService userService;
+    @Mock
+    private AdminService adminService;
+
+    @InjectMocks
+    private NurseController nurseController;
+
+    private AutoCloseable closeable;
+
+    @BeforeEach
+    void setUp() {
+        closeable = MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(nurseController).build();
+        objectMapper = new ObjectMapper();
+    }
+
+    @AfterEach
+    void tearDown() throws Exception {
+        closeable.close();
+    }
+
+    // --- Utility Methods ---
+    private Nurse createNurse() {
+        Nurse nurse = new Nurse();
+        nurse.set_id("N1");
+        nurse.setFirstName("Alice");
+        nurse.setLastName("Smith");
+        nurse.setRegistrationStatus("PENDING");
+        return nurse;
+    }
+
+    private NurseResponseDTO createNurseResponseDTO() {
+        NurseResponseDTO dto = new NurseResponseDTO();
+        dto.set_id("N1");
+        dto.setFirstName("Alice");
+        dto.setLastName("Smith");
+        dto.setRegistrationStatus("PENDING");
+        return dto;
+    }
+
+    private NurseRequestDTO createNurseRequestDTO() {
+        NurseRequestDTO dto = new NurseRequestDTO();
+        dto.set_id("N1");
+        dto.setFirstName("Alice");
+        dto.setLastName("Smith");
+        dto.setRegistrationStatus("approved");
+        dto.setEmail("nurse@example.com");
+        dto.setPassword("pass123");
+        dto.setRole("NURSE");
+        return dto;
+    }
+
+    private User createUser() {
+        User user = new User();
+        user.set_id("U1");
+        user.setEmail("nurse@example.com");
+        user.setPassword("pass123");
+        user.setRole("NURSE");
+        user.setVerificationStatus("VERIFIED");
+        return user;
+    }
+
+    // --- Tests ---
+
+    @Test
+    void testGetAllNurses_success() throws Exception {
+        Nurse nurse = createNurse();
+        List<Nurse> nurses = Arrays.asList(nurse);
+
+        try (MockedStatic<NurseUtils> nurseUtilsMock = mockStatic(NurseUtils.class)) {
+            when(nurseService.getAllNurses()).thenReturn(nurses);
+            nurseUtilsMock.when(() -> NurseUtils.convertToNurseResponseDTO(nurse))
+                    .thenReturn(createNurseResponseDTO());
+
+            mockMvc.perform(get("/api/admin/nurse/nurseDetails"))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$[0].firstName").value("Alice"));
+        }
+    }
+
+    @Test
+    void testGetAllNurses_emptyList() throws Exception {
+        when(nurseService.getAllNurses()).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/api/admin/nurse/nurseDetails"))
+                .andExpect(status().isOk()) // empty list is still 200
+                .andExpect(content().json("[]"));
+    }
+
+    @Test
+    void testUpdateRegistrationStatus_approved_success() throws Exception {
+        NurseRequestDTO reqDTO = createNurseRequestDTO();
+        Nurse nurse = createNurse();
+        nurse.setRegistrationStatus("approved");
+
+        NurseResponseDTO nurseResponseDTO = createNurseResponseDTO();
+        nurseResponseDTO.setRegistrationStatus("approved");
+
+        User createdUser = createUser();
+
+        try (MockedStatic<UserUtils> userUtilsMock = mockStatic(UserUtils.class);
+             MockedStatic<NurseUtils> nurseUtilsMock = mockStatic(NurseUtils.class)) {
+
+            userUtilsMock.when(UserUtils::generateUserId).thenReturn("U1");
+            userUtilsMock.when(() -> UserUtils.convertToUser(reqDTO)).thenReturn(createdUser);
+
+            when(nurseService.updateNurseRegistrationStatus(eq("approved"), eq("N1"), eq("U1")))
+                    .thenReturn(nurse);
+
+            nurseUtilsMock.when(() -> NurseUtils.convertToNurseResponseDTO(nurse))
+                    .thenReturn(nurseResponseDTO);
+
+            when(userService.createUser(any(User.class))).thenReturn(createdUser);
+            when(adminService.updateAdminById("A1", "N1")).thenReturn(true);
+
+            mockMvc.perform(put("/api/admin/nurse/updateRegistrationStatus/{adminId}", "A1")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(objectMapper.writeValueAsString(reqDTO)))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.email").value("nurse@example.com"));
+        }
+    }
+
+    @Test
+    void testUpdateRegistrationStatus_invalidData() throws Exception {
+        NurseRequestDTO invalidDTO = new NurseRequestDTO();
+        mockMvc.perform(put("/api/admin/nurse/updateRegistrationStatus/{adminId}", "A1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(invalidDTO)))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Invalid nurse data provided."));
+    }
+
+    @Test
+    void testUpdateRegistrationStatus_notFound() throws Exception {
+        NurseRequestDTO reqDTO = createNurseRequestDTO();
+
+        when(nurseService.updateNurseRegistrationStatus(anyString(), anyString(), any()))
+                .thenReturn(null);
+
+        mockMvc.perform(put("/api/admin/nurse/updateRegistrationStatus/{adminId}", "A1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(reqDTO)))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("Nurse with ID: N1 not found."));
+    }
+
+    @Test
+    void testUpdateRegistrationStatus_notApproved_forbidden() throws Exception {
+        NurseRequestDTO reqDTO = createNurseRequestDTO();
+        reqDTO.setRegistrationStatus("pending"); // Not approved
+
+        Nurse nurse = createNurse();
+        nurse.setRegistrationStatus("pending");
+
+        NurseResponseDTO nurseResponseDTO = createNurseResponseDTO();
+        nurseResponseDTO.setRegistrationStatus("pending");
+
+        try (MockedStatic<NurseUtils> nurseUtilsMock = mockStatic(NurseUtils.class)) {
+            when(nurseService.updateNurseRegistrationStatus(eq("pending"), eq("N1"), isNull()))
+                    .thenReturn(nurse);
+
+            nurseUtilsMock.when(() -> NurseUtils.convertToNurseResponseDTO(nurse))
+                    .thenReturn(nurseResponseDTO);
+
+            mockMvc.perform(put("/api/admin/nurse/updateRegistrationStatus/{adminId}", "A1")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(objectMapper.writeValueAsString(reqDTO)))
+                    .andExpect(status().isForbidden())
+                    .andExpect(content().string("Can not upadte Nurse Details"));
+        }
+    }
+
+    @Test
+    void testUpdateNurse_success() throws Exception {
+        Nurse nurse = createNurse();
+        when(nurseService.updateNurse(any(Nurse.class))).thenReturn(nurse);
+
+        mockMvc.perform(put("/api/admin/nurse/updateNurse")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(nurse)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.firstName").value("Alice"));
+    }
+
+    @Test
+    void testUpdateNurse_nullInput() throws Exception {
+        // This simulates invalid JSON (null nurse object)
+        mockMvc.perform(put("/api/admin/nurse/updateNurse")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{}"))
+                .andExpect(status().isOk()); // According to code, not null object -> goes to service
+    }
+
+    @Test
+    void testDeleteNurse_success() throws Exception {
+        when(nurseService.deleteNurse("N1")).thenReturn(true);
+
+        mockMvc.perform(delete("/api/admin/nurse/deleteNurse")
+                        .param("nurseId", "N1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Nurse with ID: N1 has been deleted successfully."));
+    }
+
+    @Test
+    void testDeleteNurse_notFound() throws Exception {
+        when(nurseService.deleteNurse("N1")).thenReturn(false);
+
+        mockMvc.perform(delete("/api/admin/nurse/deleteNurse")
+                        .param("nurseId", "N1"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("Nurse with ID: N1 could not be deleted."));
+    }
+}

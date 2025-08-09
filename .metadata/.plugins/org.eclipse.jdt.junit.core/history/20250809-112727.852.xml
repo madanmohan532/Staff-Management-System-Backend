@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="NurseControllerTest" project="admin-service" tests="3" started="3" failures="0" errors="1" ignored="0">
+  <testsuite name="training.iqgateway.admin.test.NurseControllerTest" time="3.446" displayname="NurseControllerTest" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.admin.test.NurseControllerTest]">
+    <testcase name="testUpdateRegistrationStatusApproved_success" classname="training.iqgateway.admin.test.NurseControllerTest" time="3.336" displayname="testUpdateRegistrationStatusApproved_success()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.admin.test.NurseControllerTest]/[method:testUpdateRegistrationStatusApproved_success()]"/>
+    <testcase name="testGetAllNurses_success" classname="training.iqgateway.admin.test.NurseControllerTest" time="0.063" displayname="testGetAllNurses_success()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.admin.test.NurseControllerTest]/[method:testGetAllNurses_success()]"/>
+    <testcase name="testDeleteNurse_success" classname="training.iqgateway.admin.test.NurseControllerTest" time="0.045" displayname="testDeleteNurse_success()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.admin.test.NurseControllerTest]/[method:testDeleteNurse_success()]">
+      <error>java.lang.ClassCastException: class org.springframework.test.web.client.match.ContentRequestMatchers$$Lambda$667/0x00000199e0427d58 cannot be cast to class org.springframework.test.web.servlet.ResultMatcher (org.springframework.test.web.client.match.ContentRequestMatchers$$Lambda$667/0x00000199e0427d58 and org.springframework.test.web.servlet.ResultMatcher are in unnamed module of loader 'app')&#13;
+	at training.iqgateway.admin.test.NurseControllerTest.testDeleteNurse_success(NurseControllerTest.java:171)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</error>
+    </testcase>
+  </testsuite>
+</testrun>

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="HospitalControllerTest (1)" project="hospital-service" tests="9" started="9" failures="1" errors="8" ignored="0">
+  <testsuite name="training.iqgateway.hospital.test.HospitalControllerTest" time="3.142" displayname="HospitalControllerTest" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.hospital.test.HospitalControllerTest]">
+    <testcase name="testGetAllNurseDetails_notFound" classname="training.iqgateway.hospital.test.HospitalControllerTest" time="2.801" displayname="testGetAllNurseDetails_notFound()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.hospital.test.HospitalControllerTest]/[method:testGetAllNurseDetails_notFound()]">
+      <error>jakarta.servlet.ServletException: Request processing failed: java.lang.NullPointerException: Cannot invoke "org.springframework.web.client.RestTemplate.getForObject(String, java.lang.Class, Object[])" because "this.restTemplate" is null&#13;
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1022)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)&#13;
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)&#13;
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72)&#13;
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)&#13;
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:165)&#13;
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132)&#13;
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:201)&#13;
+	at training.iqgateway.hospital.test.HospitalControllerTest.testGetAllNurseDetails_notFound(HospitalControllerTest.java:122)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+Caused by: java.lang.NullPointerException: Cannot invoke "org.springframework.web.client.RestTemplate.getForObject(String, java.lang.Class, Object[])" because "this.restTemplate" is null&#13;
+	at training.iqgateway.hospital.controller.HospitalController.getNurseDetails(HospitalController.java:106)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)&#13;
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)&#13;
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891)&#13;
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)&#13;
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)&#13;
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)&#13;
+	... 12 more&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="testGetHospitalByEmail_found" classname="training.iqgateway.hospital.test.HospitalControllerTest" time="0.037" displayname="testGetHospitalByEmail_found()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.hospital.test.HospitalControllerTest]/[method:testGetHospitalByEmail_found()]">
+      <error>jakarta.servlet.ServletException: Request processing failed: java.lang.NullPointerException: Cannot invoke "training.iqgateway.hospital.service.HospitalService.findByEmail(String)" because "this.hospitalService" is null&#13;
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1022)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)&#13;
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)&#13;
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72)&#13;
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)&#13;
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:165)&#13;
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132)&#13;
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:201)&#13;
+	at training.iqgateway.hospital.test.HospitalControllerTest.testGetHospitalByEmail_found(HospitalControllerTest.java:94)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+Caused by: java.lang.NullPointerException: Cannot invoke "training.iqgateway.hospital.service.HospitalService.findByEmail(String)" because "this.hospitalService" is null&#13;
+	at training.iqgateway.hospital.controller.HospitalController.getHospitalByEmail(HospitalController.java:72)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)&#13;
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)&#13;
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891)&#13;
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)&#13;
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)&#13;
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)&#13;
+	... 12 more&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="testGetAllNurseDetails_success" classname="training.iqgateway.hospital.test.HospitalControllerTest" time="0.023" displayname="testGetAllNurseDetails_success()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.hospital.test.HospitalControllerTest]/[method:testGetAllNurseDetails_success()]">
+      <error>jakarta.servlet.ServletException: Request processing failed: java.lang.NullPointerException: Cannot invoke "org.springframework.web.client.RestTemplate.getForObject(String, java.lang.Class, Object[])" because "this.restTemplate" is null&#13;
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1022)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)&#13;
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)&#13;
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72)&#13;
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)&#13;
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:165)&#13;
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132)&#13;
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:201)&#13;
+	at training.iqgateway.hospital.test.HospitalControllerTest.testGetAllNurseDetails_success(HospitalControllerTest.java:114)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+Caused by: java.lang.NullPointerException: Cannot invoke "org.springframework.web.client.RestTemplate.getForObject(String, java.lang.Class, Object[])" because "this.restTemplate" is null&#13;
+	at training.iqgateway.hospital.controller.HospitalController.getNurseDetails(HospitalController.java:106)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)&#13;
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)&#13;
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891)&#13;
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)&#13;
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)&#13;
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)&#13;
+	... 12 more&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="testRequestSingleNurse_success" classname="training.iqgateway.hospital.test.HospitalControllerTest" time="0.133" displayname="testRequestSingleNurse_success()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.hospital.test.HospitalControllerTest]/[method:testRequestSingleNurse_success()]">
+      <failure>java.lang.AssertionError: Status expected:&lt;200&gt; but was:&lt;404&gt;&#13;
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:61)&#13;
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:128)&#13;
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:640)&#13;
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)&#13;
+	at training.iqgateway.hospital.test.HospitalControllerTest.testRequestSingleNurse_success(HospitalControllerTest.java:143)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</failure>
+    </testcase>
+    <testcase name="testGetHospitalById_notFound" classname="training.iqgateway.hospital.test.HospitalControllerTest" time="0.02" displayname="testGetHospitalById_notFound()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.hospital.test.HospitalControllerTest]/[method:testGetHospitalById_notFound()]">
+      <error>jakarta.servlet.ServletException: Request processing failed: java.lang.NullPointerException: Cannot invoke "training.iqgateway.hospital.service.HospitalService.getHospitalById(String)" because "this.hospitalService" is null&#13;
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1022)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)&#13;
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)&#13;
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72)&#13;
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)&#13;
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:165)&#13;
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132)&#13;
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:201)&#13;
+	at training.iqgateway.hospital.test.HospitalControllerTest.testGetHospitalById_notFound(HospitalControllerTest.java:86)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+Caused by: java.lang.NullPointerException: Cannot invoke "training.iqgateway.hospital.service.HospitalService.getHospitalById(String)" because "this.hospitalService" is null&#13;
+	at training.iqgateway.hospital.controller.HospitalController.getHospitalById(HospitalController.java:61)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)&#13;
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)&#13;
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891)&#13;
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)&#13;
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)&#13;
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)&#13;
+	... 12 more&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="testGetHospitalById_found" classname="training.iqgateway.hospital.test.HospitalControllerTest" time="0.018" displayname="testGetHospitalById_found()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.hospital.test.HospitalControllerTest]/[method:testGetHospitalById_found()]">
+      <error>jakarta.servlet.ServletException: Request processing failed: java.lang.NullPointerException: Cannot invoke "training.iqgateway.hospital.service.HospitalService.getHospitalById(String)" because "this.hospitalService" is null&#13;
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1022)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)&#13;
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)&#13;
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72)&#13;
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)&#13;
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:165)&#13;
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132)&#13;
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:201)&#13;
+	at training.iqgateway.hospital.test.HospitalControllerTest.testGetHospitalById_found(HospitalControllerTest.java:78)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+Caused by: java.lang.NullPointerException: Cannot invoke "training.iqgateway.hospital.service.HospitalService.getHospitalById(String)" because "this.hospitalService" is null&#13;
+	at training.iqgateway.hospital.controller.HospitalController.getHospitalById(HospitalController.java:61)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)&#13;
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)&#13;
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891)&#13;
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)&#13;
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)&#13;
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)&#13;
+	... 12 more&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="testAddPatient" classname="training.iqgateway.hospital.test.HospitalControllerTest" time="0.047" displayname="testAddPatient()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.hospital.test.HospitalControllerTest]/[method:testAddPatient()]">
+      <error>jakarta.servlet.ServletException: Request processing failed: java.lang.NullPointerException: Cannot invoke "training.iqgateway.hospital.service.PatientService.addPatient(training.iqgateway.hospital.entity.Patient)" because "this.patientService" is null&#13;
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1022)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)&#13;
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)&#13;
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72)&#13;
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)&#13;
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:165)&#13;
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132)&#13;
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:201)&#13;
+	at training.iqgateway.hospital.test.HospitalControllerTest.testAddPatient(HospitalControllerTest.java:175)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+Caused by: java.lang.NullPointerException: Cannot invoke "training.iqgateway.hospital.service.PatientService.addPatient(training.iqgateway.hospital.entity.Patient)" because "this.patientService" is null&#13;
+	at training.iqgateway.hospital.controller.HospitalController.addPatientDetails(HospitalController.java:219)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)&#13;
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)&#13;
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891)&#13;
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)&#13;
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)&#13;
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)&#13;
+	... 12 more&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="testUpdateHospitalDetails_success" classname="training.iqgateway.hospital.test.HospitalControllerTest" time="0.036" displayname="testUpdateHospitalDetails_success()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.hospital.test.HospitalControllerTest]/[method:testUpdateHospitalDetails_success()]">
+      <error>jakarta.servlet.ServletException: Request processing failed: java.lang.NullPointerException: Cannot invoke "training.iqgateway.hospital.service.HospitalService.updateHospital(training.iqgateway.hospital.entity.Hospital)" because "this.hospitalService" is null&#13;
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1022)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:925)&#13;
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:593)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)&#13;
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72)&#13;
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)&#13;
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:165)&#13;
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132)&#13;
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:201)&#13;
+	at training.iqgateway.hospital.test.HospitalControllerTest.testUpdateHospitalDetails_success(HospitalControllerTest.java:103)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+Caused by: java.lang.NullPointerException: Cannot invoke "training.iqgateway.hospital.service.HospitalService.updateHospital(training.iqgateway.hospital.entity.Hospital)" because "this.hospitalService" is null&#13;
+	at training.iqgateway.hospital.controller.HospitalController.updateHospitalDetails(HospitalController.java:89)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)&#13;
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)&#13;
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891)&#13;
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)&#13;
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)&#13;
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)&#13;
+	... 12 more&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="testCancelSingleNurseRequest_success" classname="training.iqgateway.hospital.test.HospitalControllerTest" time="0.024" displayname="testCancelSingleNurseRequest_success()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.hospital.test.HospitalControllerTest]/[method:testCancelSingleNurseRequest_success()]">
+      <error>jakarta.servlet.ServletException: Request processing failed: java.lang.NullPointerException: Cannot invoke "training.iqgateway.hospital.service.HospitalNurseService.deleteHospitalNurseRequest(String, String, String, String)" because "this.hospitalNurseService" is null&#13;
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1022)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:925)&#13;
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:593)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)&#13;
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72)&#13;
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)&#13;
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:165)&#13;
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132)&#13;
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:201)&#13;
+	at training.iqgateway.hospital.test.HospitalControllerTest.testCancelSingleNurseRequest_success(HospitalControllerTest.java:164)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+Caused by: java.lang.NullPointerException: Cannot invoke "training.iqgateway.hospital.service.HospitalNurseService.deleteHospitalNurseRequest(String, String, String, String)" because "this.hospitalNurseService" is null&#13;
+	at training.iqgateway.hospital.controller.HospitalController.cancelSingleNurseRequest(HospitalController.java:199)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)&#13;
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)&#13;
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986)&#13;
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891)&#13;
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)&#13;
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)&#13;
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)&#13;
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)&#13;
+	... 12 more&#13;
+&#13;
+</error>
+    </testcase>
+  </testsuite>
+</testrun>

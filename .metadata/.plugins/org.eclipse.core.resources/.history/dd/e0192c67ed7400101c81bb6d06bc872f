@@ -1,0 +1,146 @@
+package training.iqgateway.controller;
+
+import org.junit.jupiter.api.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.MockitoAnnotations;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import training.iqgateway.dto.HospitalRegistrationRequestDTO;
+import training.iqgateway.dto.HospitalRegistrationResponseDTO;
+import training.iqgateway.dto.NurseRegistrationRequestDTO;
+import training.iqgateway.dto.NurseResponseDTO;
+import training.iqgateway.entity.HospitalRegistrationEntity;
+import training.iqgateway.entity.NurseRegistrationEntity;
+import training.iqgateway.service.HospitalRegistrationService;
+import training.iqgateway.service.NurseRegistrationService;
+import training.iqgateway.util.HospitalUtils;
+import training.iqgateway.util.NurseUtils;
+
+import java.util.Collections;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+class RegistrationControllerTest {
+
+    private MockMvc mockMvc;
+
+    @Mock HospitalRegistrationService hospitalRegistrationService;
+    @Mock NurseRegistrationService nurseRegistrationService;
+
+    @InjectMocks
+    private RegistrationController registrationController;
+
+    private AutoCloseable closeable;
+
+    @BeforeEach
+    void setup() {
+        closeable = MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(registrationController).build();
+    }
+
+    @AfterEach
+    void tearDown() throws Exception {
+        closeable.close();
+    }
+
+    @Test
+    void testGetAllHospitals_success() throws Exception {
+        HospitalRegistrationEntity entity = new HospitalRegistrationEntity();
+        try (MockedStatic<HospitalUtils> utilMock = mockStatic(HospitalUtils.class)) {
+            when(hospitalRegistrationService.findAllHospitals()).thenReturn(Collections.singletonList(entity));
+            utilMock.when(() -> HospitalUtils.convertToResponseDTO(entity))
+                    .thenReturn(new HospitalRegistrationResponseDTO());
+
+            mockMvc.perform(get("/api/registration/hospitals"))
+                    .andExpect(status().isOk());
+        }
+    }
+
+    @Test
+    void testRegisterHospital_success() throws Exception {
+        HospitalRegistrationRequestDTO dto = new HospitalRegistrationRequestDTO();
+        HospitalRegistrationEntity entity = new HospitalRegistrationEntity();
+
+        try (MockedStatic<HospitalUtils> utilMock = mockStatic(HospitalUtils.class)) {
+            utilMock.when(() -> HospitalUtils.convertToRegistrationEntity(dto)).thenReturn(entity);
+            when(hospitalRegistrationService.registerHospital(entity)).thenReturn(entity);
+            utilMock.when(() -> HospitalUtils.convertToResponseDTO(entity)).thenReturn(new HospitalRegistrationResponseDTO());
+
+            mockMvc.perform(post("/api/registration/hospital")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(new ObjectMapper().writeValueAsString(dto)))
+                    .andExpect(status().isCreated());
+        }
+    }
+
+    @Test
+    void testRegisterHospital_duplicateEmail() throws Exception {
+        HospitalRegistrationRequestDTO dto = new HospitalRegistrationRequestDTO();
+        HospitalRegistrationEntity entity = new HospitalRegistrationEntity();
+
+        try (MockedStatic<HospitalUtils> utilMock = mockStatic(HospitalUtils.class)) {
+            utilMock.when(() -> HospitalUtils.convertToRegistrationEntity(dto)).thenReturn(entity);
+            when(hospitalRegistrationService.registerHospital(entity)).thenThrow(new DuplicateKeyException("duplicate"));
+
+            mockMvc.perform(post("/api/registration/hospital")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(new ObjectMapper().writeValueAsString(dto)))
+                    .andExpect(status().isConflict())
+                    .andExpect(content().string("Email already exists, want to login ?"));
+        }
+    }
+
+    @Test
+    void testRegisterNurse_success() throws Exception {
+        NurseRegistrationRequestDTO dto = new NurseRegistrationRequestDTO();
+        NurseRegistrationEntity entity = new NurseRegistrationEntity();
+
+        try (MockedStatic<NurseUtils> utilMock = mockStatic(NurseUtils.class)) {
+            utilMock.when(() -> NurseUtils.convertToNurseRegistrationEntity(dto)).thenReturn(entity);
+            when(nurseRegistrationService.registerNurse(entity)).thenReturn(entity);
+            utilMock.when(() -> NurseUtils.convertToNurseRegistrationResponseDTO(entity)).thenReturn(new NurseResponseDTO());
+
+            mockMvc.perform(post("/api/registration/nurse")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(new ObjectMapper().writeValueAsString(dto)))
+                    .andExpect(status().isCreated());
+        }
+    }
+
+    @Test
+    void testRegisterNurse_duplicateEmail() throws Exception {
+        NurseRegistrationRequestDTO dto = new NurseRegistrationRequestDTO();
+        NurseRegistrationEntity entity = new NurseRegistrationEntity();
+
+        try (MockedStatic<NurseUtils> utilMock = mockStatic(NurseUtils.class)) {
+            utilMock.when(() -> NurseUtils.convertToNurseRegistrationEntity(dto)).thenReturn(entity);
+            when(nurseRegistrationService.registerNurse(entity)).thenThrow(new DuplicateKeyException("duplicate"));
+
+            mockMvc.perform(post("/api/registration/nurse")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(new ObjectMapper().writeValueAsString(dto)))
+                    .andExpect(status().isConflict())
+                    .andExpect(content().string("Email already exists, want to login ?"));
+        }
+    }
+
+    @Test
+    void testGetAllNurses_success() throws Exception {
+        NurseRegistrationEntity entity = new NurseRegistrationEntity();
+        try (MockedStatic<NurseUtils> utilMock = mockStatic(NurseUtils.class)) {
+            when(nurseRegistrationService.findAllNurses()).thenReturn(Collections.singletonList(entity));
+            utilMock.when(() -> NurseUtils.convertToNurseRegistrationResponseDTO(entity)).thenReturn(new NurseResponseDTO());
+
+            mockMvc.perform(get("/api/registration/nurses"))
+                    .andExpect(status().isOk());
+        }
+    }
+}

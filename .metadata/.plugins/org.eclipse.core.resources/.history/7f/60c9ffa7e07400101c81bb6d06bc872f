@@ -1,0 +1,224 @@
+package com.iqgateway.admin.test;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import training.iqgateway.admin.controller.HospitalController;
+import training.iqgateway.admin.dto.HospitalRequestDTO;
+import training.iqgateway.admin.dto.HospitalResponseDTO;
+import training.iqgateway.admin.entity.Hospital;
+import training.iqgateway.admin.entity.User;
+import training.iqgateway.admin.service.AdminService;
+import training.iqgateway.admin.service.HospitalService;
+import training.iqgateway.admin.service.UserService;
+import training.iqgateway.admin.utils.HospitalUtils;
+import training.iqgateway.admin.utils.UserUtils;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+public class HospitalControllerTest {
+
+    private MockMvc mockMvc;
+    private ObjectMapper objectMapper;
+
+    @Mock
+    private HospitalService hospitalService;
+    @Mock
+    private UserService userService;
+    @Mock
+    private AdminService adminService;
+
+    @InjectMocks
+    private HospitalController hospitalController;
+
+    private AutoCloseable closeable;
+
+    @BeforeEach
+    void setUp() {
+        closeable = MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(hospitalController).build();
+        objectMapper = new ObjectMapper();
+    }
+
+    @AfterEach
+    void tearDown() throws Exception {
+        closeable.close();
+    }
+
+    private Hospital createHospital() {
+        Hospital hospital = new Hospital();
+        hospital.set_id("H1");
+        hospital.setName("City Hospital");
+        hospital.setUserId("U1");
+        hospital.setRegistrationStatus("PENDING");
+        return hospital;
+    }
+
+    private HospitalResponseDTO createHospitalResponseDTO() {
+        HospitalResponseDTO dto = new HospitalResponseDTO();
+        dto.set_id("H1");
+        dto.setName("City Hospital");
+        dto.setRegistrationStatus("PENDING");
+        return dto;
+    }
+
+    private HospitalRequestDTO createHospitalRequestDTO() {
+        HospitalRequestDTO dto = new HospitalRequestDTO();
+        dto.set_id("H1");
+        dto.setRegistrationStatus("approved");
+        dto.setEmail("hospital@example.com");
+        dto.setPassword("pass123");
+        dto.setRole("HOSPITAL");
+        return dto;
+    }
+
+    private User createUser() {
+        User user = new User();
+        user.set_id("U1");
+        user.setEmail("hospital@example.com");
+        user.setPassword("pass123");
+        user.setRole("HOSPITAL");
+        user.setVerificationStatus("VERIFIED");
+        return user;
+    }
+
+    // --- Tests ---
+
+    @Test
+    void testGetAllHospitals_success() throws Exception {
+        Hospital hospital = createHospital();
+        List<Hospital> hospitals = Arrays.asList(hospital);
+
+        try (MockedStatic<HospitalUtils> hospitalUtilsMock = mockStatic(HospitalUtils.class)) {
+            when(hospitalService.getAllHospitals()).thenReturn(hospitals);
+            hospitalUtilsMock.when(() -> HospitalUtils.convertToHospitalResponseDTO(hospital))
+                    .thenReturn(createHospitalResponseDTO());
+
+            mockMvc.perform(get("/api/admin/hospital/hospitalDetails"))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$[0].name").value("City Hospital"));
+        }
+    }
+
+    @Test
+    void testGetAllHospitals_emptyList() throws Exception {
+        when(hospitalService.getAllHospitals()).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/api/admin/hospital/hospitalDetails"))
+                .andExpect(status().isOk()) // Returns empty list, not 404
+                .andExpect(content().json("[]"));
+    }
+
+    @Test
+    void testUpdateRegistrationStatus_approved_success() throws Exception {
+        HospitalRequestDTO reqDTO = createHospitalRequestDTO();
+        Hospital hospital = createHospital();
+        hospital.setRegistrationStatus("approved");
+
+        HospitalResponseDTO hospitalResponseDTO = createHospitalResponseDTO();
+        hospitalResponseDTO.setRegistrationStatus("approved");
+
+        User createdUser = createUser();
+
+        try (MockedStatic<UserUtils> userUtilsMock = mockStatic(UserUtils.class);
+             MockedStatic<HospitalUtils> hospitalUtilsMock = mockStatic(HospitalUtils.class)) {
+
+            userUtilsMock.when(UserUtils::generateUserId).thenReturn("U1");
+            userUtilsMock.when(() -> UserUtils.convertToUser(reqDTO)).thenReturn(createdUser);
+
+            when(hospitalService.updateHospitalRegistrationStatus(eq("approved"), eq("H1"), eq("U1")))
+                    .thenReturn(hospital);
+
+            hospitalUtilsMock.when(() -> HospitalUtils.convertToHospitalResponseDTO(hospital))
+                    .thenReturn(hospitalResponseDTO);
+
+            when(userService.createUser(any(User.class))).thenReturn(createdUser);
+
+            when(adminService.updateAdminById("A1", "H1")).thenReturn(true);
+
+            mockMvc.perform(put("/api/admin/hospital/updateRegistrationStatus/{adminId}", "A1")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(objectMapper.writeValueAsString(reqDTO)))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.email").value("hospital@example.com"));
+        }
+    }
+
+    @Test
+    void testUpdateRegistrationStatus_invalidData() throws Exception {
+        HospitalRequestDTO invalidDTO = new HospitalRequestDTO();
+        mockMvc.perform(put("/api/admin/hospital/updateRegistrationStatus/{adminId}", "A1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(invalidDTO)))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Invalid hospital data provided."));
+    }
+
+    @Test
+    void testUpdateRegistrationStatus_notFound() throws Exception {
+        HospitalRequestDTO reqDTO = createHospitalRequestDTO();
+
+        when(hospitalService.updateHospitalRegistrationStatus(anyString(), anyString(), any()))
+                .thenReturn(null);
+
+        mockMvc.perform(put("/api/admin/hospital/updateRegistrationStatus/{adminId}", "A1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(reqDTO)))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("Hospital with ID: H1 not found."));
+    }
+
+    @Test
+    void testDeleteHospital_success() throws Exception {
+        when(hospitalService.deleteHospital("H1")).thenReturn(true);
+
+        mockMvc.perform(delete("/api/admin/hospital/deleteHospital")
+                        .param("hospitalId", "H1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Hospital with ID: H1 has been deleted successfully."));
+    }
+
+    @Test
+    void testDeleteHospital_notFound() throws Exception {
+        when(hospitalService.deleteHospital("H1")).thenReturn(false);
+
+        mockMvc.perform(delete("/api/admin/hospital/deleteHospital")
+                        .param("hospitalId", "H1"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("Hospital with ID: H1 could not be deleted."));
+    }
+
+    @Test
+    void testUpdateHospital_success() throws Exception {
+        Hospital hospital = createHospital();
+        when(hospitalService.updateHospital(any(Hospital.class))).thenReturn(hospital);
+
+        mockMvc.perform(put("/api/admin/hospital/updateHospital")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(hospital)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("City Hospital"));
+    }
+
+    @Test
+    void testUpdateHospital_nullBody() throws Exception {
+        // This will cause NPE on hospital.get_id(), but according to controller it returns 404 only if obj != null
+        mockMvc.perform(put("/api/admin/hospital/updateHospital")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{}"))
+                .andExpect(status().isOk()); // because obj != null so it goes to service mock (null)
+    }
+}

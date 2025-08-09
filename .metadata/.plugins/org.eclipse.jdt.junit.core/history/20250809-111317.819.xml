@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="HospitalControllerTest" project="admin-service" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="training.iqgateway.admin.test.HospitalControllerTest" time="3.071" displayname="HospitalControllerTest" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.admin.test.HospitalControllerTest]">
+    <testcase name="testGetAllHospitals_success" classname="training.iqgateway.admin.test.HospitalControllerTest" time="3.039" displayname="testGetAllHospitals_success()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.admin.test.HospitalControllerTest]/[method:testGetAllHospitals_success()]"/>
+    <testcase name="testDeleteHospital_success" classname="training.iqgateway.admin.test.HospitalControllerTest" time="0.031" displayname="testDeleteHospital_success()" uniqueid="[engine:junit-jupiter]/[class:training.iqgateway.admin.test.HospitalControllerTest]/[method:testDeleteHospital_success()]"/>
+  </testsuite>
+</testrun>

@@ -1,0 +1,184 @@
+package training.iqgateway.admin;
+
+import com.example.model.Admin;
+import com.example.model.User;
+import com.example.service.AdminService;
+import com.example.service.UserService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+public class AdminControllerTest {
+
+    private MockMvc mockMvc;
+
+    @Mock
+    private AdminService adminService;
+
+    @Mock
+    private UserService userService;
+
+    @InjectMocks
+    private AdminController adminController;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(adminController).build();
+    }
+
+    @Test
+    void testGetAdminById_found() throws Exception {
+        Admin admin = new Admin();
+        admin.setId("1");
+        admin.setEmail("admin@example.com");
+
+        when(adminService.getAdminById("1")).thenReturn(admin);
+
+        mockMvc.perform(get("/api/admin/admin/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.email").value("admin@example.com"));
+    }
+
+    @Test
+    void testGetAdminById_notFound() throws Exception {
+        when(adminService.getAdminById("2")).thenReturn(null);
+
+        mockMvc.perform(get("/api/admin/admin/2"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("Admin not found"));
+    }
+
+    @Test
+    void testUpdateAdminDetails_success() throws Exception {
+        Admin admin = new Admin();
+        admin.setId("1");
+        admin.setEmail("admin@example.com");
+
+        when(adminService.updateAdmin(any(Admin.class))).thenReturn(admin);
+
+        String json = "{\"id\":\"1\",\"email\":\"admin@example.com\"}";
+
+        mockMvc.perform(put("/api/admin/admin")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.email").value("admin@example.com"));
+    }
+
+    @Test
+    void testUpdateAdminDetails_invalidData() throws Exception {
+        String json = "{}"; // Missing id
+
+        mockMvc.perform(put("/api/admin/admin")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Invalid admin data provided."));
+    }
+
+    @Test
+    void testGetAllUsers_success() throws Exception {
+        User u1 = new User();
+        u1.setId("1");
+        u1.setEmail("user1@example.com");
+        when(userService.getAllUsers()).thenReturn(Arrays.asList(u1));
+
+        mockMvc.perform(get("/api/admin/admin/users"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].email").value("user1@example.com"));
+    }
+
+    @Test
+    void testGetAllUsers_notFound() throws Exception {
+        when(userService.getAllUsers()).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/api/admin/admin/users"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("No users found"));
+    }
+
+    @Test
+    void testDeleteUserById_success() throws Exception {
+        when(userService.deleteUserById("1")).thenReturn(true);
+
+        mockMvc.perform(delete("/api/admin/admin/users/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("User deleted successfully"));
+    }
+
+    @Test
+    void testDeleteUserById_invalidId() throws Exception {
+        mockMvc.perform(delete("/api/admin/admin/users/"))
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    void testDeleteUserById_notFound() throws Exception {
+        when(userService.deleteUserById("2")).thenReturn(false);
+
+        mockMvc.perform(delete("/api/admin/admin/users/2"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("User not found or could not be deleted"));
+    }
+
+    @Test
+    void testGetUserByEmail_success() throws Exception {
+        User user = new User();
+        user.setEmail("test@example.com");
+        when(userService.findByEmail("test@example.com")).thenReturn(user);
+
+        mockMvc.perform(get("/api/admin/admin/user/test@example.com"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.email").value("test@example.com"));
+    }
+
+    @Test
+    void testGetUserByEmail_invalid() throws Exception {
+        mockMvc.perform(get("/api/admin/admin/user/"))
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    void testGetUserByEmail_notFound() throws Exception {
+        when(userService.findByEmail("notfound@example.com")).thenReturn(null);
+
+        mockMvc.perform(get("/api/admin/admin/user/notfound@example.com"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("User not found"));
+    }
+
+    @Test
+    void testGetAdminByEmail_success() throws Exception {
+        Admin admin = new Admin();
+        admin.setEmail("admin@example.com");
+        when(adminService.findByEmail("admin@example.com")).thenReturn(admin);
+
+        mockMvc.perform(get("/api/admin/admin/admin/admin@example.com"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.email").value("admin@example.com"));
+    }
+
+    @Test
+    void testGetAdminByEmail_notFound() throws Exception {
+        when(adminService.findByEmail("noadmin@example.com")).thenReturn(null);
+
+        mockMvc.perform(get("/api/admin/admin/admin/noadmin@example.com"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("User not found"));
+    }
+}

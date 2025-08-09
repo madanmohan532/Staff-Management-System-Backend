@@ -1,0 +1,172 @@
+package training.iqgateway.admin.test;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import training.iqgateway.admin.controller.NurseController;
+import training.iqgateway.admin.dto.NurseRequestDTO;
+import training.iqgateway.admin.dto.NurseResponseDTO;
+import training.iqgateway.admin.entity.Admin;
+import training.iqgateway.admin.entity.Nurse;
+import training.iqgateway.admin.entity.User;
+import training.iqgateway.admin.service.AdminService;
+import training.iqgateway.admin.service.NurseService;
+import training.iqgateway.admin.service.UserService;
+import training.iqgateway.admin.utils.NurseUtils;
+import training.iqgateway.admin.utils.UserUtils;
+
+public class NurseControllerTest {
+
+    private MockMvc mockMvc;
+    private ObjectMapper objectMapper;
+
+    @Mock private NurseService nurseService;
+    @Mock private UserService userService;
+    @Mock private AdminService adminService;
+
+    @InjectMocks
+    private NurseController nurseController;
+
+    private AutoCloseable closeable;
+
+    @BeforeEach
+    void setUp() {
+        closeable = MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(nurseController).build();
+        objectMapper = new ObjectMapper();
+    }
+
+    @AfterEach
+    void tearDown() throws Exception {
+        closeable.close();
+    }
+
+    private Nurse createNurseEntity() {
+        Nurse nurse = new Nurse();
+        nurse.set_id("N1");
+        nurse.setFirstName("Alice");
+        nurse.setLastName("Smith");
+        nurse.setRegistrationStatus("PENDING");
+
+        Nurse.Address address = new Nurse.Address();
+        address.setCity("Mumbai");
+        nurse.setAddress(address);
+
+        Nurse.ContactDetails contact = new Nurse.ContactDetails();
+        contact.setEmail("nurse@example.com");
+        contact.setPhone("9998887777");
+        nurse.setContactDetails(contact);
+
+        return nurse;
+    }
+
+    private NurseRequestDTO createNurseRequestDTO() {
+        NurseRequestDTO dto = new NurseRequestDTO();
+        dto.set_id("N1");
+        dto.setFirstName("Alice");
+        dto.setRegistrationStatus("approved");
+        dto.setPassword("pass123");
+        NurseRequestDTO.ContactDetails contact = new NurseRequestDTO.ContactDetails();
+        contact.setEmail("nurse@example.com");
+        contact.setPhone("9998887777");
+        dto.setContactDetails(contact);
+        return dto;
+    }
+
+    private NurseResponseDTO createNurseResponseDTO() {
+        NurseResponseDTO dto = new NurseResponseDTO();
+        dto.set_id("N1");
+        dto.setFirstName("Alice");
+        dto.setRegistrationStatus("approved");
+        NurseResponseDTO.ContactDetails contact = new NurseResponseDTO.ContactDetails("9998887777", "nurse@example.com");
+        dto.setContactDetails(contact);
+        return dto;
+    }
+
+    private User createUserEntity() {
+        User user = new User();
+        user.set_id("U1");
+        user.setEmail("nurse@example.com");
+        user.setPassword("pass123");
+        user.setRole("nurse");
+        user.setVerificationStatus("verified");
+        return user;
+    }
+
+    @Test
+    void testGetAllNurses_success() throws Exception {
+        Nurse nurse = createNurseEntity();
+        try (MockedStatic<NurseUtils> nurseUtilsMock = mockStatic(NurseUtils.class)) {
+            when(nurseService.getAllNurses()).thenReturn(List.of(nurse));
+            nurseUtilsMock.when(() -> NurseUtils.convertToNurseResponseDTO(nurse))
+                    .thenReturn(createNurseResponseDTO());
+
+            mockMvc.perform(get("/api/admin/nurse/nurseDetails"))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$[0].contactDetails.email").value("nurse@example.com"));
+        }
+    }
+
+    @Test
+    void testUpdateRegistrationStatusApproved_success() throws Exception {
+        NurseRequestDTO req = createNurseRequestDTO();
+        Nurse nurseEntity = createNurseEntity();
+        nurseEntity.setRegistrationStatus("approved");
+        NurseResponseDTO resDTO = createNurseResponseDTO();
+        User createdUser = createUserEntity();
+        
+        Admin mockAdmin = new Admin();
+        mockAdmin.setId("A1");
+       
+
+
+        try (MockedStatic<UserUtils> userUtilsMock = mockStatic(UserUtils.class);
+             MockedStatic<NurseUtils> nurseUtilsMock = mockStatic(NurseUtils.class)) {
+            userUtilsMock.when(UserUtils::generateUserId).thenReturn("U1");
+            userUtilsMock.when(() -> UserUtils.convertToUser(req)).thenReturn(createdUser);
+
+            when(nurseService.updateNurseRegistrationStatus("approved", "N1", "U1"))
+                    .thenReturn(nurseEntity);
+            nurseUtilsMock.when(() -> NurseUtils.convertToNurseResponseDTO(nurseEntity))
+                    .thenReturn(resDTO);
+            when(userService.createUser(any(User.class))).thenReturn(createdUser);
+            when(adminService.updateAdminById("A1", "N1")).thenReturn(mockAdmin);
+
+            mockMvc.perform(put("/api/admin/nurse/updateRegistrationStatus/{adminId}", "A1")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(objectMapper.writeValueAsString(req)))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.email").value("nurse@example.com"));
+        }
+    }
+
+//    @Test
+//    void testDeleteNurse_success() throws Exception {
+//        when(nurseService.deleteNurse("N1")).thenReturn(true);
+//        mockMvc.perform(delete("/api/admin/nurse/deleteNurse").param("nurseId", "N1"))
+//                .andExpect(status().isOk())
+//                .andExpect(content().string("Nurse with ID: N1 has been deleted successfully."));
+//    }
+}
