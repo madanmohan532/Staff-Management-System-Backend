@@ -37,16 +37,16 @@ public class NurseController {
     private final NurseRepository nurseRepository;
 
 	@Autowired
-	NurseService nurseService;
+	public NurseService nurseService;
 	
 	@Autowired
-	RestTemplate restTemplate;
+	public RestTemplate restTemplate;
 
 	@Autowired
-	private PatientService patientService;
+	public PatientService patientService;
 
 
-    NurseController(NurseRepository nurseRepository) {
+    public NurseController(NurseRepository nurseRepository) {
         this.nurseRepository = nurseRepository;
     }
 

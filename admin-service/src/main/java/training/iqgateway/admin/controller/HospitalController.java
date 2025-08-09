@@ -41,7 +41,8 @@ public class HospitalController {
 	
 	@GetMapping("/hospitalDetails")
 	public List<HospitalResponseDTO> getAllHospitals() {
-		// Logic to fetch all hospitals
+	
+		
 		List<HospitalResponseDTO> allHospitalResponseDTO = new ArrayList<>();
 
 	    List<Hospital> listOfHospitalEntity = hospitalService.getAllHospitals();
